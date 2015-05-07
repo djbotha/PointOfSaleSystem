@@ -15,45 +15,14 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     public LockScreenGUI()
     {
         initComponents();
-        
-        Timer timer = new Timer(100, this); //
-        timer.setInitialDelay(0);
-        timer.start();
+        //https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
+        Timer timer = new Timer(100, this); //100ms pause inbetween calls
+        timer.setInitialDelay(0);           //Starts instantly
+        timer.start();                      //start the "thread"
         
         this.setVisible(true);
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage());
-//        clock();
     }
-    
-    public void clock() //https://www.youtube.com/watch?v=gyyj57O0FVI
-    {
-//        new Thread()
-//        {
-//            @Override
-//            public void run()
-//            {
-        Calendar cal = new GregorianCalendar();
-
-        while(true)
-        {
-
-            int hour = cal.get(Calendar.HOUR);
-            int min = cal.get(Calendar.MINUTE);
-            int sec = cal.get(Calendar.SECOND);
-            int am_pm = cal.get(Calendar.AM_PM);
-            String output;
-
-            if (am_pm==1)
-                output = hour + ":" + min + ":" + sec + " AM";
-
-            output = hour + ":" + min + ":" + sec + " PM";
-
-            lblClock.setText(output);
-        }
-                
-            }
-//        }.start();
-//    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,12 +152,26 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
          int sec = cal.get(Calendar.SECOND);
          int am_pm = cal.get(Calendar.AM_PM);
          
-         String output;
+         String output= hour + ":";
+         
+         if (min<10) 
+             output += "0";
+         
+         output+= ""+min + ":";
+         
+         if (sec<10)
+             output +="0";
+         
+         output+=""+sec;
          
          if (am_pm==1)
-             output = hour + ":" + min + ":" + sec + " AM";
-         
-         output = hour + ":" + min + ":" + sec + " PM";
+         {    
+             output+= " PM";
+         }
+         else
+         {
+             output+= " AM";
+         }
          
          lblClock.setText(output);
      }
