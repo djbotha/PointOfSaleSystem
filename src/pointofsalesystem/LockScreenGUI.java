@@ -1,10 +1,13 @@
 package pointofsalesystem;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.Timer;
 
-public class LockScreenGUI extends javax.swing.JFrame 
+public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 {
     
     String password;
@@ -12,6 +15,11 @@ public class LockScreenGUI extends javax.swing.JFrame
     public LockScreenGUI()
     {
         initComponents();
+        
+        Timer timer = new Timer(100, this); //
+        timer.setInitialDelay(0);
+        timer.start();
+        
         this.setVisible(true);
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage());
 //        clock();
@@ -24,7 +32,6 @@ public class LockScreenGUI extends javax.swing.JFrame
 //            @Override
 //            public void run()
 //            {
-        
         Calendar cal = new GregorianCalendar();
 
         while(true)
@@ -106,7 +113,6 @@ public class LockScreenGUI extends javax.swing.JFrame
         lblClock.setFont(new java.awt.Font("DS-Digital", 0, 72)); // NOI18N
         lblClock.setForeground(new java.awt.Color(0, 165, 255));
         lblClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblClock.setText("10:13:32 PM");
         getContentPane().add(lblClock, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 340, 330));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/LockScreen.png"))); // NOI18N
@@ -168,6 +174,25 @@ public class LockScreenGUI extends javax.swing.JFrame
             }
         });
     }
+    
+     public void actionPerformed(ActionEvent e) 
+     {
+         Calendar cal = new GregorianCalendar();
+         int hour = cal.get(Calendar.HOUR);
+         int min = cal.get(Calendar.MINUTE);
+         int sec = cal.get(Calendar.SECOND);
+         int am_pm = cal.get(Calendar.AM_PM);
+         
+         String output;
+         
+         if (am_pm==1)
+             output = hour + ":" + min + ":" + sec + " AM";
+         
+         output = hour + ":" + min + ":" + sec + " PM";
+         
+         lblClock.setText(output);
+     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbl0;
     private javax.swing.JLabel lbl1;
