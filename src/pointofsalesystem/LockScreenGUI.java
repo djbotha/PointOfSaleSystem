@@ -10,7 +10,8 @@ import javax.swing.Timer;
 public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 {
     
-    String password;
+    String password=null;
+    String masterPass = "2580";
     
     public LockScreenGUI()
     {
@@ -55,20 +56,86 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
             }
         });
         getContentPane().add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 40, 80));
+
+        lbl2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl2MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 50, 80));
+
+        lbl3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl3MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, 60, 80));
+
+        lbl4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl4MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 50, 90));
+
+        lbl5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl5MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 420, 50, 80));
+
+        lbl6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl6MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 414, 50, 90));
+
+        lbl7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl7MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 524, 60, 80));
+
+        lbl8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl8MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 514, 50, 90));
+
+        lbl9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl9MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 524, 50, 80));
+
+        lbl0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl0MouseReleased(evt);
+            }
+        });
         getContentPane().add(lbl0, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 634, 60, 80));
 
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 70)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(71, 156, 214));
         getContentPane().add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 190, 40));
+
+        lblEnter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblEnterMouseReleased(evt);
+            }
+        });
         getContentPane().add(lblEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 644, 80, 60));
+
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblBackMouseReleased(evt);
+            }
+        });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 224, 60, 40));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -98,15 +165,71 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     private void lbl1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseReleased
         updatePassword("1");
     }//GEN-LAST:event_lbl1MouseReleased
+
+    private void lbl2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseReleased
+        updatePassword("2");
+    }//GEN-LAST:event_lbl2MouseReleased
+
+    private void lbl3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MouseReleased
+        updatePassword("3");
+    }//GEN-LAST:event_lbl3MouseReleased
+
+    private void lbl4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MouseReleased
+        updatePassword("4");
+    }//GEN-LAST:event_lbl4MouseReleased
+
+    private void lbl5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MouseReleased
+        updatePassword("5");
+    }//GEN-LAST:event_lbl5MouseReleased
+
+    private void lbl6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl6MouseReleased
+        updatePassword("6");
+    }//GEN-LAST:event_lbl6MouseReleased
+
+    private void lbl7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseReleased
+        updatePassword("7");
+    }//GEN-LAST:event_lbl7MouseReleased
+
+    private void lbl8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MouseReleased
+        updatePassword("8");
+    }//GEN-LAST:event_lbl8MouseReleased
+
+    private void lbl9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MouseReleased
+        updatePassword("9");
+    }//GEN-LAST:event_lbl9MouseReleased
+
+    private void lbl0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl0MouseReleased
+        updatePassword("0");
+    }//GEN-LAST:event_lbl0MouseReleased
+
+    private void lblEnterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseReleased
+        commitPassword();
+    }//GEN-LAST:event_lblEnterMouseReleased
+
+    private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
+        if (password.length()>0)
+            password = password.substring(0,password.length()-1);
+        
+        lblPassword.setText(lblPassword.getText().substring(0,password.length()-1));
+    }//GEN-LAST:event_lblBackMouseReleased
     
     public void updatePassword(String num)
     {
-            password+=num;
-            lblPassword.setText(lblPassword.getText()+"*");
-            
-            if (password.length()==3) 
-                System.out.println(password);
+        lblPassword.setText(lblPassword.getText()+"*");
         
+        password+=num;
+        
+        if (password.length()==3)
+            System.out.println(password);
+    }
+    
+    public void commitPassword()
+    {
+        if (password.equals(masterPass)) 
+        {
+            this.setVisible(false);
+            new StartScreenGUI.setVisible(false);
+        }
     }
     
     /**
