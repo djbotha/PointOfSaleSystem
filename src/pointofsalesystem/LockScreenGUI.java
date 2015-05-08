@@ -10,12 +10,13 @@ import javax.swing.Timer;
 public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 {
     
-    String password=null;
+    String password = null;
     String masterPass = "2580";
     
     public LockScreenGUI()
     {
         initComponents();
+        
         //https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
         Timer timer = new Timer(100, this); //100ms pause inbetween calls
         timer.setInitialDelay(0);           //Starts instantly
@@ -48,6 +49,12 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setOpacity(0.0F);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,6 +219,10 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         
         lblPassword.setText(lblPassword.getText().substring(0,password.length()-1));
     }//GEN-LAST:event_lblBackMouseReleased
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        new PointOfSaleSystem().fadeIn(this); //Fade in the current screen smoothly
+    }//GEN-LAST:event_formWindowOpened
     
     public void updatePassword(String num)
     {
@@ -228,7 +239,6 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         if (password.equals(masterPass)) 
         {
             this.setVisible(false);
-            new StartScreenGUI.setVisible(false);
         }
     }
     
