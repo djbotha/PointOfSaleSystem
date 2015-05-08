@@ -44,7 +44,8 @@ public class HomeGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        System.exit(0); //Quit the program
+        new PointOfSaleSystem().fadeOut(this); 
+        System.exit(0);
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void jLabel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseReleased

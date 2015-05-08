@@ -166,6 +166,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
+        new PointOfSaleSystem().fadeOut(this); 
         System.exit(0);
     }//GEN-LAST:event_lblQuitMouseReleased
 
