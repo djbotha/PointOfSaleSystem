@@ -26,29 +26,28 @@ public class PointOfSaleSystem
             {
                 Thread.sleep(25);       //100ms Delay between iterations
             }
-            catch(Exception e)
+            catch(Exception e)          //If the thread failed to sleep.
             {
                 System.out.println("Thread failed to sleep: " + e);
             }
         }
     }
     
-    public void fadeOut(JFrame frame) //Fade out of the current window
+    public void fadeOut(JFrame frame)   //Fade out of the current window
     {
         for (double i = 1.0; i >= 0.0; i-=0.1) 
         {
             String floatValue = i +"F"; //Convert the double I to a float value
             Float f = Float.valueOf(floatValue);
             
-            frame.setOpacity(f);   //Set opacity of window to f
+            frame.setOpacity(f);        //Set opacity of window to f
             
             try
             {
-                Thread.sleep(25); //100ms Delay between iterations
+                Thread.sleep(25);       //100ms Delay between iterations
             }
-            catch(Exception e)
+            catch(Exception e)          //If the thread failed to sleep.
             {
-                System.out.println("Thread failed to sleep: " + e);
             }
         }
         
