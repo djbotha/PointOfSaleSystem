@@ -1,5 +1,6 @@
 package pointofsalesystem;
 
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /*
@@ -60,4 +61,15 @@ public class PointOfSaleSystem
         frame.setVisible(false);        //Close the frame after it's opacity is set to 0.0
     }
 
+    public void loadWebSite(String url)
+    {
+        try 
+        {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        } 
+        catch (IOException ex) 
+        {
+            System.out.println("Failed to load website. " + ex);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package pointofsalesystem;
 
+import java.io.IOException;
 import javax.swing.ImageIcon;
 
 public class HomeGUI extends javax.swing.JFrame 
@@ -16,8 +17,10 @@ public class HomeGUI extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblCompanyLogo = new javax.swing.JLabel();
         lblLock = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
+        lblPOSLogo = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -30,6 +33,14 @@ public class HomeGUI extends javax.swing.JFrame
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCompanyLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCompanyLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblCompanyLogoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblCompanyLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 860, 140));
 
         lblLock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLock.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -46,6 +57,14 @@ public class HomeGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 30));
+
+        lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblPOSLogoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 40, 50));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeGUI.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -67,6 +86,14 @@ public class HomeGUI extends javax.swing.JFrame
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         new PointOfSaleSystem().fadeIn(this);   //Fade in the current screen as soon as it is selected.
     }//GEN-LAST:event_formWindowOpened
+
+    private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompanyLogoMouseReleased
+        new PointOfSaleSystem().loadWebSite("http://www.spar.co.za/home"); //Load the company webpage.
+    }//GEN-LAST:event_lblCompanyLogoMouseReleased
+
+    private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
+        new PointOfSaleSystem().loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
+    }//GEN-LAST:event_lblPOSLogoMouseReleased
 
     /**
      * @param args the command line arguments
@@ -104,7 +131,9 @@ public class HomeGUI extends javax.swing.JFrame
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblLock;
+    private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     // End of variables declaration//GEN-END:variables
 }
