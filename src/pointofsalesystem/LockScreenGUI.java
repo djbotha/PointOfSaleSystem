@@ -258,7 +258,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
                 passwordTries--;                //Decrement amount of tries remaining
                 if (passwordTries == 0)         //If user has reached password cap
                 {
-                    JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH); //Show error message. 
+                    JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. Exiting...", "ERROR", WIDTH); //Show error message. 
                     new PointOfSaleSystem().fadeOut(this); //Fade out current screen
                     System.exit(0);             //Quit program
                 }
