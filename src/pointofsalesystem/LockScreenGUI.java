@@ -258,13 +258,13 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
                 passwordTries--;                //Decrement amount of tries remaining
                 if (passwordTries == 0)         //If user has reached password cap
                 {
-                    JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH);
+                    JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH); //Show error message. 
                     new PointOfSaleSystem().fadeOut(this); //Fade out current screen
                     System.exit(0);             //Quit program
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, ("PASSWORD INCORRECT. " + passwordTries + " tries left."), "ERROR",  WIDTH);
+                    JOptionPane.showMessageDialog(this, ("PASSWORD INCORRECT. " + passwordTries + " tries left."), "ERROR",  WIDTH); //Show error message with the amount of tries left.
                     lblPassword.setText("");    //Clear password field
                     password = "";              //Clear password variable
                 }
@@ -312,47 +312,43 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
     }
     
-     public void actionPerformed(ActionEvent e) 
+     public void actionPerformed(ActionEvent e) //Method to update clock
      {
-         Calendar cal = new GregorianCalendar();
-         int hour = cal.get(Calendar.HOUR);
-         int min = cal.get(Calendar.MINUTE);
-         int sec = cal.get(Calendar.SECOND);
-         int am_pm = cal.get(Calendar.AM_PM);
-         String output = "";
+         Calendar cal = new GregorianCalendar();    //Calendar object
+         int hour = cal.get(Calendar.HOUR);         //Get hours 
+         int min = cal.get(Calendar.MINUTE);        //Get minutes
+         int sec = cal.get(Calendar.SECOND);        //Get seconds
+         int am_pm = cal.get(Calendar.AM_PM);       //Get whether or not the time is in the morning or evening
+         String output = "";                        //Instantiate blank output string
          
-         if (hour==0)
+         if (hour==0)                               //If hour == 0, rather print a 12 instead of a 0. 
              output += 12 + ":";
          
-         if (hour<10) 
-         {
-             output += "0" + hour + ":";
-         }
-         else
-         {
-            output += hour + ":";
-         }
-         
-         if (min<10) 
+         if (hour<10)                               //If hour is less than 10, add a 0.
              output += "0";
          
-         output+= ""+min + ":";
+         output += ""+hour + ":";                   //Print hours
          
-         if (sec<10)
+         if (min<10)                                //If minutes are less than 10, add a 0.
+             output += "0";
+         
+         output+= ""+min + ":";                     //Add minutes
+         
+         if (sec<10)                                //If seconds are less than 10, add a 0.
              output +="0";
          
-         output+=""+sec;
+         output+=""+sec;                            //Add seconds
          
-         if (am_pm==1)
+         if (am_pm==1)                              //If the time is in the evening, add a PM.
          {    
              output+= " PM";
          }
-         else
+         else                                       //If the time is in the morning, add an AM.
          {
              output+= " AM";
          }
          
-         lblClock.setText(output);
+         lblClock.setText(output);                  //Print output
      }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
