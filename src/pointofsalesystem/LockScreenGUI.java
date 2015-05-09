@@ -312,7 +312,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
     }
     
-     public void actionPerformed(ActionEvent e) //Method to update clock
+     public void actionPerformed(ActionEvent e)     //Method to update clock
      {
          Calendar cal = new GregorianCalendar();    //Calendar object
          int hour = cal.get(Calendar.HOUR);         //Get hours 
