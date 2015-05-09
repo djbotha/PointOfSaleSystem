@@ -1,11 +1,15 @@
 package pointofsalesystem;
 
+import javax.swing.ImageIcon;
+
 public class HomeGUI extends javax.swing.JFrame 
 {
 
     public HomeGUI() 
     {
         initComponents();
+        
+        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo
     }
 
     @SuppressWarnings("unchecked")
