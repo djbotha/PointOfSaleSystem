@@ -48,6 +48,7 @@ public class PointOfSaleSystem
             }
             catch(Exception e)          //If the thread failed to sleep.
             {
+                System.out.println("Thread failed to sleep: " + e);
             }
         }
         
