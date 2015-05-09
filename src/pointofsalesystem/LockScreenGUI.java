@@ -251,24 +251,33 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     
     public void commitPassword()
     {
-        if (password.equals(masterPass)) 
+        if (!password.equals("")) 
         {
-            new PointOfSaleSystem().fadeOut(this);
-            new HomeGUI().setVisible(true);
-        }
-        else
-        {
-            passwordTries--;
-            if (passwordTries == 0) 
+            if (password.equals(masterPass)) 
             {
-                JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH);
+                new PointOfSaleSystem().fadeOut(this);
+                new HomeGUI().setVisible(true);
             }
             else
             {
-                JOptionPane.showMessageDialog(this, ("PASSWORD INCORRECT. " + passwordTries + " tries left."), "ERROR",  WIDTH);
-                lblPassword.setText("");
-                password = "";
+                passwordTries--;
+                if (passwordTries == 0) 
+                {
+                    JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH);
+                    new PointOfSaleSystem().fadeOut(this);
+                    System.exit(0);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, ("PASSWORD INCORRECT. " + passwordTries + " tries left."), "ERROR",  WIDTH);
+                    lblPassword.setText("");
+                    password = "";
+                }
             }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No password entered. Please enter a password.", "ERROR", WIDTH);
         }
     }
     
@@ -315,12 +324,15 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
          int min = cal.get(Calendar.MINUTE);
          int sec = cal.get(Calendar.SECOND);
          int am_pm = cal.get(Calendar.AM_PM);
-         
-         String output= hour + ":";
+         String output = "";
          
          if (hour==0)
-             output = 12+":";
+             output = 12 + ":";
          
+         if (hour<10) 
+             output = "0" + hour + ":";
+         
+         output = hour + ":";
          
          if (min<10) 
              output += "0";
