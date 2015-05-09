@@ -272,7 +272,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         }
         else                                    //If password field is empty
         {
-            JOptionPane.showMessageDialog(this, "No password entered. Please enter a password.", "ERROR", WIDTH);
+            JOptionPane.showMessageDialog(this, "No password entered. Please enter a password.", "ERROR", WIDTH); //Prompt user to enter a password
         }
     }
     
