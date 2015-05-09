@@ -1,11 +1,15 @@
 package pointofsalesystem;
 
+import javax.swing.ImageIcon;
+
 public class ManagerPortalGUI extends javax.swing.JFrame 
 {
 
     public ManagerPortalGUI() 
     {
         initComponents();
+        
+        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +64,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
         new PointOfSaleSystem().fadeOut(this);  //Fade out this screen
+        System.exit(0);
     }//GEN-LAST:event_lblQuitMouseReleased
 
     /**

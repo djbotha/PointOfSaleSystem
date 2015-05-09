@@ -1,7 +1,9 @@
 package pointofsalesystem;
 
+import static java.awt.image.ImageObserver.WIDTH;
 import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class HomeGUI extends javax.swing.JFrame 
 {
@@ -13,6 +15,8 @@ public class HomeGUI extends javax.swing.JFrame
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo
     }
 
+    private final String managerPass = "1234";
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -107,10 +111,34 @@ public class HomeGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
     private void lblManagerPortalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManagerPortalMouseReleased
-        new PointOfSaleSystem().fadeOut(this);
-        new ManagerPortalGUI().setVisible(true);
+        validateManagerPassword();
     }//GEN-LAST:event_lblManagerPortalMouseReleased
 
+    public void validateManagerPassword()
+    {
+        int passwordTries = 3;
+        String password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining.");
+        
+        while(passwordTries>1)
+        {
+            if (!password.equals(managerPass)) 
+            {
+                JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. ", "ERROR", WIDTH); //Show error message. 
+                passwordTries--;
+                password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining.");
+            }
+            else
+            {
+                new PointOfSaleSystem().fadeOut(this);
+                new ManagerPortalGUI().setVisible(true);
+                return;
+            }
+        }
+        
+        JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. Exiting...", "ERROR", WIDTH); //Show error message. 
+        new PointOfSaleSystem().fadeOut(this);
+    }
+    
     public void loadWebSite(String url) //Display a certain webpage 
     {
         try 

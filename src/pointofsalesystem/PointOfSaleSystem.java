@@ -55,7 +55,7 @@ public class PointOfSaleSystem
                 System.out.println("Thread failed to sleep: " + e);
             }
         }
-        frame.setVisible(false);        //Close the frame after it's opacity is set to 0.0
+        frame.setVisible(false);        //Close the frame after its opacity is set to 0.0
     }
 
     public void loadWebSite(String url) //Display a certain webpage
