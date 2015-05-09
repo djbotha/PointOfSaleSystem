@@ -12,22 +12,21 @@ import javax.swing.Timer;
 public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 {
     
-    String password = "";
-    String masterPass = "0000";
-    JOptionPane optPane = new JOptionPane();
-    int passwordTries = 3;
+    String password = "";                       //Temporary password variable for validation         
+    public String masterPass = "0000";          //Master password. Can be edited from Manager Portal
+    int passwordTries = 3;                      //Password counter for amount of times the user can enter a false password
     
     public LockScreenGUI()
     {
         initComponents();
         
         //https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
-        Timer timer = new Timer(100, this); //100ms pause inbetween calls
-        timer.setInitialDelay(0);           //Starts instantly
-        timer.start();                      //start the "thread"
+        Timer timer = new Timer(100, this);     //100ms pause inbetween calls
+        timer.setInitialDelay(0);               //Starts instantly
+        timer.start();                          //start the "thread"
         
-        this.setVisible(true);
-        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage());
+        this.setVisible(true); 
+        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo
     }
     
     @SuppressWarnings("unchecked")
@@ -183,95 +182,95 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
         new PointOfSaleSystem().fadeOut(this); 
-        System.exit(0);
+        System.exit(0);     
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lbl1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseReleased
-        updatePassword("1");
+        updatePassword("1");                    //Add 1 to the password variable
     }//GEN-LAST:event_lbl1MouseReleased
 
     private void lbl2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseReleased
-        updatePassword("2");
+        updatePassword("2");                    //Add 2 to the password variable
     }//GEN-LAST:event_lbl2MouseReleased
 
     private void lbl3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MouseReleased
-        updatePassword("3");
+        updatePassword("3");                    //Add 3 to the password variable
     }//GEN-LAST:event_lbl3MouseReleased
 
     private void lbl4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MouseReleased
-        updatePassword("4");
+        updatePassword("4");                    //Add 4 to the password variable
     }//GEN-LAST:event_lbl4MouseReleased
 
     private void lbl5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MouseReleased
-        updatePassword("5");
+        updatePassword("5");                    //Add 5 to the password variable
     }//GEN-LAST:event_lbl5MouseReleased
 
     private void lbl6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl6MouseReleased
-        updatePassword("6");
+        updatePassword("6");                    //Add 6 to the password variable
     }//GEN-LAST:event_lbl6MouseReleased
 
     private void lbl7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseReleased
-        updatePassword("7");
+        updatePassword("7");                    //Add 7 to the password variable
     }//GEN-LAST:event_lbl7MouseReleased
 
     private void lbl8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MouseReleased
-        updatePassword("8");
+        updatePassword("8");                    //Add 8 to the password variable
     }//GEN-LAST:event_lbl8MouseReleased
 
     private void lbl9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MouseReleased
-        updatePassword("9");
+        updatePassword("9");                    //Add 9 to the password variable
     }//GEN-LAST:event_lbl9MouseReleased
 
     private void lbl0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl0MouseReleased
-        updatePassword("0");
+        updatePassword("0");                    //Add 0 to the password variable
     }//GEN-LAST:event_lbl0MouseReleased
 
     private void lblOKMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOKMouseReleased
-        commitPassword();
+        commitPassword();                       //Check if password is valid
     }//GEN-LAST:event_lblOKMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        password = "";  //Clear the temporary password variable
-        lblPassword.setText(""); //clear the password field
+        password = "";                          //Clear the temporary password variable
+        lblPassword.setText("");                //clear the password field
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        new PointOfSaleSystem().fadeIn(this); //Fade in the current screen smoothly
+        new PointOfSaleSystem().fadeIn(this);   //Fade in the current screen smoothly
     }//GEN-LAST:event_formWindowOpened
     
-    public void updatePassword(String num)
+    public void updatePassword(String num)      //Method used to update the password label on screen and password variable
     {
-        lblPassword.setText(lblPassword.getText()+"*");
-        password+=num;
+        lblPassword.setText(lblPassword.getText()+"*"); //Add another * to password label
+        password+=num;                          //increase password variable with num that is parsed on from actionperformed.
     }
     
-    public void commitPassword()
+    public void commitPassword()                //Variable to validate password and continue to next screen
     {
-        if (!password.equals("")) 
+        if (!password.equals(""))               //If password is not empty 
         {
-            if (password.equals(masterPass)) 
+            if (password.equals(masterPass))    //If password is valid
             {
-                new PointOfSaleSystem().fadeOut(this);
-                new HomeGUI().setVisible(true);
+                new PointOfSaleSystem().fadeOut(this);  //Fade out current screen
+                new HomeGUI().setVisible(true); //Bring up home screen
             }
-            else
+            else                                //If password is invalid
             {
-                passwordTries--;
-                if (passwordTries == 0) 
+                passwordTries--;                //Decrement amount of tries remaining
+                if (passwordTries == 0)         //If user has reached password cap
                 {
                     JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH);
-                    new PointOfSaleSystem().fadeOut(this);
-                    System.exit(0);
+                    new PointOfSaleSystem().fadeOut(this); //Fade out current screen
+                    System.exit(0);             //Quit program
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(this, ("PASSWORD INCORRECT. " + passwordTries + " tries left."), "ERROR",  WIDTH);
-                    lblPassword.setText("");
-                    password = "";
+                    lblPassword.setText("");    //Clear password field
+                    password = "";              //Clear password variable
                 }
             }
         }
-        else
+        else                                    //If password field is empty
         {
             JOptionPane.showMessageDialog(this, "No password entered. Please enter a password.", "ERROR", WIDTH);
         }
