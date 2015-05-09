@@ -64,7 +64,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
         new PointOfSaleSystem().fadeOut(this);  //Fade out this screen
-        System.exit(0);
+        System.exit(0);                         //Quit the program
     }//GEN-LAST:event_lblQuitMouseReleased
 
     /**

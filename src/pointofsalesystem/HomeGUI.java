@@ -114,29 +114,30 @@ public class HomeGUI extends javax.swing.JFrame
         validateManagerPassword();
     }//GEN-LAST:event_lblManagerPortalMouseReleased
 
-    public void validateManagerPassword()
+    public void validateManagerPassword()   //Validate the password when the manager tries to log in to the manager portal
     {
-        int passwordTries = 3;
-        String password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining.");
+        int passwordTries = 3;              //Amount of tries a user has left to enter his password
+        String password = JOptionPane.showInputDialog("Please enter your manager password"); //Grab password input from a JOptionPane dialog
         
-        while(passwordTries>1)
+        while(passwordTries>1)              //Repeat as long as the user can enter a password 
         {
-            if (!password.equals(managerPass)) 
+            if (!password.equals(managerPass)) //If the password is incorrect
             {
                 JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. ", "ERROR", WIDTH); //Show error message. 
-                passwordTries--;
-                password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining.");
+                passwordTries--;            //Decrement the password tries counter
+                password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining."); //Prompt for new password to be entered.
             }
-            else
+            else                            //If the password is valid
             {
-                new PointOfSaleSystem().fadeOut(this);
-                new ManagerPortalGUI().setVisible(true);
-                return;
+                new PointOfSaleSystem().fadeOut(this);  //Fade out the current GUI
+                new ManagerPortalGUI().setVisible(true);//Bring up the Manager Portal
+                return;                                 //Exit out of this method
             }
         }
         
         JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. Exiting...", "ERROR", WIDTH); //Show error message. 
-        new PointOfSaleSystem().fadeOut(this);
+        new PointOfSaleSystem().fadeOut(this);  //If the password was incorrect 3 times, quit the program.
+        System.exit(0);
     }
     
     public void loadWebSite(String url) //Display a certain webpage 
@@ -145,7 +146,7 @@ public class HomeGUI extends javax.swing.JFrame
         {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } 
-        catch (IOException ex) 
+        catch (IOException ex)          //If the website failed to display, print an error.
         {
             System.out.println("Failed to load website. " + ex);
         }
