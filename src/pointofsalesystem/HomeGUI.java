@@ -27,6 +27,7 @@ public class HomeGUI extends javax.swing.JFrame
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblLock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblLockMouseReleased(evt);
