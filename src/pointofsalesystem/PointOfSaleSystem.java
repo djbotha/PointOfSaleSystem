@@ -7,6 +7,12 @@ import javax.swing.JFrame;
  *  MULTIPLE PLACES IN THIS PROJECT. e.g. fadeIn(), fadeOut()...
  */
 
+/*
+ *  GLOSSARY
+ *      https://www.mockaroo.com/                           - Test data
+ *      http://www.w3schools.com/sql/sql_create_table.asp   - SQL Create Table statement
+ *      http://www.entrepreneur.com/answer/221767           - Grocery Markup - between 9% and 13%  
+ */
 public class PointOfSaleSystem 
 {    
     
