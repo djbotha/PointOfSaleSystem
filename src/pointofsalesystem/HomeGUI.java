@@ -18,6 +18,7 @@ public class HomeGUI extends javax.swing.JFrame
     private void initComponents() {
 
         lblCompanyLogo = new javax.swing.JLabel();
+        lblManagerPortal = new javax.swing.JLabel();
         lblLock = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
@@ -41,6 +42,14 @@ public class HomeGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblCompanyLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 860, 140));
+
+        lblManagerPortal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblManagerPortal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblManagerPortalMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblManagerPortal, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 174, 150, 150));
 
         lblLock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLock.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,6 +106,11 @@ public class HomeGUI extends javax.swing.JFrame
         loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
+    private void lblManagerPortalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManagerPortalMouseReleased
+        new PointOfSaleSystem().fadeOut(this);
+        new ManagerPortalGUI().setVisible(true);
+    }//GEN-LAST:event_lblManagerPortalMouseReleased
+
     public void loadWebSite(String url) //Display a certain webpage 
     {
         try 
@@ -147,6 +161,7 @@ public class HomeGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblLock;
+    private javax.swing.JLabel lblManagerPortal;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     // End of variables declaration//GEN-END:variables
