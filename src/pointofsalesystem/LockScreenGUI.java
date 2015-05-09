@@ -15,7 +15,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     String password = "";
     String masterPass = "0000";
     JOptionPane optPane = new JOptionPane();
-    int passwordTries = 0;
+    int passwordTries = 3;
     
     public LockScreenGUI()
     {
@@ -231,12 +231,8 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_lblOKMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-//        if (password.length()>0)
-//            password = password.substring(0,password.length()-1);
-//        
-//        lblPassword.setText(lblPassword.getText().substring(0,password.length()-1));
-        password = "";
-        lblPassword.setText("");
+        password = "";  //Clear the temporary password variable
+        lblPassword.setText(""); //clear the password field
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -255,8 +251,6 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     
     public void commitPassword()
     {
-        System.out.println(password);
-        System.out.println(masterPass);
         if (password.equals(masterPass)) 
         {
             new PointOfSaleSystem().fadeOut(this);
@@ -264,9 +258,17 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT", "ERROR",  WIDTH);
-            lblPassword.setText("");
-            password = "";
+            passwordTries--;
+            if (passwordTries == 0) 
+            {
+                JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. If you forgot your password, please contact your store manager. ", "ERROR", WIDTH);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, ("PASSWORD INCORRECT. " + passwordTries + " tries left."), "ERROR",  WIDTH);
+                lblPassword.setText("");
+                password = "";
+            }
         }
     }
     
