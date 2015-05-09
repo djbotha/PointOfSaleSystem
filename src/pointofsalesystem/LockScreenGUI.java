@@ -169,7 +169,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 30));
 
-        lblClock.setFont(new java.awt.Font("DS-Digital", 0, 72)); // NOI18N
+        lblClock.setFont(new java.awt.Font("DS-Digital", 0, 68)); // NOI18N
         lblClock.setForeground(new java.awt.Color(0, 165, 255));
         lblClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblClock, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 340, 330));
@@ -327,12 +327,16 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
          String output = "";
          
          if (hour==0)
-             output = 12 + ":";
+             output += 12 + ":";
          
          if (hour<10) 
-             output = "0" + hour + ":";
-         
-         output = hour + ":";
+         {
+             output += "0" + hour + ":";
+         }
+         else
+         {
+            output += hour + ":";
+         }
          
          if (min<10) 
              output += "0";
