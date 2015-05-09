@@ -17,9 +17,6 @@ import javax.swing.JFrame;
 public class PointOfSaleSystem 
 {    
     
-    
-    
-    
     public void fadeIn(JFrame frame)    //Fade in the current window
     {
         for (double i = 0.0; i <= 1.0; i+=0.1) 
@@ -61,7 +58,7 @@ public class PointOfSaleSystem
         frame.setVisible(false);        //Close the frame after it's opacity is set to 0.0
     }
 
-    public void loadWebSite(String url)
+    public void loadWebSite(String url) //Display a certain webpage
     {
         try 
         {

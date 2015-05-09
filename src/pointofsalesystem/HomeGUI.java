@@ -88,13 +88,27 @@ public class HomeGUI extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowOpened
 
     private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompanyLogoMouseReleased
-        new PointOfSaleSystem().loadWebSite("http://www.spar.co.za/home"); //Load the company webpage.
+//        new PointOfSaleSystem().loadWebSite("http://www.spar.co.za/home"); //Load the company webpage.
+        loadWebSite("http://www.spar.co.za/home"); //Load the company webpage.
     }//GEN-LAST:event_lblCompanyLogoMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
-        new PointOfSaleSystem().loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
+//        new PointOfSaleSystem().loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
+        loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
+    public void loadWebSite(String url) //Display a certain webpage 
+    {
+        try 
+        {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        } 
+        catch (IOException ex) 
+        {
+            System.out.println("Failed to load website. " + ex);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
