@@ -34,7 +34,7 @@ public class PointOfSaleSystem
         }
     }
     
-    public void fadeOut(JFrame frame)
+    public void fadeOut(JFrame frame) //Fade out of the current window
     {
         for (double i = 1.0; i >= 0.0; i-=0.1) 
         {

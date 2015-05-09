@@ -12,7 +12,7 @@ public class HomeGUI extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblLock = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
@@ -21,12 +21,12 @@ public class HomeGUI extends javax.swing.JFrame
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblLock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel1MouseReleased(evt);
+                lblLockMouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 30, 30));
+        getContentPane().add(lblLock, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 30, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -48,10 +48,10 @@ public class HomeGUI extends javax.swing.JFrame
         System.exit(0);
     }//GEN-LAST:event_lblQuitMouseReleased
 
-    private void jLabel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseReleased
+    private void lblLockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLockMouseReleased
         new PointOfSaleSystem().fadeOut(this); //Fade out the current screen using fadeOut method
         new LockScreenGUI().setVisible(true); //Bring up new screen
-    }//GEN-LAST:event_jLabel1MouseReleased
+    }//GEN-LAST:event_lblLockMouseReleased
 
     /**
      * @param args the command line arguments
@@ -88,8 +88,8 @@ public class HomeGUI extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblLock;
     private javax.swing.JLabel lblQuit;
     // End of variables declaration//GEN-END:variables
 }

@@ -215,10 +215,12 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_lblEnterMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        if (password.length()>0)
-            password = password.substring(0,password.length()-1);
-        
-        lblPassword.setText(lblPassword.getText().substring(0,password.length()-1));
+//        if (password.length()>0)
+//            password = password.substring(0,password.length()-1);
+//        
+//        lblPassword.setText(lblPassword.getText().substring(0,password.length()-1));
+        password = "";
+        lblPassword.setText("");
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
