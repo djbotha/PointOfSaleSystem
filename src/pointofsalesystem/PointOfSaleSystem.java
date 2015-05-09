@@ -25,7 +25,7 @@ public class PointOfSaleSystem
             
             try
             {
-                Thread.sleep(50); //100ms Delay between iterations
+                Thread.sleep(25); //100ms Delay between iterations
             }
             catch(Exception e)
             {
@@ -45,7 +45,7 @@ public class PointOfSaleSystem
             
             try
             {
-                Thread.sleep(50); //100ms Delay between iterations
+                Thread.sleep(25); //100ms Delay between iterations
             }
             catch(Exception e)
             {

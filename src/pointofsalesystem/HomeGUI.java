@@ -18,7 +18,13 @@ public class HomeGUI extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setOpacity(0.0F);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLock.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -52,6 +58,10 @@ public class HomeGUI extends javax.swing.JFrame
         new PointOfSaleSystem().fadeOut(this); //Fade out the current screen using fadeOut method
         new LockScreenGUI().setVisible(true); //Bring up new screen
     }//GEN-LAST:event_lblLockMouseReleased
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        new PointOfSaleSystem().fadeIn(this);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

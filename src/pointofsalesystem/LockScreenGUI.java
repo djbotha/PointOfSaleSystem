@@ -2,16 +2,20 @@ package pointofsalesystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.ImageIcon;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 {
     
-    String password = null;
-    String masterPass = "2580";
+    String password = "";
+    String masterPass = "0000";
+    JOptionPane optPane = new JOptionPane();
+    int passwordTries = 0;
     
     public LockScreenGUI()
     {
@@ -41,7 +45,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         lbl9 = new javax.swing.JLabel();
         lbl0 = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        lblEnter = new javax.swing.JLabel();
+        lblOK = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblClock = new javax.swing.JLabel();
@@ -57,6 +61,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lbl1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl1MouseReleased(evt);
@@ -64,6 +69,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 40, 80));
 
+        lbl2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl2MouseReleased(evt);
@@ -71,6 +77,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 50, 80));
 
+        lbl3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl3MouseReleased(evt);
@@ -78,6 +85,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, 60, 80));
 
+        lbl4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl4MouseReleased(evt);
@@ -85,6 +93,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 50, 90));
 
+        lbl5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl5MouseReleased(evt);
@@ -92,6 +101,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 420, 50, 80));
 
+        lbl6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl6MouseReleased(evt);
@@ -99,6 +109,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 414, 50, 90));
 
+        lbl7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl7MouseReleased(evt);
@@ -106,6 +117,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 524, 60, 80));
 
+        lbl8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl8MouseReleased(evt);
@@ -113,6 +125,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 514, 50, 90));
 
+        lbl9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl9MouseReleased(evt);
@@ -120,6 +133,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 524, 50, 80));
 
+        lbl0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl0.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lbl0MouseReleased(evt);
@@ -131,13 +145,15 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         lblPassword.setForeground(new java.awt.Color(71, 156, 214));
         getContentPane().add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 190, 40));
 
-        lblEnter.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblOK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblEnterMouseReleased(evt);
+                lblOKMouseReleased(evt);
             }
         });
-        getContentPane().add(lblEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 644, 80, 60));
+        getContentPane().add(lblOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 644, 100, 60));
 
+        lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
@@ -210,9 +226,9 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         updatePassword("0");
     }//GEN-LAST:event_lbl0MouseReleased
 
-    private void lblEnterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseReleased
+    private void lblOKMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOKMouseReleased
         commitPassword();
-    }//GEN-LAST:event_lblEnterMouseReleased
+    }//GEN-LAST:event_lblOKMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
 //        if (password.length()>0)
@@ -239,9 +255,18 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     
     public void commitPassword()
     {
+        System.out.println(password);
+        System.out.println(masterPass);
         if (password.equals(masterPass)) 
         {
-            this.setVisible(false);
+            new PointOfSaleSystem().fadeOut(this);
+            new HomeGUI().setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT", "ERROR",  WIDTH);
+            lblPassword.setText("");
+            password = "";
         }
     }
     
@@ -249,6 +274,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -290,6 +316,10 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
          
          String output= hour + ":";
          
+         if (hour==0)
+             output = 12+":";
+         
+         
          if (min<10) 
              output += "0";
          
@@ -326,7 +356,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblClock;
-    private javax.swing.JLabel lblEnter;
+    private javax.swing.JLabel lblOK;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblQuit;
     // End of variables declaration//GEN-END:variables
