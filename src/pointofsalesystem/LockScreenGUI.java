@@ -242,11 +242,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     public void updatePassword(String num)
     {
         lblPassword.setText(lblPassword.getText()+"*");
-        
         password+=num;
-        
-        if (password.length()==3)
-            System.out.println(password);
     }
     
     public void commitPassword()
