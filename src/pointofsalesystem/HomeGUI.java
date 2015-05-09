@@ -50,17 +50,17 @@ public class HomeGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        new PointOfSaleSystem().fadeOut(this); 
-        System.exit(0);
+        new PointOfSaleSystem().fadeOut(this);  //Fade out the current screen
+        System.exit(0);                         //Quit the program.
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblLockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLockMouseReleased
-        new PointOfSaleSystem().fadeOut(this); //Fade out the current screen using fadeOut method
-        new LockScreenGUI().setVisible(true); //Bring up new screen
+        new PointOfSaleSystem().fadeOut(this);  //Fade out the current screen using fadeOut method
+        new LockScreenGUI().setVisible(true);   //Bring up new screen
     }//GEN-LAST:event_lblLockMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        new PointOfSaleSystem().fadeIn(this);
+        new PointOfSaleSystem().fadeIn(this);   //Fade in the current screen as soon as it is selected.
     }//GEN-LAST:event_formWindowOpened
 
     /**
