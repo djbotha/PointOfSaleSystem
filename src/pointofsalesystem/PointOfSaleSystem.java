@@ -19,7 +19,7 @@ public class PointOfSaleSystem
     
     public void fadeIn(JFrame frame)    //Fade in the current window
     {
-        for (double i = 0.0; i <= 1.0; i+=0.1) 
+        for (double i = 0.0; i <= 1.0; i+=0.05) 
         {
             String floatValue = i +"F"; //Convert the double I to a float value
             Float f = Float.valueOf(floatValue);
@@ -28,7 +28,7 @@ public class PointOfSaleSystem
             
             try
             {
-                Thread.sleep(25);       //100ms Delay between iterations
+                Thread.sleep(10);       //100ms Delay between iterations
             }
             catch(Exception e)          //If the thread failed to sleep.
             {
