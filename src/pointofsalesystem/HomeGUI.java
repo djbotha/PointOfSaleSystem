@@ -5,22 +5,25 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class HomeGUI extends javax.swing.JFrame 
+public class HomeGUI extends javax.swing.JFrame
 {
-
+    
+    PointOfSaleSystem pos =  new PointOfSaleSystem();
+    
     public HomeGUI() 
     {
         initComponents();
-        
+
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo
     }
-
-    private final String managerPass = "1234";
     
+    private final String managerPass = "1234";
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblSearch = new javax.swing.JLabel();
         lblCompanyLogo = new javax.swing.JLabel();
         lblManagerPortal = new javax.swing.JLabel();
         lblLock = new javax.swing.JLabel();
@@ -38,6 +41,14 @@ public class HomeGUI extends javax.swing.JFrame
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblSearchMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 174, 150, 150));
 
         lblCompanyLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCompanyLogo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,75 +98,81 @@ public class HomeGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out the current screen
-        System.exit(0);                         //Quit the program.
+        pos.fadeOut(this);                                  //Fade out the current screen
+        System.exit(0);                                     //Quit the program.
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblLockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLockMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out the current screen using fadeOut method
-        new LockScreenGUI().setVisible(true);   //Bring up new screen
+        pos.fadeOut(this);                                  //Fade out the current screen using fadeOut method
+        new LockScreenGUI().setVisible(true);               //Bring up new screen
     }//GEN-LAST:event_lblLockMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        new PointOfSaleSystem().fadeIn(this);   //Fade in the current screen as soon as it is selected.
+        pos.fadeIn(this);                                   //Fade in the current screen as soon as it is selected.
     }//GEN-LAST:event_formWindowOpened
 
     private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompanyLogoMouseReleased
-//        new PointOfSaleSystem().loadWebSite("http://www.spar.co.za/home"); //Load the company webpage.
-        loadWebSite("http://www.spar.co.za/home"); //Load the company webpage.
+//        pos.loadWebSite("http://www.spar.co.za/home");    //Load the company webpage.
+        loadWebSite("http://www.spar.co.za/home");          //Load the company webpage.
     }//GEN-LAST:event_lblCompanyLogoMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
-//        new PointOfSaleSystem().loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
+//        pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
         loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
     private void lblManagerPortalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManagerPortalMouseReleased
-        validateManagerPassword();
+        validateManagerPassword();                          //Check if the Manager Password is correct or not
     }//GEN-LAST:event_lblManagerPortalMouseReleased
 
-    public void validateManagerPassword()   //Validate the password when the manager tries to log in to the manager portal
+    private void lblSearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseReleased
+        pos.fadeOut(this);                                  //Fade out current screen
+        new SearchGUI().setVisible(true);                   //Bring up home screen
+    }//GEN-LAST:event_lblSearchMouseReleased
+
+    public void validateManagerPassword()                   //Validate the password when the manager tries to log in to the manager portal
     {
-        int passwordTries = 3;              //Amount of tries a user has left to enter his password
+        int passwordTries = 3;                              //Amount of tries a user has left to enter his password
         String password = JOptionPane.showInputDialog("Please enter your manager password"); //Grab password input from a JOptionPane dialog
-        
-        while(passwordTries>1)              //Repeat as long as the user can enter a password 
+
+        while (passwordTries > 1)                           //Repeat as long as the user can enter a password 
         {
-            if (!password.equals(managerPass)) //If the password is incorrect
+            if (!password.equals(managerPass))              //If the password is incorrect
             {
                 JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. ", "ERROR", WIDTH); //Show error message. 
-                passwordTries--;            //Decrement the password tries counter
+                passwordTries--;                            //Decrement the password tries counter
                 password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining."); //Prompt for new password to be entered.
-            }
-            else                            //If the password is valid
+                if (password.equals(managerPass)) {
+                    pos.fadeOut(this);                      //Fade out the current GUI
+                    new ManagerPortalGUI().setVisible(true);//Bring up the Manager Portal
+                    return;                                 //Exit out of this method
+                }
+            } else                                          //If the password is valid
             {
-                new PointOfSaleSystem().fadeOut(this);  //Fade out the current GUI
-                new ManagerPortalGUI().setVisible(true);//Bring up the Manager Portal
-                return;                                 //Exit out of this method
+                pos.fadeOut(this);                          //Fade out the current GUI
+                new ManagerPortalGUI().setVisible(true);    //Bring up the Manager Portal
+                return;                                     //Exit out of this method
             }
         }
-        
+
         JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. Exiting...", "ERROR", WIDTH); //Show error message. 
-        new PointOfSaleSystem().fadeOut(this);  //If the password was incorrect 3 times, quit the program.
+        pos.fadeOut(this);                                  //If the password was incorrect 3 times, quit the program.
         System.exit(0);
     }
-    
-    public void loadWebSite(String url) //Display a certain webpage 
+
+    public void loadWebSite(String url)                     //Display a certain webpage 
     {
         try 
         {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-        } 
-        catch (IOException ex)          //If the website failed to display, print an error.
+        } catch (IOException ex)                            //If the website failed to display, print an error.
         {
             System.out.println("Failed to load website. " + ex);
         }
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    public static void main(String args[]) 
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -193,5 +210,6 @@ public class HomeGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblManagerPortal;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JLabel lblSearch;
     // End of variables declaration//GEN-END:variables
 }

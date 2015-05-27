@@ -1,11 +1,13 @@
 package pointofsalesystem;
 
+import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.JFrame;
 
 /*
  *  THIS CLASS IS USED FOR MISCELLANEOUS PIECES OF CODE, THAT ARE USED AT  
- *  MULTIPLE PLACES IN THIS PROJECT. e.g. fadeIn(), fadeOut()...
+ *  MULTIPLE PLACES IN THIS PROJECT. e.g. fadeIn(), fadeOut(), etc...
  */
 
 /*
@@ -16,6 +18,10 @@ import javax.swing.JFrame;
  */
 public class PointOfSaleSystem 
 {    
+    public PointOfSaleSystem()
+    {
+        
+    }
     
     public void fadeIn(JFrame frame)    //Fade in the current window
     {
