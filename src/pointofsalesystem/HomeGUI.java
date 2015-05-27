@@ -142,7 +142,8 @@ public class HomeGUI extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. ", "ERROR", WIDTH); //Show error message. 
                 passwordTries--;                            //Decrement the password tries counter
                 password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining."); //Prompt for new password to be entered.
-                if (password.equals(managerPass)) {
+                if (password.equals(managerPass)) 
+                {
                     pos.fadeOut(this);                      //Fade out the current GUI
                     new ManagerPortalGUI().setVisible(true);//Bring up the Manager Portal
                     return;                                 //Exit out of this method
