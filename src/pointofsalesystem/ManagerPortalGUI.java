@@ -98,6 +98,8 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ManagerPortalGUI().setVisible(true);
+//                new LockScreenGUI().setVisible(true);     //The user can only start the program in the lockscreen. 
+            
             }
         });
     }

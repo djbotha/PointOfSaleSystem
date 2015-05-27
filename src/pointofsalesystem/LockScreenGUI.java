@@ -308,6 +308,8 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LockScreenGUI().setVisible(true);
+//                new LockScreenGUI().setVisible(true);     //The user can only start the program in the lockscreen. 
+            
             }
         });
     }
