@@ -182,7 +182,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        pos.fadeOut(this);  //Fade out current screen
+        pos.fadeOut(this);                      //Fade out current screen
         System.exit(0);                         //Quit program
     }//GEN-LAST:event_lblQuitMouseReleased
 
@@ -236,7 +236,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        pos.fadeIn(this);   //Fade in the current screen smoothly
+        pos.fadeIn(this);                       //Fade in the current screen smoothly
     }//GEN-LAST:event_formWindowOpened
     
     public void updatePassword(String num)      //Method used to update the password label on screen and password variable

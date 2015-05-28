@@ -20,6 +20,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
+        lblAddNewStock = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,6 +49,14 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 30));
 
+        lblAddNewStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblAddNewStockMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblAddNewStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, 150, 150));
+
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ManagerPortalGUI.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
 
@@ -56,23 +65,27 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        pos.fadeIn(this);   //Fade in this window
+        pos.fadeIn(this);                       //Fade in this window
     }//GEN-LAST:event_formWindowOpened
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        pos.fadeOut(this);  //Fade out this window
+        pos.fadeOut(this);                      //Fade out this window
         new HomeGUI().setVisible(true);         //Bring up the home screen
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        pos.fadeOut(this);  //Fade out this screen
+        pos.fadeOut(this);                      //Fade out this screen
         System.exit(0);                         //Quit the program
     }//GEN-LAST:event_lblQuitMouseReleased
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void lblAddNewStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewStockMouseReleased
+        pos.fadeOut(this);                                  //Fade out current screen
+        new AddNewStockGUI().setVisible(true);              //Bring up add new stock screen
+    }//GEN-LAST:event_lblAddNewStockMouseReleased
+
+    
+    public static void main(String args[]) 
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -106,6 +119,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblAddNewStock;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblQuit;

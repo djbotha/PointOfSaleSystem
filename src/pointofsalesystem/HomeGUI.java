@@ -127,7 +127,7 @@ public class HomeGUI extends javax.swing.JFrame
 
     private void lblSearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseReleased
         pos.fadeOut(this);                                  //Fade out current screen
-        new SearchGUI().setVisible(true);                   //Bring up home screen
+        new SearchGUI().setVisible(true);                   //Bring up search screen
     }//GEN-LAST:event_lblSearchMouseReleased
 
     public void validateManagerPassword()                   //Validate the password when the manager tries to log in to the manager portal

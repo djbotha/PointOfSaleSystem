@@ -16,7 +16,8 @@ public class StartGUI extends javax.swing.JFrame
     public StartGUI() 
     {
         initComponents();
-        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_bw.png")).getImage()); 
+    
+        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
     }
     
     @SuppressWarnings("unchecked")
