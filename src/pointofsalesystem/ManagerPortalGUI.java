@@ -82,7 +82,6 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         pos.fadeOut(this);                                  //Fade out current screen
         new AddNewStockGUI().setVisible(true);              //Bring up add new stock screen
     }//GEN-LAST:event_lblAddNewStockMouseReleased
-
     
     public static void main(String args[]) 
     {

@@ -276,10 +276,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
             JOptionPane.showMessageDialog(this, "No password entered. Please enter a password.", "ERROR", WIDTH); //Prompt user to enter a password
         }
     }
-    
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         
         /* Set the Nimbus look and feel */
