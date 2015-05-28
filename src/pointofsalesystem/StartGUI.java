@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 public class StartGUI extends javax.swing.JFrame 
 {
 
+    PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
+    
     public StartGUI() 
     {
         initComponents();

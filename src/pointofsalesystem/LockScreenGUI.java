@@ -12,6 +12,7 @@ import javax.swing.Timer;
 public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 {
     
+    PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
     String password = "";                       //Temporary password variable for validation         
     public String masterPass = "0000";          //Master password. Can be edited from Manager Portal
     int passwordTries = 3;                      //Password counter for amount of times the user can enter a false password
@@ -181,7 +182,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out current screen
+        pos.fadeOut(this);  //Fade out current screen
         System.exit(0);                         //Quit program
     }//GEN-LAST:event_lblQuitMouseReleased
 
@@ -235,7 +236,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        new PointOfSaleSystem().fadeIn(this);   //Fade in the current screen smoothly
+        pos.fadeIn(this);   //Fade in the current screen smoothly
     }//GEN-LAST:event_formWindowOpened
     
     public void updatePassword(String num)      //Method used to update the password label on screen and password variable
@@ -250,7 +251,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         {
             if (password.equals(masterPass))    //If password is valid
             {
-                new PointOfSaleSystem().fadeOut(this);  //Fade out current screen
+                pos.fadeOut(this);  //Fade out current screen
                 new HomeGUI().setVisible(true); //Bring up home screen
             }
             else                                //If password is invalid
@@ -259,7 +260,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
                 if (passwordTries == 0)         //If user has reached password cap
                 {
                     JOptionPane.showMessageDialog(this, "PASSWORD INCORRECT. Exiting...", "ERROR", WIDTH); //Show error message. 
-                    new PointOfSaleSystem().fadeOut(this); //Fade out current screen
+                    pos.fadeOut(this); //Fade out current screen
                     System.exit(0);             //Quit program
                 }
                 else

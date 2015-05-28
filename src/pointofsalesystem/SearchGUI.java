@@ -5,6 +5,8 @@ import java.awt.Color;
 public class SearchGUI extends javax.swing.JFrame 
 {
     
+    PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
+    
     public SearchGUI() 
     {
         initComponents();
@@ -77,16 +79,16 @@ public class SearchGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        new PointOfSaleSystem().fadeIn(this);   //Fade in the current screen smoothly
+        pos.fadeIn(this);   //Fade in the current screen smoothly
     }//GEN-LAST:event_formWindowOpened
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out current screen
+        pos.fadeOut(this);  //Fade out current screen
         System.exit(0);                         //Quit program
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out current screen
+        pos.fadeOut(this);  //Fade out current screen
         new HomeGUI().setVisible(true);         //Bring up home screen
     }//GEN-LAST:event_lblBackMouseReleased
 

@@ -4,6 +4,8 @@ import javax.swing.ImageIcon;
 
 public class ManagerPortalGUI extends javax.swing.JFrame 
 {
+    
+    PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
 
     public ManagerPortalGUI() 
     {
@@ -54,16 +56,16 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        new PointOfSaleSystem().fadeIn(this);   //Fade in this window
+        pos.fadeIn(this);   //Fade in this window
     }//GEN-LAST:event_formWindowOpened
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out this window
+        pos.fadeOut(this);  //Fade out this window
         new HomeGUI().setVisible(true);         //Bring up the home screen
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        new PointOfSaleSystem().fadeOut(this);  //Fade out this screen
+        pos.fadeOut(this);  //Fade out this screen
         System.exit(0);                         //Quit the program
     }//GEN-LAST:event_lblQuitMouseReleased
 

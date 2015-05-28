@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class HomeGUI extends javax.swing.JFrame
 {
     
-    PointOfSaleSystem pos =  new PointOfSaleSystem();
+    PointOfSaleSystem pos =  new PointOfSaleSystem();       //Create a new pointofsalesystem object to use its methods
     
     public HomeGUI() 
     {
