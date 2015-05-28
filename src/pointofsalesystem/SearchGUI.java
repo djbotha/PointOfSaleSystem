@@ -122,7 +122,6 @@ public class SearchGUI extends javax.swing.JFrame
             public void run() {
                 new SearchGUI().setVisible(true);
 //                new LockScreenGUI().setVisible(true);     //The user can only start the program in the lockscreen. 
-            
             }
         });
     }
