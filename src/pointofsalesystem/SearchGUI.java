@@ -168,15 +168,16 @@ public class SearchGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblSearchMouseReleased
 
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
-        
+        String sql = "select * from \"NBUSER\".ORDERS";
+        search(sql);
     }//GEN-LAST:event_lblViewAllMouseReleased
 
     public void search(String query)
     {
         try 
         {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            Statement stmt = conn.createStatement(); //Create a statement object
+            ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
             
             rs.next();
             
