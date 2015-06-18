@@ -1,18 +1,44 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class SearchGUI extends javax.swing.JFrame 
 {
+
+    static 
+    {
+        try 
+        {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            System.err.println("Derby driver not found.");
+        }
+    }
     
+    private Connection conn;
     PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
     
     public SearchGUI() 
     {
         initComponents();
         jScrollPane1.getViewport().setOpaque(false); //Set background to invisible
-        jScrollPane1.setBorder(null);
         taOutput.setBorder(null);
+        jScrollPane1.setBorder(null);
+        
+
+        try 
+        {
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/NBUSER", "nbuser", "nbuser");
+            System.out.println("Connection to NBUSER Database Established");
+        } catch (SQLException ex) 
+        {
+            System.out.println("Connection to NBUSER Database Failed: " + ex);
+        } 
     }
 
     @SuppressWarnings("unchecked")

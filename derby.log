@@ -1,7 +1,7 @@
-Sat May 09 13:54:04 CAT 2015 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
+Thu Jun 18 18:27:58 CAT 2015 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Sat May 09 13:54:08 CAT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-014d-3886-72bb-000046bb625d 
+Thu Jun 18 18:28:00 CAT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-014e-077f-9229-000046bb625d 
 on database directory C:\Users\Daniel\Documents\IT\Gr12\PAT\PointOfSaleSystem\PointOfSaleSystem  with class loader sun.misc.Launcher$AppClassLoader@8955b34 
 Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_40/db/lib/derby.jar
 java.vendor=Oracle Corporation
