@@ -38,9 +38,9 @@ public class SearchGUI extends javax.swing.JFrame
         {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
             System.out.println("Connection to PointOfSaleSystem Database Established");
-        } catch (SQLException ex) 
+        } catch (SQLException ex) //If the connection fails...
         {
-            System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex);
+            System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
         } 
     }
 
@@ -150,26 +150,32 @@ public class SearchGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblSearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseReleased
-        String productName = tfProductName.getText();
-        String barcode = tfBarcode.getText();
+        String productName = tfProductName.getText();   //Fetch product name from textfield
+        String barcode = tfBarcode.getText();           //Fetch barcode from textfield
+        
+        String sql = "";                                //INstanstiate "sql" string, to act as the query. 
         
         if(!"".equals(productName) && "".equals(barcode))  //If the user has entered a productName
         {
-        
+            sql = "SELECT * FROM NBUSER.PRODUCTS\n" +
+                    "WHERE PRODUCTS.PRODUCT_NAME like '" + productName + "'"; //Search for all the similar product names 
         }
         else if (!"".equals(barcode) && "".equals(productName))  //If the user has entered a barcode
         {
-            
+            sql = "SELECT * FROM NBUSER.PRODUCTS\n" +
+                    "WHERE PRODUCTS.PRODUCT_BARCODE like '" + barcode + "'";  //Search for all the similar barcodes
         }
         else if(("".equals(barcode) && "".equals(productName)) || (!"".equals(barcode) && !"".equals(productName))) //If the user has left the input blank or is trying to search for a name AND barcode
         {
             JOptionPane.showMessageDialog(this, "Please fill in ONE of the fields.", "ERROR", WIDTH); //Instruct the user to fill in one of the fields. 
         }
+        
+        search(sql);                                    //Search for the specific query
     }//GEN-LAST:event_lblSearchMouseReleased
 
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
-        String sql = "select * from \"NBUSER\".ORDERS";
-        search(sql);
+        String sql = "select * from \"NBUSER\".ORDERS"; //View all the data
+        search(sql);                                    //Search for query
     }//GEN-LAST:event_lblViewAllMouseReleased
 
     public void search(String query)
@@ -179,15 +185,15 @@ public class SearchGUI extends javax.swing.JFrame
             Statement stmt = conn.createStatement(); //Create a statement object
             ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
             
-            rs.next();
+            rs.next();                              //Skip to first line of file
             
             
             
             
         } 
-        catch (SQLException e) 
+        catch (SQLException e)                      //If the query failed...
         {
-            System.out.println("Search query unsuccessful: " + e);
+            System.out.println("Search query unsuccessful: " + e); //...print an output message
         }
     }
     public static void main(String args[]) 
