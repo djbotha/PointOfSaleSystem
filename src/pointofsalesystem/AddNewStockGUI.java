@@ -134,8 +134,8 @@ public class AddNewStockGUI extends javax.swing.JFrame
         double markup = Double.parseDouble(tfMarkup.getText()); //Fetch product markup from the text field
         int supplierID = 0;                                 //Supplier ID to be fetched from table
         
-        String getSupplierID = "";
-        
+        String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
+                                "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "';";
         
         
         String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_NAME, PRODUCT_BARCODE,"

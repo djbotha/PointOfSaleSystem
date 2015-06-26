@@ -110,11 +110,28 @@ public class PointOfSaleSystem
             ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
             
             rs.next();                              //Skip to first line of resultset
-
         } 
         catch (SQLException e)                      //If the query failed...
         {
             System.out.println("Search query unsuccessful: " + e); //...print an output message
+        }
+    }
+    
+    public int getSupplierID(String query)
+    {
+        try 
+        {
+            Statement stmt = conn.createStatement(); //Create a statement object
+            ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
+            
+            rs.next();                              //Skip to first line of resultset
+            int supplierID = rs.getInt(1);
+            return supplierID;
+        } 
+        catch (SQLException e)                      //If the query failed...
+        {
+            System.out.println("Search query unsuccessful: " + e); //...print an output message
+            return 0;
         }
     }
     
