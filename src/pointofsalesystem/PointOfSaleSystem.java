@@ -37,12 +37,17 @@ public class PointOfSaleSystem
     
     private Connection conn;
     
-    public PointOfSaleSystem()
+    public PointOfSaleSystem()  //Default constructor for instantiating a POS object 
+    {
+
+    }
+    
+    public PointOfSaleSystem(String s) //Constructor to be used when a DB connection is necessary 
     {
         try //Connect application to Database
         {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
-            System.out.println("Connection to PointOfSaleSystem Database Established");
+//            System.out.println("Connection to PointOfSaleSystem Database Established"); 
         } catch (SQLException ex) //If the connection fails...
         {
             System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message

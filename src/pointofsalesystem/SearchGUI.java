@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class SearchGUI extends javax.swing.JFrame 
 {
-    PointOfSaleSystem pos =  new PointOfSaleSystem();   //Create a new pointofsalesystem object to use its methods
+    PointOfSaleSystem pos =  new PointOfSaleSystem("");   //Create a new pointofsalesystem object to use its methods
     
     public SearchGUI() 
     {
