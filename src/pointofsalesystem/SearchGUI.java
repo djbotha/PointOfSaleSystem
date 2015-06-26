@@ -10,20 +10,6 @@ import javax.swing.JOptionPane;
 
 public class SearchGUI extends javax.swing.JFrame 
 {
-
-    static 
-    {
-        try                                           
-        {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            System.err.println("Derby driver not found.");
-        }
-    }
-    
-    private Connection conn;
     PointOfSaleSystem pos =  new PointOfSaleSystem();   //Create a new pointofsalesystem object to use its methods
     
     public SearchGUI() 
@@ -32,16 +18,6 @@ public class SearchGUI extends javax.swing.JFrame
         jScrollPane1.getViewport().setOpaque(false);    //Set background of ScrollPane to invisible
         taOutput.setBorder(null);                       //Set border of textarea to null
         jScrollPane1.setBorder(null);                   //Set border of ScrollPane to null
-        
-
-        try //Connect application to Database
-        {
-            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
-            System.out.println("Connection to PointOfSaleSystem Database Established");
-        } catch (SQLException ex) //If the connection fails...
-        {
-            System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
-        } 
     }
 
     @SuppressWarnings("unchecked")
@@ -170,32 +146,14 @@ public class SearchGUI extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Please fill in ONE of the fields.", "ERROR", WIDTH); //Instruct the user to fill in one of the fields. 
         }
         
-        search(sql);                                    //Search for the specific query
+        pos.searchDB(sql);                                    //Search for the specific query
     }//GEN-LAST:event_lblSearchMouseReleased
 
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
-        String sql = "select * from \"NBUSER\".ORDERS"; //View all the data
-        search(sql);                                    //Search for query
+        String sql = "select * from \"NBUSER\".ORDERS";       //View all the data
+        pos.searchDB(sql);                                    //Search for query
     }//GEN-LAST:event_lblViewAllMouseReleased
 
-    public void search(String query)
-    {
-        try 
-        {
-            Statement stmt = conn.createStatement(); //Create a statement object
-            ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
-            
-            rs.next();                              //Skip to first line of file
-            
-            
-            
-            
-        } 
-        catch (SQLException e)                      //If the query failed...
-        {
-            System.out.println("Search query unsuccessful: " + e); //...print an output message
-        }
-    }
     public static void main(String args[]) 
     {
         /* Set the Nimbus look and feel */

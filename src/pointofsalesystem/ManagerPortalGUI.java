@@ -18,6 +18,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblAddNewSupplier = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblAddNewStock = new javax.swing.JLabel();
@@ -32,6 +33,14 @@ public class ManagerPortalGUI extends javax.swing.JFrame
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblAddNewSupplierMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblAddNewSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,6 +91,11 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         pos.fadeOut(this);                                  //Fade out current screen
         new AddNewStockGUI().setVisible(true);              //Bring up add new stock screen
     }//GEN-LAST:event_lblAddNewStockMouseReleased
+
+    private void lblAddNewSupplierMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewSupplierMouseReleased
+        pos.fadeOut(this);                                  //Fade out current screen
+        new AddNewSupplierGUI().setVisible(true);           //Bring up add new supplier screen
+    }//GEN-LAST:event_lblAddNewSupplierMouseReleased
     
     public static void main(String args[]) 
     {
@@ -119,6 +133,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblAddNewStock;
+    private javax.swing.JLabel lblAddNewSupplier;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblQuit;

@@ -1,11 +1,16 @@
 package pointofsalesystem;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JFrame;
 
 /*
  *  THIS CLASS IS USED FOR MISCELLANEOUS PIECES OF CODE, THAT ARE USED AT  
- *  MULTIPLE PLACES IN THIS PROJECT. e.g. fadeIn(), fadeOut(), etc...
+ *  MULTIPLE PLACES IN THIS PROJECT. e.g. fadeIn(), fadeOut(), loadWebsite(), searchDB(), etc...
  */
 
 /*
@@ -13,12 +18,35 @@ import javax.swing.JFrame;
  *      https://www.mockaroo.com/                           - Test data
  *      http://www.w3schools.com/sql/sql_create_table.asp   - SQL Create Table statement
  *      http://www.entrepreneur.com/answer/221767           - Grocery Markup - between 9% and 13%  
+ *      http://stackoverflow.com/questions/3816015/sqlexception-no-suitable-driver-found-for-jdbcderby-localhost1527
+ *                                                          - Derby Driver not found
  */
 public class PointOfSaleSystem 
 {    
+    static 
+    {
+        try                                           
+        {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            System.err.println("Derby driver not found.");
+        }
+    }
+    
+    private Connection conn;
+    
     public PointOfSaleSystem()
     {
-        
+        try //Connect application to Database
+        {
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
+            System.out.println("Connection to PointOfSaleSystem Database Established");
+        } catch (SQLException ex) //If the connection fails...
+        {
+            System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
+        } 
     }
     
     public void fadeIn(JFrame frame)    //Fade in the current window
@@ -72,5 +100,31 @@ public class PointOfSaleSystem
         {
             System.out.println("Failed to load website. " + ex);
         }
+    }
+    
+    public void searchDB(String query)
+    {
+        try 
+        {
+            Statement stmt = conn.createStatement(); //Create a statement object
+            ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
+            
+            rs.next();                              //Skip to first line of resultset
+
+        } 
+        catch (SQLException e)                      //If the query failed...
+        {
+            System.out.println("Search query unsuccessful: " + e); //...print an output message
+        }
+    }
+    
+    public void addDBEntry(String query)
+    {
+    
+    }
+    
+    public void deleteDBEntry(String query)
+    {
+        
     }
 }
