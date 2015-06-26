@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pointofsalesystem;
 
 import java.util.Properties;
@@ -18,17 +14,18 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Daniel
  */
-public class OrderStockGUI extends javax.swing.JFrame {
+public class OrderStockGUI extends javax.swing.JFrame 
+{
 
-    /**
-     * Creates new form OrderStockGUI
-     */
-    public OrderStockGUI() {
+     public OrderStockGUI() 
+     {
         initComponents();
     }
 
     public void orderStock() 
     {
+        //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
+        
         String to = "xyz@gmail.com";                //Recipient's email
 
         final String from = "abc@gmail.com";              //Sender's email
