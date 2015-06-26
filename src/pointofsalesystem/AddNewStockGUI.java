@@ -135,7 +135,10 @@ public class AddNewStockGUI extends javax.swing.JFrame
         int supplierID = 0;                                 //Supplier ID to be fetched from table
         
         String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
-                                "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "';";
+                                "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'";
+        
+        System.out.println(pos.getSupplierID(getSupplierID));
+        
         
         
         String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_NAME, PRODUCT_BARCODE,"
