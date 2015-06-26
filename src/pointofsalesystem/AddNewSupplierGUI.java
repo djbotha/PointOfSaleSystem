@@ -19,6 +19,7 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
 
         lblBack = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
+        lblQuit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,12 +40,21 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
+        lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
-        getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 50, 50));
+        getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 50));
+
+        lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblQuitMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/AddNewSupplierGUI.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 586, 376));
@@ -54,13 +64,18 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        pos.fadeIn(this);
+        pos.fadeIn(this);                   //Fade in this window
     }//GEN-LAST:event_formWindowOpened
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        pos.fadeOut(this);
-        new ManagerPortalGUI().setVisible(true);
+        pos.fadeOut(this);                  //Fade out this window
+        new ManagerPortalGUI().setVisible(true); //Bring up the manager screen
     }//GEN-LAST:event_lblBackMouseReleased
+
+    private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
+        pos.fadeOut(this);                  //Fade out the current screen
+        System.exit(0);                     //Quit the program
+    }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
         pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
@@ -102,5 +117,6 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblPOSLogo;
+    private javax.swing.JLabel lblQuit;
     // End of variables declaration//GEN-END:variables
 }

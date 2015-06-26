@@ -1,5 +1,8 @@
 package pointofsalesystem;
 
+import java.awt.Color;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,11 +21,13 @@ import javax.mail.internet.MimeMessage;
 public class OrderStockGUI extends javax.swing.JFrame 
 {
     
-    PointOfSaleSystem pos = new PointOfSaleSystem();
+    PointOfSaleSystem pos = new PointOfSaleSystem("");
     
     public OrderStockGUI()
     {
         initComponents();
+        tfSupplierName.setText("asdf");
+        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
     }
 
     public void orderStock() 
@@ -81,6 +87,16 @@ public class OrderStockGUI extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tfTotalPrice = new javax.swing.JTextField();
+        tfPricePerUnit = new javax.swing.JTextField();
+        tfSupplierName = new javax.swing.JTextField();
+        tfOrderID = new javax.swing.JTextField();
+        tfOrderDate = new javax.swing.JTextField();
+        tfBarcode = new javax.swing.JTextField();
+        tfProductName = new javax.swing.JTextField();
+        spnQuantity = new javax.swing.JSpinner();
+        lblPlaceOrder = new javax.swing.JLabel();
+        lblPOSLogo = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
@@ -94,6 +110,77 @@ public class OrderStockGUI extends javax.swing.JFrame
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tfTotalPrice.setBackground(new Color(0, 0, 0, 0));
+        tfTotalPrice.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfTotalPrice.setForeground(new java.awt.Color(255, 255, 255));
+        tfTotalPrice.setBorder(null);
+        tfTotalPrice.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfTotalPrice.setEnabled(false);
+        getContentPane().add(tfTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 120, 30));
+
+        tfPricePerUnit.setBackground(new Color(0, 0, 0, 0));
+        tfPricePerUnit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfPricePerUnit.setForeground(new java.awt.Color(255, 255, 255));
+        tfPricePerUnit.setBorder(null);
+        tfPricePerUnit.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfPricePerUnit.setEnabled(false);
+        getContentPane().add(tfPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 120, 30));
+
+        tfSupplierName.setBackground(new Color(0, 0, 0, 0));
+        tfSupplierName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfSupplierName.setForeground(new java.awt.Color(255, 255, 255));
+        tfSupplierName.setBorder(null);
+        tfSupplierName.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfSupplierName.setEnabled(false);
+        getContentPane().add(tfSupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 460, 40));
+
+        tfOrderID.setBackground(new Color(0, 0, 0, 0));
+        tfOrderID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfOrderID.setForeground(new java.awt.Color(255, 255, 255));
+        tfOrderID.setBorder(null);
+        tfOrderID.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfOrderID.setEnabled(false);
+        getContentPane().add(tfOrderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 210, 40));
+
+        tfOrderDate.setBackground(new Color(0, 0, 0, 0));
+        tfOrderDate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfOrderDate.setForeground(new java.awt.Color(255, 255, 255));
+        tfOrderDate.setBorder(null);
+        tfOrderDate.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfOrderDate.setEnabled(false);
+        getContentPane().add(tfOrderDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 210, 40));
+
+        tfBarcode.setBackground(new Color(0, 0, 0, 0));
+        tfBarcode.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfBarcode.setForeground(new java.awt.Color(255, 255, 255));
+        tfBarcode.setBorder(null);
+        tfBarcode.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfBarcode.setEnabled(false);
+        getContentPane().add(tfBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 460, 40));
+
+        tfProductName.setBackground(new Color(0, 0, 0, 0));
+        tfProductName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfProductName.setForeground(new java.awt.Color(255, 255, 255));
+        tfProductName.setBorder(null);
+        getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 106, 340, 40));
+        getContentPane().add(spnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 80, 30));
+
+        lblPlaceOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPlaceOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblPlaceOrderMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblPlaceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 364, 190, 20));
+
+        lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblPOSLogoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 50));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,7 +207,7 @@ public class OrderStockGUI extends javax.swing.JFrame
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
         pos.fadeOut(this);                                  //Fade out this window
-        new ManagerPortalGUI().setVisible(true);            //Bring up the home screen
+        new ManagerPortalGUI().setVisible(true);            //Bring up the manager screen
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -128,9 +215,24 @@ public class OrderStockGUI extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowOpened
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        pos.fadeOut(this);                      //Fade out current screen
-        System.exit(0);                         //Quit program
+        pos.fadeOut(this);                                  //Fade out current screen
+        System.exit(0);                                     //Quit program
     }//GEN-LAST:event_lblQuitMouseReleased
+
+    private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
+        pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
+    }//GEN-LAST:event_lblPOSLogoMouseReleased
+
+    private void lblPlaceOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPlaceOrderMouseReleased
+        String productName = tfProductName.getText();
+        int quantity = (int) spnQuantity.getValue();
+        String barcode = tfBarcode.getText();
+        String orderDate = tfOrderDate.getText() + ":00.0";
+        Calendar cal = new GregorianCalendar();
+        
+        
+        
+    }//GEN-LAST:event_lblPlaceOrderMouseReleased
 
     /**
      * @param args the command line arguments
@@ -169,6 +271,16 @@ public class OrderStockGUI extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblPOSLogo;
+    private javax.swing.JLabel lblPlaceOrder;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JSpinner spnQuantity;
+    private javax.swing.JTextField tfBarcode;
+    private javax.swing.JTextField tfOrderDate;
+    private javax.swing.JTextField tfOrderID;
+    private javax.swing.JTextField tfPricePerUnit;
+    private javax.swing.JTextField tfProductName;
+    private javax.swing.JTextField tfSupplierName;
+    private javax.swing.JTextField tfTotalPrice;
     // End of variables declaration//GEN-END:variables
 }

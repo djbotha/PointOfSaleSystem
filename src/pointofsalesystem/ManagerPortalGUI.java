@@ -19,6 +19,8 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private void initComponents() {
 
         lblAddNewSupplier = new javax.swing.JLabel();
+        lblOrderStock = new javax.swing.JLabel();
+        lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblAddNewStock = new javax.swing.JLabel();
@@ -41,6 +43,22 @@ public class ManagerPortalGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblAddNewSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
+
+        lblOrderStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblOrderStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblOrderStockMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblOrderStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 150));
+
+        lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblPOSLogoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 40, 50));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,14 +106,23 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblAddNewStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewStockMouseReleased
-        pos.fadeOut(this);                                  //Fade out current screen
-        new AddNewStockGUI().setVisible(true);              //Bring up add new stock screen
+        pos.fadeOut(this);                      //Fade out current screen
+        new AddNewStockGUI().setVisible(true);  //Bring up add new stock screen
     }//GEN-LAST:event_lblAddNewStockMouseReleased
 
     private void lblAddNewSupplierMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewSupplierMouseReleased
-        pos.fadeOut(this);                                  //Fade out current screen
-        new AddNewSupplierGUI().setVisible(true);           //Bring up add new supplier screen
+        pos.fadeOut(this);                      //Fade out current screen
+        new AddNewSupplierGUI().setVisible(true);//Bring up add new supplier screen
     }//GEN-LAST:event_lblAddNewSupplierMouseReleased
+
+    private void lblOrderStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOrderStockMouseReleased
+        pos.fadeOut(this);                       //Fade out current screen
+        new AddNewSupplierGUI().setVisible(true);//Bring up order stock screen
+    }//GEN-LAST:event_lblOrderStockMouseReleased
+
+    private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
+        pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
+    }//GEN-LAST:event_lblPOSLogoMouseReleased
     
     public static void main(String args[]) 
     {
@@ -136,6 +163,8 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblAddNewSupplier;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblOrderStock;
+    private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     // End of variables declaration//GEN-END:variables
 }

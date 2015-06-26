@@ -30,6 +30,7 @@ public class SearchGUI extends javax.swing.JFrame
         taOutput = new javax.swing.JTextArea();
         lblSearch = new javax.swing.JLabel();
         lblViewAll = new javax.swing.JLabel();
+        lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
@@ -51,7 +52,7 @@ public class SearchGUI extends javax.swing.JFrame
         tfBarcode.setBorder(null);
         tfBarcode.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         tfBarcode.setOpaque(false);
-        getContentPane().add(tfBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 630, -1));
+        getContentPane().add(tfBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 186, 630, 20));
 
         tfProductName.setBackground(new Color(0, 0, 0, 0));
         tfProductName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -60,7 +61,7 @@ public class SearchGUI extends javax.swing.JFrame
         tfProductName.setBorder(null);
         tfProductName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         tfProductName.setOpaque(false);
-        getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 630, -1));
+        getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 126, 630, 20));
 
         taOutput.setBackground(new Color(0,0,0,0));
         taOutput.setColumns(20);
@@ -87,6 +88,14 @@ public class SearchGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblViewAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 104, 110, 110));
+
+        lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblPOSLogoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 40, 50));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,6 +163,10 @@ public class SearchGUI extends javax.swing.JFrame
         pos.searchDB(sql);                                    //Search for query
     }//GEN-LAST:event_lblViewAllMouseReleased
 
+    private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
+        pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project.
+    }//GEN-LAST:event_lblPOSLogoMouseReleased
+
     public static void main(String args[]) 
     {
         /* Set the Nimbus look and feel */
@@ -191,6 +204,7 @@ public class SearchGUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblViewAll;
