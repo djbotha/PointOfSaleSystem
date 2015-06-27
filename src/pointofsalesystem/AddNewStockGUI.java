@@ -152,22 +152,26 @@ public class AddNewStockGUI extends javax.swing.JFrame
         int supplierID = 0;                                 //Supplier ID to be fetched from table
         
         String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
-                                "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'";
+                                "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'"; //Query to get the supplier ID of the supplier the user entered
         
-        supplierID = pos.getID(getSupplierID);
-        System.out.println(supplierID);
+        supplierID = pos.getID(getSupplierID);              //Get the supplier ID of the supplier the user entered
+        
+//        System.out.println(supplierID);
+        
         String getProductID = "SELECT PRODUCT_ID FROM NBUSER.PRODUCTS\n" +
                                 "ORDER BY PRODUCT_ID DESC\n" +
-                                "FETCH FIRST 1 ROWS ONLY"; //Get the last product ID and increment it with one
+                                "FETCH FIRST 1 ROWS ONLY"; //Query to get the last product ID and increment it with one
         
-        int productID = pos.getID(getProductID) + 1;
-        System.out.println(productID);
+        int productID = pos.getID(getProductID) + 1;        //Get the last product ID and increment it with one
+        
+//        System.out.println(productID);
+        
         String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE,"
                 + " PRODUCT_COSTPRICE, PRODUCT_MARKUP, PRODUCT_QTY, SUPPLIER_ID)\n" +
                         "VALUES (" + productID + ", '" + productName + "', '" + barcode + "'," + pricePerUnit + ", "
-                + "" + markup + ", " + quantity + ", " + supplierID + ")"; //SQL query to add the data to the DB
+                + "" + markup + ", " + quantity + ", " + supplierID + ")"; //Query to add the data to the DB
         
-        pos.addDBEntry(query);
+        pos.addDBEntry(query);                              //Add the data to the DB
     }//GEN-LAST:event_lblAddToDBMouseReleased
 
     public static void main(String args[]) 
