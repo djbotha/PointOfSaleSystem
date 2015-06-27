@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
+import javax.swing.ImageIcon;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -12,7 +13,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -102,6 +103,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("POS Point Of Sale");
         setUndecorated(true);
         setOpacity(0.0F);
         addWindowListener(new java.awt.event.WindowAdapter() {

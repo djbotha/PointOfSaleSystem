@@ -27,6 +27,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("POS Point Of Sale");
         setUndecorated(true);
         setOpacity(0.0F);
         addWindowListener(new java.awt.event.WindowAdapter() {

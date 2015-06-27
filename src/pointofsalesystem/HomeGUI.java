@@ -33,6 +33,7 @@ public class HomeGUI extends javax.swing.JFrame
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("POS Point Of Sale");
         setUndecorated(true);
         setOpacity(0.0F);
         setResizable(false);

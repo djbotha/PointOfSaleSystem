@@ -27,7 +27,7 @@ public class StartGUI extends javax.swing.JFrame
         lblBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Point of Sale System");
+        setTitle("POS Point Of Sale");
         setIconImages(null);
         setUndecorated(true);
 
