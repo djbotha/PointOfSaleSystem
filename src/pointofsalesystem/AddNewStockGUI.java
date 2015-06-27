@@ -32,7 +32,7 @@ public class AddNewStockGUI extends javax.swing.JFrame
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("POS Point Of Sale");
+        setTitle("POS Add New Stock");
         setUndecorated(true);
         setOpacity(0.0F);
         addWindowListener(new java.awt.event.WindowAdapter()
@@ -149,22 +149,18 @@ public class AddNewStockGUI extends javax.swing.JFrame
         double pricePerUnit = Double.parseDouble(tfPricePerUnit.getText()); //Fetch price per unit from the text field
         double markup = Double.parseDouble(tfMarkup.getText()); //Fetch product markup from the text field
         int quantity = (int) spnQty.getValue();             //Fetch the quantity from the spinner
-        int supplierID = 0;                                 //Supplier ID to be fetched from table
+        int supplierID;                                 //Supplier ID to be fetched from table
         
         String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
                                 "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'"; //Query to get the supplier ID of the supplier the user entered
         
         supplierID = pos.getID(getSupplierID);              //Get the supplier ID of the supplier the user entered
         
-//        System.out.println(supplierID);
-        
         String getProductID = "SELECT PRODUCT_ID FROM NBUSER.PRODUCTS\n" +
                                 "ORDER BY PRODUCT_ID DESC\n" +
                                 "FETCH FIRST 1 ROWS ONLY"; //Query to get the last product ID and increment it with one
         
         int productID = pos.getID(getProductID) + 1;        //Get the last product ID and increment it with one
-        
-//        System.out.println(productID);
         
         String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE,"
                 + " PRODUCT_COSTPRICE, PRODUCT_MARKUP, PRODUCT_QTY, SUPPLIER_ID)\n" +

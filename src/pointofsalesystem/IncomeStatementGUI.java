@@ -16,7 +16,8 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
@@ -24,11 +25,13 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("POS Point Of Sale");
+        setTitle("POS Income Statement");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -37,8 +40,10 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         getContentPane().add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 150, 40));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblPOSLogoMouseReleased(evt);
             }
         });

@@ -16,7 +16,8 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         lblAddNewSupplier = new javax.swing.JLabel();
         lblOrderStock = new javax.swing.JLabel();
@@ -24,66 +25,91 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblAddNewStock = new javax.swing.JLabel();
+        lblCompanyLogo = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("POS Point Of Sale");
+        setTitle("POS Manager Portal");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblAddNewSupplierMouseReleased(evt);
             }
         });
         getContentPane().add(lblAddNewSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
 
         lblOrderStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblOrderStock.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblOrderStock.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblOrderStockMouseReleased(evt);
             }
         });
         getContentPane().add(lblOrderStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 150));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 40, 50));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 14, 60, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 30));
 
         lblAddNewStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblAddNewStockMouseReleased(evt);
             }
         });
         getContentPane().add(lblAddNewStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, 150, 150));
+
+        lblCompanyLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCompanyLogo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblCompanyLogoMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblCompanyLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 224, 320, 380));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ManagerPortalGUI.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
@@ -118,12 +144,17 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblOrderStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOrderStockMouseReleased
         pos.fadeOut(this);                       //Fade out current screen
-        new AddNewSupplierGUI().setVisible(true);//Bring up order stock screen
+        new OrderStockGUI().setVisible(true);//Bring up order stock screen
     }//GEN-LAST:event_lblOrderStockMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
         pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
     }//GEN-LAST:event_lblPOSLogoMouseReleased
+
+    private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblCompanyLogoMouseReleased
+    {//GEN-HEADEREND:event_lblCompanyLogoMouseReleased
+        pos.loadWebSite("http://www.spar.co.za/home");
+    }//GEN-LAST:event_lblCompanyLogoMouseReleased
     
     public static void main(String args[]) 
     {
@@ -164,6 +195,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblAddNewSupplier;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblOrderStock;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;

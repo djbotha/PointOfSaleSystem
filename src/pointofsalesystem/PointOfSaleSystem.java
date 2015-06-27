@@ -1,5 +1,6 @@
 package pointofsalesystem;
 
+import static java.awt.image.ImageObserver.WIDTH;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  *  THIS CLASS IS USED FOR MISCELLANEOUS PIECES OF CODE, THAT ARE USED AT  
@@ -140,10 +142,13 @@ public class PointOfSaleSystem
         {
             Statement stmt = conn.createStatement();    //Create a statement object
             stmt.executeUpdate(query);                  //Executes the insert INTO query
+            
         } catch (SQLException e)                      //If the query failed...
         {
             System.out.println("INSERT INTO query unsuccessful: " + e); //...print an output message
         }
+        
+        JOptionPane.showMessageDialog(null, "Success!");
     }
 
     public void deleteDBEntry(String query)
