@@ -21,27 +21,25 @@ import javax.swing.JFrame;
  *      http://stackoverflow.com/questions/3816015/sqlexception-no-suitable-driver-found-for-jdbcderby-localhost1527
  *                                                          - Derby Driver not found
  */
-public class PointOfSaleSystem 
-{    
-    static 
+public class PointOfSaleSystem
+{
+
+    static
     {
-        try                                           
+        try
         {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } 
-        catch (ClassNotFoundException e) 
+        } catch (ClassNotFoundException e)
         {
             System.err.println("Derby driver not found.");
         }
     }
-    
     private Connection conn;
-    
+
     public PointOfSaleSystem()  //Default constructor for instantiating a POS object 
     {
-
     }
-    
+
     public PointOfSaleSystem(String s) //Constructor to be used when a DB connection is necessary 
     {
         try //Connect application to Database
@@ -51,43 +49,41 @@ public class PointOfSaleSystem
         } catch (SQLException ex) //If the connection fails...
         {
             System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
-        } 
+        }
     }
-    
+
     public void fadeIn(JFrame frame)    //Fade in the current window
     {
-        for (double i = 0.0; i <= 1.0; i+=0.1) 
+        for (double i = 0.0; i <= 1.0; i += 0.1)
         {
-            String floatValue = i +"F"; //Convert the double I to a float value
+            String floatValue = i + "F"; //Convert the double I to a float value
             Float f = Float.valueOf(floatValue);
-            
+
             frame.setOpacity(f);        //Set opacity of window to f
-            
+
             try
             {
                 Thread.sleep(25);       //100ms Delay between iterations
-            }
-            catch(Exception e)          //If the thread failed to sleep.
+            } catch (Exception e)          //If the thread failed to sleep.
             {
                 System.out.println("Thread failed to sleep: " + e);
             }
         }
     }
-    
+
     public void fadeOut(JFrame frame)   //Fade out of the current window
     {
-        for (double i = 1.0; i >= 0.0; i-=0.1) 
+        for (double i = 1.0; i >= 0.0; i -= 0.1)
         {
-            String floatValue = i +"F"; //Convert the double I to a float value
+            String floatValue = i + "F"; //Convert the double I to a float value
             Float f = Float.valueOf(floatValue);
-            
+
             frame.setOpacity(f);        //Set opacity of window to f
-            
+
             try
             {
                 Thread.sleep(25);       //100ms Delay between iterations
-            }
-            catch(Exception e)          //If the thread failed to sleep.
+            } catch (Exception e)          //If the thread failed to sleep.
             {
                 System.out.println("Thread failed to sleep: " + e);
             }
@@ -97,56 +93,60 @@ public class PointOfSaleSystem
 
     public void loadWebSite(String url) //Display a certain webpage
     {
-        try 
+        try
         {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-        } 
-        catch (IOException ex) 
+        } catch (IOException ex)
         {
             System.out.println("Failed to load website. " + ex);
         }
     }
-    
+
     public void searchDB(String query)
     {
-        try 
+        try
         {
             Statement stmt = conn.createStatement(); //Create a statement object
             ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
-            
+
             rs.next();                              //Skip to first line of resultset
-        } 
-        catch (SQLException e)                      //If the query failed...
+        } catch (SQLException e)                      //If the query failed...
         {
             System.out.println("Search query unsuccessful: " + e); //...print an output message
         }
     }
-    
-    public int getSupplierID(String query)
+
+    public int getID(String query)
     {
-        try 
+        try
         {
             Statement stmt = conn.createStatement(); //Create a statement object
             ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
-            
+
             rs.next();                              //Skip to first line of resultset
-            int supplierID = rs.getInt(1);
-            return supplierID;
-        } 
-        catch (SQLException e)                      //If the query failed...
+            int id = rs.getInt(1);
+            return id;
+        } catch (SQLException e)                      //If the query failed...
         {
             System.out.println("Search query unsuccessful: " + e); //...print an output message
             return 0;
         }
     }
-    
+
     public void addDBEntry(String query)
     {
-    
+
+        try
+        {
+            Statement stmt = conn.createStatement();    //Create a statement object
+            stmt.executeUpdate(query);                  //Executes the insert INTO query
+        } catch (SQLException e)                      //If the query failed...
+        {
+            System.out.println("INSERT INTO query unsuccessful: " + e); //...print an output message
+        }
     }
-    
+
     public void deleteDBEntry(String query)
     {
-        
     }
 }

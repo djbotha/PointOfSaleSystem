@@ -16,13 +16,15 @@ public class AddNewStockGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         tfMarkup = new javax.swing.JTextField();
         tfPricePerUnit = new javax.swing.JTextField();
         tfSupplierName = new javax.swing.JTextField();
         tfBarcode = new javax.swing.JTextField();
         tfProductName = new javax.swing.JTextField();
+        spnQty = new javax.swing.JSpinner();
         lblAddToDB = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
@@ -30,10 +32,13 @@ public class AddNewStockGUI extends javax.swing.JFrame
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("POS Point Of Sale");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -69,42 +74,53 @@ public class AddNewStockGUI extends javax.swing.JFrame
         tfProductName.setBorder(null);
         getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 116, 340, 20));
 
+        spnQty.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        getContentPane().add(spnQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 110, 100, 30));
+
         lblAddToDB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddToDB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblAddToDB.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblAddToDBMouseReleased(evt);
             }
         });
         getContentPane().add(lblAddToDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 304, 150, 30));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 20));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 40));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/AddNewStockGUI.png"))); // NOI18N
-        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 370));
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, -1));
 
-        pack();
+        setSize(new java.awt.Dimension(586, 376));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,19 +148,24 @@ public class AddNewStockGUI extends javax.swing.JFrame
         String supplierName = tfSupplierName.getText();     //Fetch supplier name from the text field
         double pricePerUnit = Double.parseDouble(tfPricePerUnit.getText()); //Fetch price per unit from the text field
         double markup = Double.parseDouble(tfMarkup.getText()); //Fetch product markup from the text field
+        int quantity = (int) spnQty.getValue();             //Fetch the quantity from the spinner
         int supplierID = 0;                                 //Supplier ID to be fetched from table
         
         String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
                                 "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'";
         
-        System.out.println(pos.getSupplierID(getSupplierID));
+        supplierID = pos.getID(getSupplierID);
+        System.out.println(supplierID);
+        String getProductID = "SELECT PRODUCT_ID FROM NBUSER.PRODUCTS\n" +
+                                "ORDER BY PRODUCT_ID DESC\n" +
+                                "FETCH FIRST 1 ROWS ONLY"; //Get the last product ID and increment it with one
         
-        
-        
-        String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_NAME, PRODUCT_BARCODE,"
+        int productID = pos.getID(getProductID) + 1;
+        System.out.println(productID);
+        String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE,"
                 + " PRODUCT_COSTPRICE, PRODUCT_MARKUP, PRODUCT_QTY, SUPPLIER_ID)\n" +
-                        "VALUES ('" + productName + "', '" + barcode + "', '" + pricePerUnit + "', "
-                + "'" + markup + "', '" + supplierID + "')"; //SQL query to add the data to the DB
+                        "VALUES (" + productID + ", '" + productName + "', '" + barcode + "'," + pricePerUnit + ", "
+                + "" + markup + ", " + quantity + ", " + supplierID + ")"; //SQL query to add the data to the DB
         
         pos.addDBEntry(query);
     }//GEN-LAST:event_lblAddToDBMouseReleased
@@ -187,6 +208,7 @@ public class AddNewStockGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JSpinner spnQty;
     private javax.swing.JTextField tfBarcode;
     private javax.swing.JTextField tfMarkup;
     private javax.swing.JTextField tfPricePerUnit;
