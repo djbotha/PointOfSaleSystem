@@ -120,7 +120,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfTotalPrice.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfTotalPrice.setForeground(new java.awt.Color(255, 255, 255));
         tfTotalPrice.setBorder(null);
-        tfTotalPrice.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfTotalPrice.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         tfTotalPrice.setEnabled(false);
         getContentPane().add(tfTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 120, 30));
 
@@ -128,7 +128,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfPricePerUnit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfPricePerUnit.setForeground(new java.awt.Color(255, 255, 255));
         tfPricePerUnit.setBorder(null);
-        tfPricePerUnit.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfPricePerUnit.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         tfPricePerUnit.setEnabled(false);
         getContentPane().add(tfPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 120, 30));
 
@@ -136,7 +136,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfSupplierName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfSupplierName.setForeground(new java.awt.Color(255, 255, 255));
         tfSupplierName.setBorder(null);
-        tfSupplierName.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfSupplierName.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         tfSupplierName.setEnabled(false);
         getContentPane().add(tfSupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 460, 40));
 
@@ -144,7 +144,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfOrderID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfOrderID.setForeground(new java.awt.Color(255, 255, 255));
         tfOrderID.setBorder(null);
-        tfOrderID.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfOrderID.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         tfOrderID.setEnabled(false);
         getContentPane().add(tfOrderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 210, 40));
 
@@ -152,7 +152,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfOrderDate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfOrderDate.setForeground(new java.awt.Color(255, 255, 255));
         tfOrderDate.setBorder(null);
-        tfOrderDate.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfOrderDate.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         tfOrderDate.setEnabled(false);
         getContentPane().add(tfOrderDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 210, 40));
 
@@ -160,7 +160,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfBarcode.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfBarcode.setForeground(new java.awt.Color(255, 255, 255));
         tfBarcode.setBorder(null);
-        tfBarcode.setDisabledTextColor(new java.awt.Color(255, 153, 0));
+        tfBarcode.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         tfBarcode.setEnabled(false);
         getContentPane().add(tfBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 460, 40));
 

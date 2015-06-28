@@ -1,5 +1,8 @@
 package pointofsalesystem;
 
+import java.awt.Color;
+import javax.swing.ImageIcon;
+
 public class DeleteStockGUI extends javax.swing.JFrame
 {
 
@@ -8,6 +11,8 @@ public class DeleteStockGUI extends javax.swing.JFrame
     public DeleteStockGUI()
     {
         initComponents();
+        
+        this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo
     }
 
     
@@ -16,6 +21,15 @@ public class DeleteStockGUI extends javax.swing.JFrame
     private void initComponents()
     {
 
+        spnQty = new javax.swing.JSpinner();
+        tfMarkup = new javax.swing.JTextField();
+        tfPricePerUnit = new javax.swing.JTextField();
+        tfSupplierName = new javax.swing.JTextField();
+        tfSupplierID = new javax.swing.JTextField();
+        tfProductID = new javax.swing.JTextField();
+        tfBarcode = new javax.swing.JTextField();
+        tfProductName = new javax.swing.JTextField();
+        lblDeleteStock = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
@@ -33,6 +47,74 @@ public class DeleteStockGUI extends javax.swing.JFrame
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        spnQty.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        getContentPane().add(spnQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(389, 110, 130, 30));
+
+        tfMarkup.setBackground(new Color(0, 0, 0, 0));
+        tfMarkup.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfMarkup.setForeground(new java.awt.Color(255, 255, 255));
+        tfMarkup.setBorder(null);
+        tfMarkup.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfMarkup.setEnabled(false);
+        getContentPane().add(tfMarkup, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 120, 30));
+
+        tfPricePerUnit.setBackground(new Color(0, 0, 0, 0));
+        tfPricePerUnit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfPricePerUnit.setForeground(new java.awt.Color(255, 255, 255));
+        tfPricePerUnit.setBorder(null);
+        tfPricePerUnit.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfPricePerUnit.setEnabled(false);
+        getContentPane().add(tfPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 120, 30));
+
+        tfSupplierName.setBackground(new Color(0, 0, 0, 0));
+        tfSupplierName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfSupplierName.setForeground(new java.awt.Color(255, 255, 255));
+        tfSupplierName.setBorder(null);
+        tfSupplierName.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfSupplierName.setEnabled(false);
+        getContentPane().add(tfSupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 460, 40));
+
+        tfSupplierID.setBackground(new Color(0, 0, 0, 0));
+        tfSupplierID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfSupplierID.setForeground(new java.awt.Color(255, 255, 255));
+        tfSupplierID.setBorder(null);
+        tfSupplierID.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfSupplierID.setEnabled(false);
+        getContentPane().add(tfSupplierID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 210, 40));
+
+        tfProductID.setBackground(new Color(0, 0, 0, 0));
+        tfProductID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfProductID.setForeground(new java.awt.Color(255, 255, 255));
+        tfProductID.setBorder(null);
+        tfProductID.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfProductID.setEnabled(false);
+        getContentPane().add(tfProductID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 230, 40));
+
+        tfBarcode.setBackground(new Color(0, 0, 0, 0));
+        tfBarcode.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfBarcode.setForeground(new java.awt.Color(255, 255, 255));
+        tfBarcode.setBorder(null);
+        tfBarcode.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfBarcode.setEnabled(false);
+        getContentPane().add(tfBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 460, 30));
+
+        tfProductName.setBackground(new Color(0, 0, 0, 0));
+        tfProductName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfProductName.setForeground(new java.awt.Color(255, 255, 255));
+        tfProductName.setBorder(null);
+        tfProductName.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 290, 40));
+
+        lblDeleteStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDeleteStock.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblDeleteStockMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblDeleteStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 364, 200, 30));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter()
@@ -93,6 +175,11 @@ public class DeleteStockGUI extends javax.swing.JFrame
         System.exit(0);                         //Quit this program
     }//GEN-LAST:event_lblQuitMouseReleased
 
+    private void lblDeleteStockMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblDeleteStockMouseReleased
+    {//GEN-HEADEREND:event_lblDeleteStockMouseReleased
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanantlyGUI.png"))); //Change background to a different button
+    }//GEN-LAST:event_lblDeleteStockMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -140,7 +227,16 @@ public class DeleteStockGUI extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblDeleteStock;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JSpinner spnQty;
+    private javax.swing.JTextField tfBarcode;
+    private javax.swing.JTextField tfMarkup;
+    private javax.swing.JTextField tfPricePerUnit;
+    private javax.swing.JTextField tfProductID;
+    private javax.swing.JTextField tfProductName;
+    private javax.swing.JTextField tfSupplierID;
+    private javax.swing.JTextField tfSupplierName;
     // End of variables declaration//GEN-END:variables
 }
