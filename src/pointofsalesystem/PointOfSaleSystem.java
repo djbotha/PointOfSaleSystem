@@ -1,6 +1,5 @@
 package pointofsalesystem;
 
-import static java.awt.image.ImageObserver.WIDTH;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,7 +32,7 @@ public class PointOfSaleSystem
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException e)
         {
-            System.err.println("Derby driver not found.");
+           JOptionPane.showMessageDialog(null, "Derby driver not found.");
         }
     }
     private Connection conn;
@@ -47,10 +46,10 @@ public class PointOfSaleSystem
         try //Connect application to Database
         {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
-//            System.out.println("Connection to PointOfSaleSystem Database Established"); 
+//            JOptionPane.showMessageDialog(null, "Connection to PointOfSaleSystem Database Established"); 
         } catch (SQLException ex) //If the connection fails...
         {
-            System.out.println("Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
+            JOptionPane.showMessageDialog(null, "Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
         }
     }
 
@@ -68,7 +67,7 @@ public class PointOfSaleSystem
                 Thread.sleep(25);       //100ms Delay between iterations
             } catch (Exception e)          //If the thread failed to sleep.
             {
-                System.out.println("Thread failed to sleep: " + e);
+                JOptionPane.showMessageDialog(null, "Thread failed to sleep: " + e);
             }
         }
     }
@@ -87,7 +86,7 @@ public class PointOfSaleSystem
                 Thread.sleep(25);       //100ms Delay between iterations
             } catch (Exception e)          //If the thread failed to sleep.
             {
-                System.out.println("Thread failed to sleep: " + e);
+                JOptionPane.showMessageDialog(null, "Thread failed to sleep: " + e);
             }
         }
         frame.setVisible(false);        //Close the frame after its opacity is set to 0.0
@@ -100,7 +99,7 @@ public class PointOfSaleSystem
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException ex)
         {
-            System.out.println("Failed to load website. " + ex);
+            JOptionPane.showMessageDialog(null, "Failed to load website. " + ex);
         }
     }
 
@@ -114,7 +113,7 @@ public class PointOfSaleSystem
             return rs;
         } catch (SQLException e)                      //If the query failed...
         {
-            System.out.println("Search query unsuccessful: " + e); //...print an output message
+            JOptionPane.showMessageDialog(null, "Search query unsuccessful: " + e); //...print an output message
             return null;
         }
     }
@@ -131,7 +130,7 @@ public class PointOfSaleSystem
             return id;
         } catch (SQLException e)                      //If the query failed...
         {
-            System.out.println("Search query unsuccessful: " + e); //...print an output message
+            JOptionPane.showMessageDialog(null, "Search query unsuccessful: " + e); //...print an output message
             return 0;
         }
     }
@@ -145,7 +144,7 @@ public class PointOfSaleSystem
             
         } catch (SQLException e)                      //If the query failed...
         {
-            System.out.println("INSERT INTO query unsuccessful: " + e); //...print an output message
+            JOptionPane.showMessageDialog(null, "INSERT INTO query unsuccessful: " + e); //...print an output message
         }
         
         JOptionPane.showMessageDialog(null, "Data successfully added to database.");
@@ -160,7 +159,7 @@ public class PointOfSaleSystem
             
         } catch (SQLException e)                      //If the query failed...
         {
-            System.out.println("DELETE query unsuccessful: " + e); //...print an output message
+            JOptionPane.showMessageDialog(null, "DELETE query unsuccessful: " + e); //...print an output message
         }
         
         JOptionPane.showMessageDialog(null, "Data successfully removed from database.");
