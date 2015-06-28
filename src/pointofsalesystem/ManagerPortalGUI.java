@@ -19,12 +19,12 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private void initComponents()
     {
 
-        lblAddNewSupplier = new javax.swing.JLabel();
+        lblAddNewStock = new javax.swing.JLabel();
         lblOrderStock = new javax.swing.JLabel();
+        lblAddNewSupplier = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
-        lblAddNewStock = new javax.swing.JLabel();
         lblCompanyLogo = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
@@ -41,15 +41,15 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
+        lblAddNewStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
-                lblAddNewSupplierMouseReleased(evt);
+                lblAddNewStockMouseReleased(evt);
             }
         });
-        getContentPane().add(lblAddNewSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
+        getContentPane().add(lblAddNewStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 150));
 
         lblOrderStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOrderStock.addMouseListener(new java.awt.event.MouseAdapter()
@@ -59,7 +59,17 @@ public class ManagerPortalGUI extends javax.swing.JFrame
                 lblOrderStockMouseReleased(evt);
             }
         });
-        getContentPane().add(lblOrderStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 150));
+        getContentPane().add(lblOrderStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 150, 150));
+
+        lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblAddNewSupplierMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblAddNewSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 150, 150));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
@@ -90,16 +100,6 @@ public class ManagerPortalGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 30));
-
-        lblAddNewStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
-                lblAddNewStockMouseReleased(evt);
-            }
-        });
-        getContentPane().add(lblAddNewStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, 150, 150));
 
         lblCompanyLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCompanyLogo.addMouseListener(new java.awt.event.MouseAdapter()
