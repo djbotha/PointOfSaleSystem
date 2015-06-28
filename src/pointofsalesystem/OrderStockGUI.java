@@ -1,6 +1,8 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
@@ -13,6 +15,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -22,7 +25,8 @@ import javax.mail.internet.MimeMessage;
 public class OrderStockGUI extends javax.swing.JFrame 
 {
     
-    PointOfSaleSystem pos = new PointOfSaleSystem("");
+    PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods
+    int clickercounter = 0;                             //Counter used to determine how many times the OrderStock button has been clicked
     
     public OrderStockGUI()
     {
@@ -96,7 +100,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfOrderDate = new javax.swing.JTextField();
         tfBarcode = new javax.swing.JTextField();
         tfProductName = new javax.swing.JTextField();
-        spnQuantity = new javax.swing.JSpinner();
+        spnQty = new javax.swing.JSpinner();
         lblPlaceOrder = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
@@ -169,7 +173,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfProductName.setForeground(new java.awt.Color(255, 255, 255));
         tfProductName.setBorder(null);
         getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 106, 340, 40));
-        getContentPane().add(spnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 80, 30));
+        getContentPane().add(spnQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 80, 30));
 
         lblPlaceOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPlaceOrder.addMouseListener(new java.awt.event.MouseAdapter()
@@ -238,15 +242,65 @@ public class OrderStockGUI extends javax.swing.JFrame
 
     private void lblPlaceOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPlaceOrderMouseReleased
         String productName = tfProductName.getText();
-        int quantity = (int) spnQuantity.getValue();
+        int quantity = (int) spnQty.getValue();
         String barcode = tfBarcode.getText();
         String orderDate = tfOrderDate.getText() + ":00.0";
         Calendar cal = new GregorianCalendar();
         
+        if (clickercounter == 0)
+        {
+            getDetails();
+            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanentlyGUI.png"))); //Change background to a different button
+        }
+        else
+        {
+            
+        }
         
         
     }//GEN-LAST:event_lblPlaceOrderMouseReleased
 
+    public void getDetails() //Method to retrieve all the details of the product
+    {
+        try
+        {
+            String productName = tfProductName.getText();   //Fetch the product name from the text field                               
+            int qty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
+
+            String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
+                            "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
+
+            ResultSet rs = pos.searchDB(query);                 //Fetch all the data from the table
+
+            rs.next();                                      //Skip to the first line of the ResultSet
+        
+            int productID = rs.getInt(1);                   //Fetch the productID from the table
+            String dbProductName = rs.getString(2);         //Fetch the productName from the table
+            String barcode = rs.getString(3);               //Fetch the barcode from the table
+            double costPrice = rs.getDouble(4);             //Fetch the costprice from the table
+            double markup = rs.getDouble(5);                //Fetch the markup from the table
+            int dbQty = rs.getInt(6);                       //Fetch the quantity from the table
+            int supplierID = rs.getInt(7);                  //Fetch the supplierIDfrom the table
+            
+            String getSupplierName =    "SELECT SUPPLIER_NAME FROM NBUSER.SUPPLIERS\n" +
+                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+            ResultSet rs2 = pos.searchDB(getSupplierName);  //Fetch the supplierName from the database
+            rs2.next();                                     //Skip to the first line of the file
+            String supplierName = rs2.getString(1);         //Fetch the supplier Name from the resultset
+
+            tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
+            tfProductID.setText(""+productID);              //Set the textfield's value to the productID
+            tfSupplierID.setText(""+supplierID);            //Set the textfield's value to the supplierID
+            tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
+            tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
+            tfMarkup.setText(""+ (markup*100.0));           //Set the textfield's value to the markup
+            
+        } 
+        catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -287,7 +341,7 @@ public class OrderStockGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblPlaceOrder;
     private javax.swing.JLabel lblQuit;
-    private javax.swing.JSpinner spnQuantity;
+    private javax.swing.JSpinner spnQty;
     private javax.swing.JTextField tfBarcode;
     private javax.swing.JTextField tfOrderDate;
     private javax.swing.JTextField tfOrderID;

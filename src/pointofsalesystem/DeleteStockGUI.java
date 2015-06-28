@@ -234,11 +234,9 @@ public class DeleteStockGUI extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
         }
-
-        
-        
     }
-            /**
+    
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[])
