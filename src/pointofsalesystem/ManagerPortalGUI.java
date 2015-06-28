@@ -21,6 +21,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
         lblAddNewStock = new javax.swing.JLabel();
         lblOrderStock = new javax.swing.JLabel();
+        lblRemoveStock = new javax.swing.JLabel();
         lblAddNewSupplier = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
@@ -60,6 +61,16 @@ public class ManagerPortalGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblOrderStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 150, 150));
+
+        lblRemoveStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRemoveStock.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblRemoveStockMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblRemoveStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 534, 150, 150));
 
         lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
@@ -153,8 +164,14 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblCompanyLogoMouseReleased
     {//GEN-HEADEREND:event_lblCompanyLogoMouseReleased
-        pos.loadWebSite("http://www.spar.co.za/home");
+        pos.loadWebSite("http://www.spar.co.za/home"); //Load the company's website
     }//GEN-LAST:event_lblCompanyLogoMouseReleased
+
+    private void lblRemoveStockMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblRemoveStockMouseReleased
+    {//GEN-HEADEREND:event_lblRemoveStockMouseReleased
+        pos.fadeOut(this);                       //Fade out current screen
+        new DeleteStockGUI().setVisible(true);//Bring up order stock screen
+    }//GEN-LAST:event_lblRemoveStockMouseReleased
     
     public static void main(String args[]) 
     {
@@ -199,5 +216,6 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblOrderStock;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JLabel lblRemoveStock;
     // End of variables declaration//GEN-END:variables
 }
