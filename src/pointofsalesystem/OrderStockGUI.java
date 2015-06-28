@@ -250,7 +250,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         if (clickercounter == 0)
         {
             getDetails();
-            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanentlyGUI.png"))); //Change background to a different button
+            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/OrderStockConfirmGUI.png"))); //Change background to a different button
         }
         else
         {
@@ -265,7 +265,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         try
         {
             String productName = tfProductName.getText();   //Fetch the product name from the text field                               
-            int qty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
+            int orderQty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
 
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
                             "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
@@ -288,12 +288,80 @@ public class OrderStockGUI extends javax.swing.JFrame
             rs2.next();                                     //Skip to the first line of the file
             String supplierName = rs2.getString(1);         //Fetch the supplier Name from the resultset
 
+            String getOrderID = "SELECT ORDER_ID FROM NBUSER.ORDERS\n" +
+                                "ORDER BY ORDER_ID DESC\n" +
+                                "FETCH FIRST 1 ROWS ONLY"; //Query to get the last order ID and increment it with one
+        
+            int orderID = pos.getID(getOrderID) + 1;        //Get the last order ID and increment it with one
+            
+            Calendar c1 = Calendar.getInstance();
+            
+            String date = "";
+            int year = c1.get(Calendar.YEAR);
+            int month = c1.get(Calendar.MONTH);
+            int day = c1.get(Calendar.DAY_OF_MONTH);
+            
+            if (month<10)
+            {
+                date = year + "-0" + month + "-";
+            }
+            else
+            {
+                date = year + "-" + month + "-";
+            }
+            
+            if (day<10)
+            {
+                date+= "0" + day;
+            }
+            else
+            {
+                date+= day;
+            }
+            
+            String time = "";
+            int hour = c1.get(Calendar.HOUR_OF_DAY);
+            int minute = c1.get(Calendar.MINUTE);
+            int second = c1.get(Calendar.SECOND);
+            
+            if (hour<10)
+            {
+                time = "0" + hour + ":";
+            }
+            else
+            {
+                time = hour + ":";
+            }
+            
+            if (minute<10)
+            {
+                time+= "0" + minute + ":";
+            }
+            else
+            {
+                time+= minute + ":";
+            }
+
+            if (second<10)
+            {
+                time+= "0" + second + ".0";
+            }
+            else
+            {
+                time+= second + ".0";
+            }
+            
+            String sqlDate = date + " " + time;             //Concatenate the Date and the Time into SQL Date format
+            
+            costPrice =(int)(costPrice*100);
+            costPrice = costPrice/100;
+            
             tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
-            tfProductID.setText(""+productID);              //Set the textfield's value to the productID
-            tfSupplierID.setText(""+supplierID);            //Set the textfield's value to the supplierID
+            tfOrderDate.setText(sqlDate);                   //Set the textfield's value to the current date and time
+            tfOrderID.setText(""+orderID);                  //Set the textfield's value to the orderID
             tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
             tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
-            tfMarkup.setText(""+ (markup*100.0));           //Set the textfield's value to the markup
+            tfTotalPrice.setText(""+(orderQty*costPrice));  //Set the textfield's value to the total price of the order
             
         } 
         catch (SQLException ex)
