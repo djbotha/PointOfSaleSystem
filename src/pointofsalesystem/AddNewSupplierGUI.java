@@ -149,7 +149,7 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
                         "VALUES (" + supplierID + ", '" + supplierName + "', '" + contactName + "', '" + email + "', "
                         + "'" + phone + "')"; //SQL query to add the data to the DB
         
-        pos.addDBEntry(query);
+        pos.addDBEntry(query);                          //Add the data to the DB
     }//GEN-LAST:event_lblSaveMouseReleased
 
     public static void main(String args[])
