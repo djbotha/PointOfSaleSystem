@@ -104,17 +104,18 @@ public class PointOfSaleSystem
         }
     }
 
-    public void searchDB(String query)
+    public ResultSet searchDB(String query)
     {
         try
         {
             Statement stmt = conn.createStatement(); //Create a statement object
             ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
 
-            rs.next();                              //Skip to first line of resultset
+            return rs;
         } catch (SQLException e)                      //If the query failed...
         {
             System.out.println("Search query unsuccessful: " + e); //...print an output message
+            return null;
         }
     }
 
@@ -137,7 +138,6 @@ public class PointOfSaleSystem
 
     public void addDBEntry(String query)
     {
-
         try
         {
             Statement stmt = conn.createStatement();    //Create a statement object
@@ -148,10 +148,21 @@ public class PointOfSaleSystem
             System.out.println("INSERT INTO query unsuccessful: " + e); //...print an output message
         }
         
-        JOptionPane.showMessageDialog(null, "Success!");
+        JOptionPane.showMessageDialog(null, "Data successfully added to database.");
     }
 
     public void deleteDBEntry(String query)
     {
+        try
+        {
+            Statement stmt = conn.createStatement();    //Create a statement object
+            stmt.executeUpdate(query);                  //Executes the insert INTO query
+            
+        } catch (SQLException e)                      //If the query failed...
+        {
+            System.out.println("DELETE query unsuccessful: " + e); //...print an output message
+        }
+        
+        JOptionPane.showMessageDialog(null, "Data successfully removed from database.");
     }
 }

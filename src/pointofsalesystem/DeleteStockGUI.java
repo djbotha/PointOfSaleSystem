@@ -1,12 +1,17 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class DeleteStockGUI extends javax.swing.JFrame
 {
 
     PointOfSaleSystem pos = new PointOfSaleSystem("");
+    int clickercounter = 0;
     
     public DeleteStockGUI()
     {
@@ -177,10 +182,63 @@ public class DeleteStockGUI extends javax.swing.JFrame
 
     private void lblDeleteStockMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblDeleteStockMouseReleased
     {//GEN-HEADEREND:event_lblDeleteStockMouseReleased
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanantlyGUI.png"))); //Change background to a different button
+        if (clickercounter == 0)
+        {
+            getDetails();
+            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanantlyGUI.png"))); //Change background to a different button
+        }
+        else
+        {
+            
+        }
     }//GEN-LAST:event_lblDeleteStockMouseReleased
 
-    /**
+    public void getDetails()
+    {
+        try
+        {
+            String productName = tfProductName.getText();
+            int qty = (int) spnQty.getValue();
+
+            String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
+                            "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'";
+
+            ResultSet rs = pos.searchDB(query);
+
+            rs.next();
+        
+            int productID = rs.getInt(1);
+            String dbProductName = rs.getString(2);
+            String barcode = rs.getString(3);
+            double costPrice = rs.getDouble(4);
+            double markup = rs.getDouble(5);
+            int dbQty = rs.getInt(6);
+            int supplierID = rs.getInt(7);
+            
+            String getSupplierName =    "SELECT SUPPLIER_NAME FROM NBUSER.SUPPLIERS\n" +
+                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + "";
+            ResultSet rs2 = pos.searchDB(getSupplierName);
+            rs2.next();
+            String supplierName = rs2.getString(1);
+
+            tfBarcode.setText(barcode);
+            tfProductID.setText(""+productID);
+            tfSupplierID.setText(""+supplierID);
+            tfSupplierName.setText(supplierName);
+            tfPricePerUnit.setText(""+costPrice);
+            tfMarkup.setText(""+ (markup*100.0));
+            
+            
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(DeleteStockGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+    }
+            /**
      * @param args the command line arguments
      */
     public static void main(String args[])
