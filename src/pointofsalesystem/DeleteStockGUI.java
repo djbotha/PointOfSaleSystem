@@ -6,12 +6,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class DeleteStockGUI extends javax.swing.JFrame
 {
 
-    PointOfSaleSystem pos = new PointOfSaleSystem("");
-    int clickercounter = 0;
+    PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods. 
+    int clickercounter = 0;                     //Counter to determine how many times the Delete stock button has been clicked
     
     public DeleteStockGUI()
     {
@@ -185,7 +186,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
         if (clickercounter == 0)
         {
             getDetails();
-            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanantlyGUI.png"))); //Change background to a different button
+            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanentlyGUI.png"))); //Change background to a different button
         }
         else
         {
@@ -193,46 +194,45 @@ public class DeleteStockGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_lblDeleteStockMouseReleased
 
-    public void getDetails()
+    public void getDetails() //Method to retrieve all the details of the product
     {
         try
         {
-            String productName = tfProductName.getText();
-            int qty = (int) spnQty.getValue();
+            String productName = tfProductName.getText();   //Fetch the product name from the text field                               
+            int qty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
 
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
-                            "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'";
+                            "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
 
-            ResultSet rs = pos.searchDB(query);
+            ResultSet rs = pos.searchDB(query);                 //Fetch all the data from the table
 
-            rs.next();
+            rs.next();                                      //Skip to the first line of the ResultSet
         
-            int productID = rs.getInt(1);
-            String dbProductName = rs.getString(2);
-            String barcode = rs.getString(3);
-            double costPrice = rs.getDouble(4);
-            double markup = rs.getDouble(5);
-            int dbQty = rs.getInt(6);
-            int supplierID = rs.getInt(7);
+            int productID = rs.getInt(1);                   //Fetch the productID from the table
+            String dbProductName = rs.getString(2);         //Fetch the productName from the table
+            String barcode = rs.getString(3);               //Fetch the barcode from the table
+            double costPrice = rs.getDouble(4);             //Fetch the costprice from the table
+            double markup = rs.getDouble(5);                //Fetch the markup from the table
+            int dbQty = rs.getInt(6);                       //Fetch the quantity from the table
+            int supplierID = rs.getInt(7);                  //Fetch the supplierIDfrom the table
             
             String getSupplierName =    "SELECT SUPPLIER_NAME FROM NBUSER.SUPPLIERS\n" +
-                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + "";
-            ResultSet rs2 = pos.searchDB(getSupplierName);
-            rs2.next();
-            String supplierName = rs2.getString(1);
+                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+            ResultSet rs2 = pos.searchDB(getSupplierName);  //Fetch the supplierName from the database
+            rs2.next();                                     //Skip to the first line of the file
+            String supplierName = rs2.getString(1);         //Fetch the supplier Name from the resultset
 
-            tfBarcode.setText(barcode);
-            tfProductID.setText(""+productID);
-            tfSupplierID.setText(""+supplierID);
-            tfSupplierName.setText(supplierName);
-            tfPricePerUnit.setText(""+costPrice);
-            tfMarkup.setText(""+ (markup*100.0));
-            
+            tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
+            tfProductID.setText(""+productID);              //Set the textfield's value to the productID
+            tfSupplierID.setText(""+supplierID);            //Set the textfield's value to the supplierID
+            tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
+            tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
+            tfMarkup.setText(""+ (markup*100.0));           //Set the textfield's value to the markup
             
         } 
         catch (SQLException ex)
         {
-            Logger.getLogger(DeleteStockGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
         }
 
         
