@@ -222,12 +222,18 @@ public class DeleteStockGUI extends javax.swing.JFrame
             rs2.next();                                     //Skip to the first line of the file
             String supplierName = rs2.getString(1);         //Fetch the supplier Name from the resultset
 
+            costPrice =(int)(costPrice*100);                //Convert the costPrice to 2 decimals
+            costPrice = costPrice/100;                      
+            
+            markup = (int)(markup*10000);
+            markup = markup/100;
+            
             tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
             tfProductID.setText(""+productID);              //Set the textfield's value to the productID
             tfSupplierID.setText(""+supplierID);            //Set the textfield's value to the supplierID
             tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
             tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
-            tfMarkup.setText(""+ (markup*100.0));           //Set the textfield's value to the markup
+            tfMarkup.setText(""+ markup);           //Set the textfield's value to the markup
             
         } 
         catch (SQLException ex)
