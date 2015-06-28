@@ -204,7 +204,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
                             "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
 
-            ResultSet rs = pos.searchDB(query);                 //Fetch all the data from the table
+            ResultSet rs = pos.searchDB(query);             //Fetch all the data from the table
 
             rs.next();                                      //Skip to the first line of the ResultSet
         
@@ -233,7 +233,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
             tfSupplierID.setText(""+supplierID);            //Set the textfield's value to the supplierID
             tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
             tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
-            tfMarkup.setText(""+ markup);           //Set the textfield's value to the markup
+            tfMarkup.setText(""+ markup);                   //Set the textfield's value to the markup
             
         } 
         catch (SQLException ex)

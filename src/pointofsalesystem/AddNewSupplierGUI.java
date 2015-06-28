@@ -142,12 +142,12 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
                                 "ORDER BY SUPPLIER_ID DESC\n" +
                                 "FETCH FIRST 1 ROWS ONLY"; //Get the last supplier ID and increment it with one
         
-        int supplierID = pos.getID(getSupplierID) + 1;
+        int supplierID = pos.getID(getSupplierID) + 1;  //Increment the last supplierID with 1 
         
-        String query =    "INSERT INTO NBUSER.SUPPLIERS(SUPPLIER_ID, SUPPLIER_NAME, CONTACT_NAME,"
-                + " SUPPLIER_EMAIL, SUPPLIER_PHONE)\n" +
+        String query =  "INSERT INTO NBUSER.SUPPLIERS(SUPPLIER_ID, SUPPLIER_NAME, CONTACT_NAME,"
+                        + " SUPPLIER_EMAIL, SUPPLIER_PHONE)\n" +
                         "VALUES (" + supplierID + ", '" + supplierName + "', '" + contactName + "', '" + email + "', "
-                + "'" + phone + "')"; //SQL query to add the data to the DB
+                        + "'" + phone + "')"; //SQL query to add the data to the DB
         
         pos.addDBEntry(query);
     }//GEN-LAST:event_lblSaveMouseReleased
