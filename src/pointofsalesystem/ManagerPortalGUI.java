@@ -6,11 +6,11 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 {
     
     PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
-
+    
     public ManagerPortalGUI() 
     {
         initComponents();
-        
+
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
     }
 
