@@ -119,7 +119,7 @@ public class PointOfSaleSystem
         catch (SQLException e)                      //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "Search query unsuccessful: " + e); //...print an output message
-            return null;
+            return null;                            //Return null if the query failed
         }
     }
 
