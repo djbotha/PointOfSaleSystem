@@ -88,7 +88,7 @@ public class PointOfSaleSystem
             {
                 Thread.sleep(25);       //100ms Delay between iterations
             } 
-            catch (Exception e)          //If the thread failed to sleep.
+            catch (Exception e)         //If the thread failed to sleep.
             {
                 JOptionPane.showMessageDialog(null, "Thread failed to sleep: " + e);
             }
@@ -148,7 +148,7 @@ public class PointOfSaleSystem
             Statement stmt = conn.createStatement();    //Create a statement object
             stmt.executeUpdate(query);                  //Executes the insert INTO query
         } 
-        catch (SQLException e)                      //If the query failed...
+        catch (SQLException e)                          //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "INSERT INTO query unsuccessful: " + e); //...print an output message
         }
@@ -163,7 +163,7 @@ public class PointOfSaleSystem
             Statement stmt = conn.createStatement();    //Create a statement object
             stmt.executeUpdate(query);                  //Executes the insert INTO query
         } 
-        catch (SQLException e)                      //If the query failed...
+        catch (SQLException e)                          //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "DELETE query unsuccessful: " + e); //...print an output message
         }
