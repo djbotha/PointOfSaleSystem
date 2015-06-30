@@ -268,6 +268,8 @@ public class DeleteStockGUI extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "The amount to be removed is more than is currently available. There is/are currently " 
                     + runningTotal + " unit/s available."); //Error message for the product that has to be removed
+            pos.fadeOut(this);
+            new ManagerPortalGUI().setVisible(true);
         }
     }
     
