@@ -270,7 +270,7 @@ public class OrderStockGUI extends javax.swing.JFrame
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
                             "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
 
-            ResultSet rs = pos.searchDB(query);                 //Fetch all the data from the table
+            ResultSet rs = pos.searchDB(query);             //Fetch all the data from the table
 
             rs.next();                                      //Skip to the first line of the ResultSet
         
