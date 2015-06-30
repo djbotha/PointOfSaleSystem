@@ -14,7 +14,8 @@ public class DeleteStockGUI extends javax.swing.JFrame
     PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods. 
     int clickercounter = 0;                     //Counter to determine how many times the Delete stock button has been clicked
     ResultSet rs;
-    int productID, dbQty, qty;
+    int productID, dbQty;
+    Integer qty;
     String productName;
     
     public DeleteStockGUI()
@@ -202,9 +203,9 @@ public class DeleteStockGUI extends javax.swing.JFrame
     {
         try
         {
-            productName = tfProductName.getText();   //Fetch the product name from the text field                               
-            qty = (int) spnQty.getValue();                  //Fetch the quantity to be deleted from the spinner
-
+            productName = tfProductName.getText();          //Fetch the product name from the text field                               
+            qty = (Integer) spnQty.getValue();                  //Fetch the quantity to be deleted from the spinner
+            System.out.println(qty);
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
                             "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
 
@@ -248,13 +249,15 @@ public class DeleteStockGUI extends javax.swing.JFrame
     
     public void removeProduct()
     {   
-//        String query = "DELETE FROM NBUSER.PRODUCTS WHERE PRODUCTS.PRODUCT_ID = " + productID;
+        System.out.println(dbQty);
         
+        qty = (Integer) spnQty.getValue();
+        System.out.println(qty);
         if (dbQty>qty)
         {
             String query = "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = "+ (dbQty-qty) + " WHERE PRODUCTS.PRODUCT_ID = " + productID;
             pos.deleteDBEntry(query);
-            JOptionPane.showMessageDialog(null, qty + " " + productName + " has been removed from the table.");
+            JOptionPane.showMessageDialog(null, qty + " unit(s) of " + productName + " has been removed from the table.");
         }
         else
         {
