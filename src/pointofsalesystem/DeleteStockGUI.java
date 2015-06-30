@@ -14,7 +14,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
     PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods. 
     int clickercounter = 0;                     //Counter to determine how many times the Delete stock button has been clicked
     ResultSet rs;                               //Instantiate a global resultset variable
-    int productID, dbQty;                       //Instantiate a prodctID and dbQty global variable
+    int productID, dbQty, runningTotal;         //Instantiate productID, dbQty and runningTotal global variables
     Integer qty;                                //Instantiate a global quantity Integer variable
     String productName;                         //Instantiate a global productName String variable
     
@@ -190,6 +190,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
         if (clickercounter == 0)
         {
             getDetails();                       //Fetch all the details of the desired product
+            runningTotal = dbQty;                               //Keep track of how much product is available
             lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanentlyGUI.png"))); //Change background to a different button
             clickercounter++;                   //Register that the button has been clicked
         }
@@ -249,16 +250,17 @@ public class DeleteStockGUI extends javax.swing.JFrame
     
     public void removeProduct() //Method to remove the desired amount of product
     {   
-        int runningTotal = dbQty;                               //Keep track of how much product is available
         
         qty = (Integer) spnQty.getValue();                      //Get the current spinner quantity value 
         
-        if (dbQty>qty)                                          //If there is more product available than the user wants to delete
+        if (dbQty>=qty)                                          //If there is more product available than the user wants to delete
         {
-            String query =  "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = "+ (dbQty-qty) 
+            runningTotal -= qty;                                //Decrease the running total with the amount that has been removed
+
+            String query =  "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = "+ runningTotal 
                             + " WHERE PRODUCTS.PRODUCT_ID = " + productID; //Query to decrease the amount of product with the desired amount
             pos.deleteDBEntry(query);                           //Execute the above query 
-            runningTotal -= qty;                                //Decrease the running total with the amount that has been removed
+            
             JOptionPane.showMessageDialog(null, qty + " unit/s of " + productName
                     + " has been removed from the table. " + runningTotal + " remaining."); //Confirmation message for the product that has been removed
         }
