@@ -30,7 +30,8 @@ public class PointOfSaleSystem
         try
         {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e)
+        } 
+        catch (ClassNotFoundException e)
         {
            JOptionPane.showMessageDialog(null, "Derby driver not found.");
         }
@@ -47,7 +48,8 @@ public class PointOfSaleSystem
         {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
 //            JOptionPane.showMessageDialog(null, "Connection to PointOfSaleSystem Database Established"); 
-        } catch (SQLException ex) //If the connection fails...
+        } 
+        catch (SQLException ex) //If the connection fails...
         {
             JOptionPane.showMessageDialog(null, "Connection to PointOfSaleSystem Database Failed: " + ex); //...print an output message
         }
@@ -65,7 +67,8 @@ public class PointOfSaleSystem
             try
             {
                 Thread.sleep(25);       //100ms Delay between iterations
-            } catch (Exception e)          //If the thread failed to sleep.
+            } 
+            catch (Exception e)          //If the thread failed to sleep.
             {
                 JOptionPane.showMessageDialog(null, "Thread failed to sleep: " + e);
             }
@@ -84,7 +87,8 @@ public class PointOfSaleSystem
             try
             {
                 Thread.sleep(25);       //100ms Delay between iterations
-            } catch (Exception e)          //If the thread failed to sleep.
+            } 
+            catch (Exception e)          //If the thread failed to sleep.
             {
                 JOptionPane.showMessageDialog(null, "Thread failed to sleep: " + e);
             }
@@ -111,7 +115,8 @@ public class PointOfSaleSystem
             ResultSet rs = stmt.executeQuery(query); //Generate a ResultSet with the specified SQL query
 
             return rs;
-        } catch (SQLException e)                      //If the query failed...
+        } 
+        catch (SQLException e)                      //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "Search query unsuccessful: " + e); //...print an output message
             return null;
@@ -128,7 +133,8 @@ public class PointOfSaleSystem
             rs.next();                              //Skip to first line of resultset
             int id = rs.getInt(1);
             return id;
-        } catch (SQLException e)                      //If the query failed...
+        } 
+        catch (SQLException e)                      //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "Search query unsuccessful: " + e); //...print an output message
             return 0;
@@ -141,8 +147,8 @@ public class PointOfSaleSystem
         {
             Statement stmt = conn.createStatement();    //Create a statement object
             stmt.executeUpdate(query);                  //Executes the insert INTO query
-            
-        } catch (SQLException e)                      //If the query failed...
+        } 
+        catch (SQLException e)                      //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "INSERT INTO query unsuccessful: " + e); //...print an output message
         }
@@ -156,12 +162,12 @@ public class PointOfSaleSystem
         {
             Statement stmt = conn.createStatement();    //Create a statement object
             stmt.executeUpdate(query);                  //Executes the insert INTO query
-            
-        } catch (SQLException e)                      //If the query failed...
+        } 
+        catch (SQLException e)                      //If the query failed...
         {
             JOptionPane.showMessageDialog(null, "DELETE query unsuccessful: " + e); //...print an output message
         }
         
-        JOptionPane.showMessageDialog(null, "Data successfully removed from database.");
+//        JOptionPane.showMessageDialog(null, "Data successfully removed from database.");
     }
 }
