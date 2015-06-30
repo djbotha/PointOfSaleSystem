@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class HomeGUI extends javax.swing.JFrame
 {
     PointOfSaleSystem pos =  new PointOfSaleSystem();       //Create a new pointofsalesystem object to use its methods
-    String companyURL = "http://www.spar.co.za/home";
+    String companyURL = "http://kwiksparpaulroos.co.za";
     String repositoryURL = "https://github.com/iggnoreza/pointofsalesystem";
     
     public HomeGUI() 

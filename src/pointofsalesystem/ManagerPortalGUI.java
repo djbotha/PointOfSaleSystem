@@ -164,7 +164,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblCompanyLogoMouseReleased
     {//GEN-HEADEREND:event_lblCompanyLogoMouseReleased
-        pos.loadWebSite("http://www.spar.co.za/home"); //Load the company's website
+        pos.loadWebSite("http://kwiksparpaulroos.co.za"); //Load the company's website
     }//GEN-LAST:event_lblCompanyLogoMouseReleased
 
     private void lblRemoveStockMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblRemoveStockMouseReleased
