@@ -35,59 +35,6 @@ public class OrderStockGUI extends javax.swing.JFrame
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
     }
 
-    public void orderStock() 
-    {
-        //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
-        
-        String to = "xyz@gmail.com";                //Recipient's email
-
-        final String from = "abc@gmail.com";              //Sender's email
-        final String username = "abc";              //Sender email accounts
-        final String password = "*****";            //Sender password
-
-        String host = "smtp.gmail.com";             //GMAIL server address
-
-        Properties props = new Properties();        //Instantiate new Properties object
-        props.put("mail.smtp.auth", "true");        //Server details
-        props.put("mail.smtp.starttls.enable", "true"); //Connect to server
-        props.put("mail.smtp.host", host);          //More details
-        props.put("mail.smtp.port", "587");         //SMTP Port 
-
-        Session session = Session.getInstance(props, // Get the Session object.
-                new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-
-        try {
-            // Create a default MimeMessage object.
-            Message message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
-
-            // Set Subject: header field
-            message.setSubject("Testing Subject");
-
-            // Now set the actual message
-            message.setText("Hello, this is sample for to check send "
-                    + "email using JavaMailAPI ");
-
-            // Send message
-            Transport.send(message);
-
-            System.out.println("Sent message successfully....");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -369,6 +316,60 @@ public class OrderStockGUI extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
         }
     }
+    
+     public void orderStock() 
+    {
+        //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
+        
+        String to = "xyz@gmail.com";                //Recipient's email
+
+        final String from = "abc@gmail.com";              //Sender's email
+        final String username = "abc";              //Sender email accounts
+        final String password = "*****";            //Sender password
+
+        String host = "smtp.gmail.com";             //GMAIL server address
+
+        Properties props = new Properties();        //Instantiate new Properties object
+        props.put("mail.smtp.auth", "true");        //Server details
+        props.put("mail.smtp.starttls.enable", "true"); //Connect to server
+        props.put("mail.smtp.host", host);          //More details
+        props.put("mail.smtp.port", "587");         //SMTP Port 
+
+        Session session = Session.getInstance(props, // Get the Session object.
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Create a default MimeMessage object.
+            Message message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+
+            // Set Subject: header field
+            message.setSubject("Testing Subject");
+
+            // Now set the actual message
+            message.setText("Hello, this is sample for to check send "
+                    + "email using JavaMailAPI ");
+
+            // Send message
+            Transport.send(message);
+
+            System.out.println("Sent message successfully....");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
