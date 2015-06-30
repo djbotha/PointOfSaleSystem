@@ -13,10 +13,10 @@ public class DeleteStockGUI extends javax.swing.JFrame
 
     PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods. 
     int clickercounter = 0;                     //Counter to determine how many times the Delete stock button has been clicked
-    ResultSet rs;
-    int productID, dbQty;
-    Integer qty;
-    String productName;
+    ResultSet rs;                               //Instantiate a global resultset variable
+    int productID, dbQty;                       //Instantiate a prodctID and dbQty global variable
+    Integer qty;                                //Instantiate a global quantity Integer variable
+    String productName;                         //Instantiate a global productName String variable
     
     public DeleteStockGUI()
     {
@@ -189,13 +189,13 @@ public class DeleteStockGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_lblDeleteStockMouseReleased
         if (clickercounter == 0)
         {
-            getDetails();
+            getDetails();                       //Fetch all the details of the desired product
             lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/DeleteStockPermanentlyGUI.png"))); //Change background to a different button
-            clickercounter++;
+            clickercounter++;                   //Register that the button has been clicked
         }
         else
         {
-            removeProduct();
+            removeProduct();                    //If the button has been clicked, execute the removeProduct code
         }
     }//GEN-LAST:event_lblDeleteStockMouseReleased
 
@@ -227,10 +227,10 @@ public class DeleteStockGUI extends javax.swing.JFrame
             rs2.next();                                     //Skip to the first line of the file
             String supplierName = rs2.getString(1);         //Fetch the supplier Name from the resultset
 
-            costPrice =(int)(costPrice*100);                //Convert the costPrice to 2 decimals
+            costPrice =(int)(costPrice*100);                //Convert the costPrice to a value with 2 decimal points
             costPrice = costPrice/100;                      
             
-            markup = (int)(markup*10000);
+            markup = (int)(markup*10000);                   //Convert the markup to a percentage with 2 decimal points
             markup = markup/100;
             
             tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
@@ -243,27 +243,30 @@ public class DeleteStockGUI extends javax.swing.JFrame
         } 
         catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
+            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex); //Error message that states why the data could not be fetched from the table
         }
     }
     
-    public void removeProduct()
+    public void removeProduct() //Method to remove the desired amount of product
     {   
-        System.out.println(dbQty);
+        int runningTotal = dbQty;                               //Keep track of how much product is available
         
-        qty = (Integer) spnQty.getValue();
-        System.out.println(qty);
-        if (dbQty>qty)
+        qty = (Integer) spnQty.getValue();                      //Get the current spinner quantity value 
+        
+        if (dbQty>qty)                                          //If there is more product available than the user wants to delete
         {
-            String query = "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = "+ (dbQty-qty) + " WHERE PRODUCTS.PRODUCT_ID = " + productID;
-            pos.deleteDBEntry(query);
-            JOptionPane.showMessageDialog(null, qty + " unit(s) of " + productName + " has been removed from the table.");
+            String query =  "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = "+ (dbQty-qty) 
+                            + " WHERE PRODUCTS.PRODUCT_ID = " + productID; //Query to decrease the amount of product with the desired amount
+            pos.deleteDBEntry(query);                           //Execute the above query 
+            runningTotal -= qty;                                //Decrease the running total with the amount that has been removed
+            JOptionPane.showMessageDialog(null, qty + " unit/s of " + productName
+                    + " has been removed from the table. " + runningTotal + " remaining."); //Confirmation message for the product that has been removed
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "The amount to be removed is more than is currently available.");
+            JOptionPane.showMessageDialog(null, "The amount to be removed is more than is currently available. There is/are currently " 
+                    + runningTotal + " unit/s available."); //Error message for the product that has to be removed
         }
-        
     }
     
     /**
