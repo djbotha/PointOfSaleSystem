@@ -163,6 +163,8 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
         /*
          * http://www.ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-1/
          * 
+         * Henré Botha (Brother) largely helped me with regex. henrebotha@gmail.com
+         * 
          * String.matches(regex) returns boolean.
          */
         

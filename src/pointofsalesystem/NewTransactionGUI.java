@@ -24,6 +24,10 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
         jScrollPane1 = new javax.swing.JScrollPane();
         taOutput = new javax.swing.JTextArea();
+        lblManager = new javax.swing.JLabel();
+        lblKeypad = new javax.swing.JLabel();
+        lblProductList = new javax.swing.JLabel();
+        lblTabs = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
@@ -53,6 +57,18 @@ public class NewTransactionGUI extends javax.swing.JFrame
         jScrollPane1.setViewportView(taOutput);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 400, 630));
+
+        lblManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(lblManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 160, 30));
+
+        lblKeypad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(lblKeypad, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 130, 30));
+
+        lblProductList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(lblProductList, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 94, 150, 30));
+
+        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_ProductList.png"))); // NOI18N
+        getContentPane().add(lblTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, 640));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter()
@@ -143,7 +159,11 @@ public class NewTransactionGUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblKeypad;
+    private javax.swing.JLabel lblManager;
+    private javax.swing.JLabel lblProductList;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JLabel lblTabs;
     private javax.swing.JTextArea taOutput;
     // End of variables declaration//GEN-END:variables
 }

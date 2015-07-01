@@ -179,6 +179,14 @@ public class AddNewStockGUI extends javax.swing.JFrame
 
     public boolean validateBarcode(String barcode)
     {
+        /*
+        * http://www.ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-1/
+        *  
+        * Henré Botha (Brother) largely helped me with regex. henrebotha@gmail.com
+        * 
+        * String.matches(regex) returns boolean.
+        */
+        
         String barcodeRegex = "0\\d{12}";
         
         return barcode.matches(barcodeRegex);

@@ -24,6 +24,7 @@ public class HomeGUI extends javax.swing.JFrame
     private void initComponents()
     {
 
+        lblNewTransaction = new javax.swing.JLabel();
         lblSearch = new javax.swing.JLabel();
         lblCompanyLogo = new javax.swing.JLabel();
         lblManagerPortal = new javax.swing.JLabel();
@@ -45,6 +46,16 @@ public class HomeGUI extends javax.swing.JFrame
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNewTransaction.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblNewTransaction.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblNewTransactionMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblNewTransaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 174, 150, 150));
 
         lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSearch.addMouseListener(new java.awt.event.MouseAdapter()
@@ -129,12 +140,10 @@ public class HomeGUI extends javax.swing.JFrame
 
     private void lblCompanyLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompanyLogoMouseReleased
         pos.loadWebSite(companyURL);        //Load the company webpage.
-//        loadWebSite(companyURL);            //Load the company webpage.
     }//GEN-LAST:event_lblCompanyLogoMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
         pos.loadWebSite(repositoryURL);     //Load the github repository for this project. 
-//        loadWebSite(repositoryURL);         //Load the github repository for this project. 
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
     private void lblManagerPortalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManagerPortalMouseReleased
@@ -145,6 +154,12 @@ public class HomeGUI extends javax.swing.JFrame
         pos.fadeOut(this);                                  //Fade out current screen
         new SearchGUI().setVisible(true);                   //Bring up search screen
     }//GEN-LAST:event_lblSearchMouseReleased
+
+    private void lblNewTransactionMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblNewTransactionMouseReleased
+    {//GEN-HEADEREND:event_lblNewTransactionMouseReleased
+        pos.fadeOut(this);
+        new NewTransactionGUI().setVisible(true);
+    }//GEN-LAST:event_lblNewTransactionMouseReleased
 
     public void validateManagerPassword()                   //Validate the password when the manager tries to log in to the manager portal
     {
@@ -226,6 +241,7 @@ public class HomeGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblCompanyLogo;
     private javax.swing.JLabel lblLock;
     private javax.swing.JLabel lblManagerPortal;
+    private javax.swing.JLabel lblNewTransaction;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblSearch;

@@ -22,6 +22,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         lblAddNewStock = new javax.swing.JLabel();
         lblOrderStock = new javax.swing.JLabel();
         lblRemoveStock = new javax.swing.JLabel();
+        lblIncomeStatement = new javax.swing.JLabel();
         lblAddNewSupplier = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
@@ -71,6 +72,16 @@ public class ManagerPortalGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblRemoveStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 534, 150, 150));
+
+        lblIncomeStatement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblIncomeStatement.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblIncomeStatementMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblIncomeStatement, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
 
         lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
@@ -172,6 +183,12 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         pos.fadeOut(this);                       //Fade out current screen
         new DeleteStockGUI().setVisible(true);//Bring up order stock screen
     }//GEN-LAST:event_lblRemoveStockMouseReleased
+
+    private void lblIncomeStatementMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblIncomeStatementMouseReleased
+    {//GEN-HEADEREND:event_lblIncomeStatementMouseReleased
+        pos.fadeOut(this);
+        new IncomeStatementGUI().setVisible(true);
+    }//GEN-LAST:event_lblIncomeStatementMouseReleased
     
     public static void main(String args[]) 
     {
@@ -213,6 +230,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblCompanyLogo;
+    private javax.swing.JLabel lblIncomeStatement;
     private javax.swing.JLabel lblOrderStock;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
