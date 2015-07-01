@@ -23,15 +23,15 @@ public class NewTransactionGUI extends javax.swing.JFrame
     {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        PointOfSaleSystemPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PointOfSaleSystemPU").createEntityManager();
-        productsQuery = java.beans.Beans.isDesignTime() ? null : PointOfSaleSystemPUEntityManager0.createQuery("SELECT p FROM Products p");
+        PointOfSaleSystemPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PointOfSaleSystemPU").createEntityManager();
+        productsQuery = java.beans.Beans.isDesignTime() ? null : PointOfSaleSystemPUEntityManager.createQuery("SELECT p FROM Products p");
         productsList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery.getResultList();
-        productsQuery1 = java.beans.Beans.isDesignTime() ? null : PointOfSaleSystemPUEntityManager0.createQuery("SELECT p FROM Products p");
+        productsQuery1 = java.beans.Beans.isDesignTime() ? null : PointOfSaleSystemPUEntityManager.createQuery("SELECT p FROM Products p");
         productsList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery1.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         taOutput = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProducts = new javax.swing.JTable();
+        tblProductList = new javax.swing.JTable();
         lblManager = new javax.swing.JLabel();
         lblKeypad = new javax.swing.JLabel();
         lblProductList = new javax.swing.JLabel();
@@ -67,7 +67,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 400, 630));
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productsList1, tblProducts, "");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productsList1, tblProductList);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productName}"));
         columnBinding.setColumnName("Product Name");
         columnBinding.setColumnClass(String.class);
@@ -76,7 +76,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane2.setViewportView(tblProducts);
+        jScrollPane2.setViewportView(tblProductList);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 400, 420));
 
@@ -94,7 +94,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
         tfSelectedItem.setForeground(new java.awt.Color(255, 255, 255));
         tfSelectedItem.setBorder(null);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProducts, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.productName}"), tfSelectedItem, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProductList, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.productName}"), tfSelectedItem, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
         bindingGroup.addBinding(binding);
 
         getContentPane().add(tfSelectedItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 290, 40));
@@ -190,7 +190,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager PointOfSaleSystemPUEntityManager0;
+    private javax.persistence.EntityManager PointOfSaleSystemPUEntityManager;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBack;
@@ -200,12 +200,12 @@ public class NewTransactionGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblProductList;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblTabs;
-    private java.util.List<Products> productsList;
+    private java.util.List<pointofsalesystem.Products> productsList;
     private java.util.List<pointofsalesystem.Products> productsList1;
     private javax.persistence.Query productsQuery;
     private javax.persistence.Query productsQuery1;
     private javax.swing.JTextArea taOutput;
-    private javax.swing.JTable tblProducts;
+    private javax.swing.JTable tblProductList;
     private javax.swing.JTextField tfSelectedItem;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

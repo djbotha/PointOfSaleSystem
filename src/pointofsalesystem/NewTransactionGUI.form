@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.persistence.EntityManager" name="PointOfSaleSystemPUEntityManager0">
+    <Component class="javax.persistence.EntityManager" name="PointOfSaleSystemPUEntityManager">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="PointOfSaleSystemPU"/>
       </Properties>
@@ -11,7 +11,7 @@
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT p FROM Products p"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="PointOfSaleSystemPUEntityManager0"/>
+          <ComponentRef name="PointOfSaleSystemPUEntityManager"/>
         </Property>
       </Properties>
     </Component>
@@ -22,14 +22,14 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Products&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;pointofsalesystem.Products&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="productsQuery1">
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT p FROM Products p"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="PointOfSaleSystemPUEntityManager0"/>
+          <ComponentRef name="PointOfSaleSystemPUEntityManager"/>
         </Property>
       </Properties>
     </Component>
@@ -125,7 +125,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblProducts">
+        <Component class="javax.swing.JTable" name="tblProductList">
           <Properties>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
@@ -146,8 +146,7 @@
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="productsList1" target="tblProducts" targetPath="elements" updateStrategy="0" immediately="true">
-              <Property name="name" type="java.lang.String" value=""/>
+            <BindingProperty name="elements" source="productsList1" target="tblProductList" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${productName}">
                 <BindingParameter name="NAME" value="Product Name"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
@@ -213,7 +212,7 @@
         </Property>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="text" source="tblProducts" sourcePath="${selectedElement.productName}" target="tfSelectedItem" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="tblProductList" sourcePath="${selectedElement.productName}" target="tfSelectedItem" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="name" type="java.lang.String" value=""/>
         </BindingProperty>
