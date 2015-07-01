@@ -2,6 +2,7 @@ package pointofsalesystem;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class AddNewStockGUI extends javax.swing.JFrame 
 {
@@ -151,25 +152,38 @@ public class AddNewStockGUI extends javax.swing.JFrame
         int quantity = (int) spnQty.getValue();             //Fetch the quantity from the spinner
         int supplierID;                                 //Supplier ID to be fetched from table
         
-        String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
-                                "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'"; //Query to get the supplier ID of the supplier the user entered
-        
-        supplierID = pos.getID(getSupplierID);              //Get the supplier ID of the supplier the user entered
-        
-        String getProductID = "SELECT PRODUCT_ID FROM NBUSER.PRODUCTS\n" +
-                                "ORDER BY PRODUCT_ID DESC\n" +
-                                "FETCH FIRST 1 ROWS ONLY"; //Query to get the last product ID and increment it with one
-        
-        int productID = pos.getID(getProductID) + 1;        //Get the last product ID and increment it with one
-        
-        String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE,"
-                + " PRODUCT_COSTPRICE, PRODUCT_MARKUP, PRODUCT_QTY, SUPPLIER_ID)\n" +
-                        "VALUES (" + productID + ", '" + productName + "', '" + barcode + "'," + pricePerUnit + ", "
-                + "" + markup + ", " + quantity + ", " + supplierID + ")"; //Query to add the data to the DB
-        
-        pos.addDBEntry(query);                              //Add the data to the DB
+        if (validateBarcode(barcode))
+        {
+            String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
+                                    "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'"; //Query to get the supplier ID of the supplier the user entered
+
+            supplierID = pos.getID(getSupplierID);              //Get the supplier ID of the supplier the user entered
+
+            String getProductID = "SELECT PRODUCT_ID FROM NBUSER.PRODUCTS\n" +
+                                    "ORDER BY PRODUCT_ID DESC\n" +
+                                    "FETCH FIRST 1 ROWS ONLY"; //Query to get the last product ID and increment it with one
+
+            int productID = pos.getID(getProductID) + 1;        //Get the last product ID and increment it with one
+
+            String query =    "INSERT INTO NBUSER.PRODUCTS(PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE,"
+                    + " PRODUCT_COSTPRICE, PRODUCT_MARKUP, PRODUCT_QTY, SUPPLIER_ID)\n" +
+                            "VALUES (" + productID + ", '" + productName + "', '" + barcode + "'," + pricePerUnit + ", "
+                    + "" + markup + ", " + quantity + ", " + supplierID + ")"; //Query to add the data to the DB
+
+            pos.addDBEntry(query);                              //Add the data to the DB
+        }
+        else
+            JOptionPane.showMessageDialog(null, "The barcode entered is invalid. Barcodes should start with a 0 and contain 13 digits in total.");
+
     }//GEN-LAST:event_lblAddToDBMouseReleased
 
+    public boolean validateBarcode(String barcode)
+    {
+        String barcodeRegex = "0\\d{12}";
+        
+        return barcode.matches(barcodeRegex);
+    }
+    
     public static void main(String args[]) 
     {
         /* Set the Nimbus look and feel */

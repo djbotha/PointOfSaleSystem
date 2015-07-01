@@ -1,11 +1,6 @@
 package pointofsalesystem;
 
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -16,6 +11,7 @@ public class SearchGUI extends javax.swing.JFrame
     public SearchGUI() 
     {
         initComponents();
+        
         jScrollPane1.getViewport().setOpaque(false);    //Set background of ScrollPane to invisible
         taOutput.setBorder(null);                       //Set border of textarea to null
         jScrollPane1.setBorder(null);                   //Set border of ScrollPane to null
