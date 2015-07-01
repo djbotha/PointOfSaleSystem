@@ -20,9 +20,9 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     {
 
         jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        dbStartDate = new org.jdesktop.swingx.JXDatePicker();
         lblPOSLogo = new javax.swing.JLabel();
-        lblBackground = new javax.swing.JLabel();
+        dpEndDate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POS Income Statement");
@@ -37,7 +37,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jXDatePicker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 150, 40));
-        getContentPane().add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 150, 40));
+        getContentPane().add(dbStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 150, 40));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
@@ -49,8 +49,8 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 50));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/IncomeStatementGUI.png"))); // NOI18N
-        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 586, 442));
+        dpEndDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/IncomeStatementGUI.png"))); // NOI18N
+        getContentPane().add(dpEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 586, 442));
 
         pack();
         setLocationRelativeTo(null);
@@ -107,9 +107,9 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private org.jdesktop.swingx.JXDatePicker dbStartDate;
+    private javax.swing.JLabel dpEndDate;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
-    private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblPOSLogo;
     // End of variables declaration//GEN-END:variables
 }

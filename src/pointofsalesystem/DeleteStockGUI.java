@@ -251,7 +251,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
         
         qty = (Integer) spnQty.getValue();                      //Get the current spinner quantity value 
         
-        if (dbQty>=qty)                                          //If there is more product available than the user wants to delete
+        if (runningTotal>=qty)                                          //If there is more product available than the user wants to delete
         {
             runningTotal -= qty;                                //Decrease the running total with the amount that has been removed
 
@@ -262,12 +262,10 @@ public class DeleteStockGUI extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, qty + " unit/s of " + productName
                     + " has been removed from the table. " + runningTotal + " remaining."); //Confirmation message for the product that has been removed
         }
-        else
+        else 
         {
-            JOptionPane.showMessageDialog(null, "The amount to be removed is more than is currently available. There is/are currently " 
+            JOptionPane.showMessageDialog(null, "The amount to be removed is more than is currently available. There is/are only " 
                     + runningTotal + " unit/s available."); //Error message for the product that has to be removed
-            pos.fadeOut(this);
-            new ManagerPortalGUI().setVisible(true);
         }
     }
     
