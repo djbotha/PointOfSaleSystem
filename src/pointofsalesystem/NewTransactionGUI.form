@@ -147,10 +147,13 @@
           </Properties>
           <BindingProperties>
             <BindingProperty name="elements" source="productsList1" target="tblProducts" targetPath="elements" updateStrategy="0" immediately="true">
+              <Property name="name" type="java.lang.String" value=""/>
               <Subbinding sourcePath="${productName}">
+                <BindingParameter name="NAME" value="Product Name"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${productBarcode}">
+                <BindingParameter name="NAME" value="Product Barcode"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
             </BindingProperty>
