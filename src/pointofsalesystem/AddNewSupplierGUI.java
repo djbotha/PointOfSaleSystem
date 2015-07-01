@@ -2,6 +2,7 @@ package pointofsalesystem;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class AddNewSupplierGUI extends javax.swing.JFrame
 {
@@ -138,20 +139,38 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
         String email = tfEmail.getText();               //Get the email address from the textfield
         String phone = tfPhone.getText();               //Get the phone number from the textfield
         
-        String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
-                                "ORDER BY SUPPLIER_ID DESC\n" +
-                                "FETCH FIRST 1 ROWS ONLY"; //Get the last supplier ID and increment it with one
-        
-        int supplierID = pos.getID(getSupplierID) + 1;  //Increment the last supplierID with 1 
-        
-        String query =  "INSERT INTO NBUSER.SUPPLIERS(SUPPLIER_ID, SUPPLIER_NAME, CONTACT_NAME,"
-                        + " SUPPLIER_EMAIL, SUPPLIER_PHONE)\n" +
-                        "VALUES (" + supplierID + ", '" + supplierName + "', '" + contactName + "', '" + email + "', "
-                        + "'" + phone + "')"; //SQL query to add the data to the DB
-        
-        pos.addDBEntry(query);                          //Add the data to the DB
+        if (validateEmail(email))
+        {
+            String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
+                                    "ORDER BY SUPPLIER_ID DESC\n" +
+                                    "FETCH FIRST 1 ROWS ONLY"; //Get the last supplier ID and increment it with one
+
+            int supplierID = pos.getID(getSupplierID) + 1;  //Increment the last supplierID with 1 
+            
+            String query =  "INSERT INTO NBUSER.SUPPLIERS(SUPPLIER_ID, SUPPLIER_NAME, CONTACT_NAME,"
+                            + " SUPPLIER_EMAIL, SUPPLIER_PHONE)\n" +
+                            "VALUES (" + supplierID + ", '" + supplierName + "', '" + contactName + "', '" + email + "', "
+                            + "'" + phone + "')"; //SQL query to add the data to the DB
+
+            pos.addDBEntry(query);                          //Add the data to the DB
+        }
+        else
+            JOptionPane.showMessageDialog(null, "The email address entered is invalid.");
     }//GEN-LAST:event_lblSaveMouseReleased
 
+    public boolean validateEmail(String email)
+    {
+        /*
+         * http://www.ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-1/
+         * 
+         * String.matches(regex) returns boolean.
+         */
+        
+        String emailRegex = "^[\\w\\.-]+@\\w+\\.(\\w+\\.)*\\w+$";
+        
+        return email.matches(emailRegex);
+    }
+    
     public static void main(String args[])
     {
         /* Set the Nimbus look and feel */
