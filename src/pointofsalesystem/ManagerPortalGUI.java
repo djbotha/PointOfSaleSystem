@@ -141,32 +141,32 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        pos.fadeIn(this);                       //Fade in this window
+        pos.fadeIn(this);                           //Fade in this window
     }//GEN-LAST:event_formWindowOpened
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        pos.fadeOut(this);                      //Fade out this window
-        new HomeGUI().setVisible(true);         //Bring up the home screen
+        pos.fadeOut(this);                          //Fade out this window
+        new HomeGUI().setVisible(true);             //Bring up the home screen
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased
-        pos.fadeOut(this);                      //Fade out this screen
-        System.exit(0);                         //Quit the program
+        pos.fadeOut(this);                          //Fade out this screen
+        System.exit(0);                             //Quit the program
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblAddNewStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewStockMouseReleased
-        pos.fadeOut(this);                      //Fade out current screen
-        new AddNewStockGUI().setVisible(true);  //Bring up add new stock screen
+        pos.fadeOut(this);                          //Fade out current screen
+        new AddNewStockGUI().setVisible(true);      //Bring up add new stock screen
     }//GEN-LAST:event_lblAddNewStockMouseReleased
 
     private void lblAddNewSupplierMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewSupplierMouseReleased
-        pos.fadeOut(this);                      //Fade out current screen
-        new AddNewSupplierGUI().setVisible(true);//Bring up add new supplier screen
+        pos.fadeOut(this);                          //Fade out current screen
+        new AddNewSupplierGUI().setVisible(true);   //Bring up add new supplier screen
     }//GEN-LAST:event_lblAddNewSupplierMouseReleased
 
     private void lblOrderStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOrderStockMouseReleased
-        pos.fadeOut(this);                       //Fade out current screen
-        new OrderStockGUI().setVisible(true);//Bring up order stock screen
+        pos.fadeOut(this);                          //Fade out current screen
+        new OrderStockGUI().setVisible(true);       //Bring up order stock screen
     }//GEN-LAST:event_lblOrderStockMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
@@ -180,14 +180,14 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblRemoveStockMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblRemoveStockMouseReleased
     {//GEN-HEADEREND:event_lblRemoveStockMouseReleased
-        pos.fadeOut(this);                       //Fade out current screen
-        new DeleteStockGUI().setVisible(true);//Bring up order stock screen
+        pos.fadeOut(this);                          //Fade out current screen
+        new DeleteStockGUI().setVisible(true);      //Bring up order stock screen
     }//GEN-LAST:event_lblRemoveStockMouseReleased
 
     private void lblIncomeStatementMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblIncomeStatementMouseReleased
     {//GEN-HEADEREND:event_lblIncomeStatementMouseReleased
-        pos.fadeOut(this);
-        new IncomeStatementGUI().setVisible(true);
+        pos.fadeOut(this);                          //Fade out the current screen
+        new IncomeStatementGUI().setVisible(true);  //Bring up IncomeStatement screen
     }//GEN-LAST:event_lblIncomeStatementMouseReleased
     
     public static void main(String args[]) 
