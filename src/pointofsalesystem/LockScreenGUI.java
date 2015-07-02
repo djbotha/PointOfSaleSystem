@@ -45,6 +45,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         lbl8 = new javax.swing.JLabel();
         lbl9 = new javax.swing.JLabel();
         lbl0 = new javax.swing.JLabel();
+        lblLockscreen = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         lblOK = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
@@ -165,6 +166,16 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
         });
         getContentPane().add(lbl0, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 634, 60, 80));
 
+        lblLockscreen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLockscreen.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblLockscreenMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblLockscreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 14, 180, 30));
+
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 70)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(71, 156, 214));
         getContentPane().add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 190, 40));
@@ -268,6 +279,11 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         pos.fadeIn(this);                       //Fade in the current screen smoothly
     }//GEN-LAST:event_formWindowOpened
+
+    private void lblLockscreenMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblLockscreenMouseReleased
+    {//GEN-HEADEREND:event_lblLockscreenMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/screens/2015/07/02/Lockscreen.html");
+    }//GEN-LAST:event_lblLockscreenMouseReleased
     
     public void updatePassword(String num)      //Method used to update the password label on screen and password variable
     {
@@ -395,6 +411,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblClock;
+    private javax.swing.JLabel lblLockscreen;
     private javax.swing.JLabel lblOK;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblQuit;

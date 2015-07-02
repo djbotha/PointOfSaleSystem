@@ -21,6 +21,10 @@ import javax.swing.JOptionPane;
  *      http://www.entrepreneur.com/answer/221767           - Grocery Markup - between 9% and 13%  
  *      http://stackoverflow.com/questions/3816015/sqlexception-no-suitable-driver-found-for-jdbcderby-localhost1527
  *                                                          - Derby Driver not found
+ * 
+ *      <-- PROJECT NOTES -->
+ *      http://jekyllrb.com/                                - Jekyll
+ *      http://jekyll-windows.juthilo.com/                  - Jekyll Windows Documentation
  */
 public class PointOfSaleSystem
 {

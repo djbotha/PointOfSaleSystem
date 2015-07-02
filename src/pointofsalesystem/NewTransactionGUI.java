@@ -93,6 +93,8 @@ public class NewTransactionGUI extends javax.swing.JFrame
         tfSelectedItem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfSelectedItem.setForeground(new java.awt.Color(255, 255, 255));
         tfSelectedItem.setBorder(null);
+        tfSelectedItem.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        tfSelectedItem.setEnabled(false);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProductList, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.productName}"), tfSelectedItem, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
         bindingGroup.addBinding(binding);
