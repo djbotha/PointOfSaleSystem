@@ -30,16 +30,19 @@ public class NewTransactionGUI extends javax.swing.JFrame
         productsList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery1.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         taOutput = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblProductList = new javax.swing.JTable();
         lblManager = new javax.swing.JLabel();
         lblKeypad = new javax.swing.JLabel();
         lblProductList = new javax.swing.JLabel();
         tfSelectedItem = new javax.swing.JTextField();
+        lblAdd = new javax.swing.JLabel();
+        tfSearch = new javax.swing.JTextField();
+        lblSearch = new javax.swing.JLabel();
         lblTabs = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblProductList = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POS New Transaction");
@@ -67,26 +70,34 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 400, 630));
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productsList1, tblProductList);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productName}"));
-        columnBinding.setColumnName("Product Name");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productBarcode}"));
-        columnBinding.setColumnName("Product Barcode");
-        columnBinding.setColumnClass(String.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane2.setViewportView(tblProductList);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 400, 420));
-
         lblManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblManager.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblManagerMouseReleased(evt);
+            }
+        });
         getContentPane().add(lblManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 160, 30));
 
         lblKeypad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblKeypad.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblKeypadMouseReleased(evt);
+            }
+        });
         getContentPane().add(lblKeypad, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 130, 30));
 
         lblProductList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblProductList.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblProductListMouseReleased(evt);
+            }
+        });
         getContentPane().add(lblProductList, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 94, 150, 30));
 
         tfSelectedItem.setBackground(new Color(0, 0, 0, 0));
@@ -100,6 +111,18 @@ public class NewTransactionGUI extends javax.swing.JFrame
         bindingGroup.addBinding(binding);
 
         getContentPane().add(tfSelectedItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 290, 40));
+
+        lblAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(lblAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 174, 70, 30));
+
+        tfSearch.setBackground(new Color(0, 0, 0, 0));
+        tfSearch.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tfSearch.setForeground(new java.awt.Color(255, 255, 255));
+        tfSearch.setBorder(null);
+        getContentPane().add(tfSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 260, 40));
+
+        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 234, 90, 30));
 
         lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_ProductList.png"))); // NOI18N
         getContentPane().add(lblTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, 640));
@@ -127,6 +150,19 @@ public class NewTransactionGUI extends javax.swing.JFrame
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productsList1, tblProductList);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productName}"));
+        columnBinding.setColumnName("Product Name");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productBarcode}"));
+        columnBinding.setColumnName("Product Barcode");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane2.setViewportView(tblProductList);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 400, 420));
+
         bindingGroup.bind();
 
         pack();
@@ -149,6 +185,26 @@ public class NewTransactionGUI extends javax.swing.JFrame
         pos.fadeOut(this);              //Fade out this screen
         System.exit(0);                 //Quit the program
     }//GEN-LAST:event_lblQuitMouseReleased
+
+    private void lblKeypadMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblKeypadMouseReleased
+    {//GEN-HEADEREND:event_lblKeypadMouseReleased
+        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Keypad.png")));
+        tfSelectedItem.setText("");
+        tfSelectedItem.setEnabled(false);
+        tblProductList.setOpaque(false);
+    }//GEN-LAST:event_lblKeypadMouseReleased
+
+    private void lblProductListMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblProductListMouseReleased
+    {//GEN-HEADEREND:event_lblProductListMouseReleased
+        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_ProductList.png")));
+    }//GEN-LAST:event_lblProductListMouseReleased
+
+    private void lblManagerMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblManagerMouseReleased
+    {//GEN-HEADEREND:event_lblManagerMouseReleased
+        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Manager.png")));
+        tfSelectedItem.setText("");
+        tfSelectedItem.setEnabled(false);
+    }//GEN-LAST:event_lblManagerMouseReleased
 
     public static void main(String args[])
     {
@@ -195,12 +251,14 @@ public class NewTransactionGUI extends javax.swing.JFrame
     private javax.persistence.EntityManager PointOfSaleSystemPUEntityManager;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblAdd;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblKeypad;
     private javax.swing.JLabel lblManager;
     private javax.swing.JLabel lblProductList;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblTabs;
     private java.util.List<pointofsalesystem.Products> productsList;
     private java.util.List<pointofsalesystem.Products> productsList1;
@@ -208,6 +266,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
     private javax.persistence.Query productsQuery1;
     private javax.swing.JTextArea taOutput;
     private javax.swing.JTable tblProductList;
+    private javax.swing.JTextField tfSearch;
     private javax.swing.JTextField tfSelectedItem;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
