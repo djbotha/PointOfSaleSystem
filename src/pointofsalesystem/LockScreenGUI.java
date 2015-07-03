@@ -282,7 +282,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
 
     private void lblLockscreenMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblLockscreenMouseReleased
     {//GEN-HEADEREND:event_lblLockscreenMouseReleased
-        pos.loadWebSite("http://pointofsalesystem.github.io/screens/2015/07/02/Lockscreen.html");
+        pos.loadWebSite("http://pointofsalesystem.github.io/lockscreen/");
     }//GEN-LAST:event_lblLockscreenMouseReleased
     
     public void updatePassword(String num)      //Method used to update the password label on screen and password variable
