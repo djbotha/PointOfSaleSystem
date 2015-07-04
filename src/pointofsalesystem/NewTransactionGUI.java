@@ -1,7 +1,9 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class NewTransactionGUI extends javax.swing.JFrame
 {
@@ -16,6 +18,8 @@ public class NewTransactionGUI extends javax.swing.JFrame
         
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
     }
+    
+    private final String managerPass = "1234";    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -201,11 +205,41 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
     private void lblManagerMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblManagerMouseReleased
     {//GEN-HEADEREND:event_lblManagerMouseReleased
-        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Manager.png")));
-        tfSelectedItem.setText("");
-        tfSelectedItem.setEnabled(false);
+        validateManagerPassword();                          //Check if the Manager Password is correct or not
+        
     }//GEN-LAST:event_lblManagerMouseReleased
+    
+    public void validateManagerPassword()                   //Validate the password when the manager tries to log in to the manager portal
+    {
+        int passwordTries = 3;                              //Amount of tries a user has left to enter his password
+        String password = JOptionPane.showInputDialog("Please enter your manager password"); //Grab password input from a JOptionPane dialog
 
+        while (passwordTries > 1)                           //Repeat as long as the user can enter a password 
+        {
+            if (!password.equals(managerPass))              //If the password is incorrect
+            {
+                JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT. ", "ERROR", WIDTH); //Show error message. 
+                passwordTries--;                            //Decrement the password tries counter
+                password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining."); //Prompt for new password to be entered.
+                if (password.equals(managerPass)) 
+                {
+                   lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Manager.png")));
+                    tfSelectedItem.setText("");
+                    tfSelectedItem.setEnabled(false);
+                    return;                                 //Exit out of this method
+                }
+            } 
+            else                                          //If the password is valid
+            {
+                lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Manager.png")));
+                tfSelectedItem.setText("");                 
+                tfSelectedItem.setEnabled(false);
+                return;                                     //Exit out of this method
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT.", "ERROR", WIDTH); //Show error message. 
+    }
     public static void main(String args[])
     {
         /* Set the Nimbus look and feel */
