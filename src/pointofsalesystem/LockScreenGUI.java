@@ -14,7 +14,7 @@ public class LockScreenGUI extends javax.swing.JFrame implements ActionListener
     
     PointOfSaleSystem pos =  new PointOfSaleSystem(); //Create a new pointofsalesystem object to use its methods
     String password = "";                       //Temporary password variable for validation         
-    public String masterPass = "0000";          //Master password. Can be edited from Manager Portal
+    public final String masterPass = "0000";          //Master password. Can be edited from Manager Portal
     int passwordTries = 3;                      //Password counter for amount of times the user can enter a false password
     
     public LockScreenGUI()
