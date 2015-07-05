@@ -120,7 +120,6 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
         pos.fadeOut(this);                  //Fade out this window
-        new ManagerPortalGUI().setVisible(true); //Bring up the manager screen
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuitMouseReleased

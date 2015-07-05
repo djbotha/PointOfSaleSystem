@@ -174,7 +174,6 @@ public class DeleteStockGUI extends javax.swing.JFrame
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblBackMouseReleased
     {//GEN-HEADEREND:event_lblBackMouseReleased
         pos.fadeOut(this);                      //Fade out the current GUI
-        new ManagerPortalGUI().setVisible(true);//Bring up the Manager Portal
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblQuitMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblQuitMouseReleased

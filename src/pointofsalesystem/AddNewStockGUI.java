@@ -136,7 +136,6 @@ public class AddNewStockGUI extends javax.swing.JFrame
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
         pos.fadeOut(this);                      //Fade out the current screen
-        new ManagerPortalGUI().setVisible(true);//Bring up the manager portal
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased

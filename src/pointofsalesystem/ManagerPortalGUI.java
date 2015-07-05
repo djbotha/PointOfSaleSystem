@@ -155,17 +155,14 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblQuitMouseReleased
 
     private void lblAddNewStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewStockMouseReleased
-        pos.fadeOut(this);                          //Fade out current screen
         new AddNewStockGUI().setVisible(true);      //Bring up add new stock screen
     }//GEN-LAST:event_lblAddNewStockMouseReleased
 
     private void lblAddNewSupplierMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewSupplierMouseReleased
-        pos.fadeOut(this);                          //Fade out current screen
         new AddNewSupplierGUI().setVisible(true);   //Bring up add new supplier screen
     }//GEN-LAST:event_lblAddNewSupplierMouseReleased
 
     private void lblOrderStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOrderStockMouseReleased
-        pos.fadeOut(this);                          //Fade out current screen
         new OrderStockGUI().setVisible(true);       //Bring up order stock screen
     }//GEN-LAST:event_lblOrderStockMouseReleased
 
@@ -180,13 +177,11 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     private void lblRemoveStockMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblRemoveStockMouseReleased
     {//GEN-HEADEREND:event_lblRemoveStockMouseReleased
-        pos.fadeOut(this);                          //Fade out current screen
         new DeleteStockGUI().setVisible(true);      //Bring up order stock screen
     }//GEN-LAST:event_lblRemoveStockMouseReleased
 
     private void lblIncomeStatementMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblIncomeStatementMouseReleased
     {//GEN-HEADEREND:event_lblIncomeStatementMouseReleased
-        pos.fadeOut(this);                          //Fade out the current screen
         new IncomeStatementGUI().setVisible(true);  //Bring up IncomeStatement screen
     }//GEN-LAST:event_lblIncomeStatementMouseReleased
     
