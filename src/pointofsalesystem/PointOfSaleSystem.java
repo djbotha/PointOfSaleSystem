@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *      http://stackoverflow.com/questions/3816015/sqlexception-no-suitable-driver-found-for-jdbcderby-localhost1527
  *                                                          - Derby Driver not found
  * 
- *      <-- PROJECT NOTES -->
+ *      <-- PROJECT NOTES SITE -->
  *      http://jekyllrb.com/                                - Jekyll
  *      http://jekyll-windows.juthilo.com/                  - Jekyll Windows Documentation
  */
