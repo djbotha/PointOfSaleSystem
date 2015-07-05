@@ -1,6 +1,7 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -168,18 +169,77 @@ public class SearchGUI extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Please fill in ONE of the fields.", "ERROR", WIDTH); //Instruct the user to fill in one of the fields. 
         }
         
-        pos.searchDB(sql);                                    //Search for the specific query
+        ResultSet rs = pos.searchDB(sql);                                    //Search for the specific query
+        String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
+        int[] colWidth = {6, 35, 15, 15, 15, 15, 15};
+        
+        displayTable(rs, headings, colWidth);
     }//GEN-LAST:event_lblSearchMouseReleased
 
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
-        String sql = "select * from \"NBUSER\".ORDERS";       //View all the data
-        pos.searchDB(sql);                                    //Search for query
+        String sql = "select * from \"NBUSER\".PRODUCTS";       //View all the data
+        ResultSet rs =pos.searchDB(sql);                                    //Search for query
+        String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
+        int[] colWidth = {6, 35, 15, 15, 15, 5, 15};
+        
+        displayTable(rs, headings, colWidth);
     }//GEN-LAST:event_lblViewAllMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
         pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project.
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
+    void displayTable(ResultSet rs, String[] headings, int[] colWidth) 
+    {
+        taOutput.setText("");
+        for (int i = 0; i < headings.length; i++) 
+        {
+            taOutput.append(addSpaces(headings[i], colWidth[i]));
+        }
+        taOutput.append("\n");
+        for (int i = 0; i < headings.length; i++) 
+        {
+            for (int j = 0; j < colWidth[i]; j++) 
+            {
+                taOutput.append("=");
+            }
+        }
+        
+        taOutput.append("\n");
+
+        try 
+        {
+            while (rs.next()) 
+            {
+                for (int i = 0; i < headings.length; i++) 
+                {
+                    taOutput.append(addSpaces(rs.getString(i+1), colWidth[i]));
+                }
+                taOutput.append("\n");
+            }
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    private String addSpaces(String str, int colWidth) 
+    {
+        String temp = str;
+        if (str.length() < colWidth)
+        {
+            for (int i = colWidth; i > str.length(); i--) 
+            {
+                temp += " ";
+            }
+            return temp;
+        }
+        else
+        {
+            return str.substring(0, (colWidth-5)) + "...  ";
+        }
+    }
     public static void main(String args[]) 
     {
         /* Set the Nimbus look and feel */
