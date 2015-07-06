@@ -150,6 +150,11 @@ public class SearchGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblBackMouseReleased
 
     private void lblSearchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseReleased
+        /*  
+         *  http://www-01.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/com.ibm.db2z10.doc.intro/src/tpc/db2z_innerjoin.dita - SQL Inner join - combines data from 2 tables
+         *  http://www.w3schools.com/sql/sql_join.asp - SQL Join explained
+         */
+        
         String productName = tfProductName.getText();   //Fetch product name from textfield
         String barcode = tfBarcode.getText();           //Fetch barcode from textfield
         
@@ -164,22 +169,22 @@ public class SearchGUI extends javax.swing.JFrame
         }
         else if (!"".equals(barcode) && "".equals(productName))  //If the user has entered a barcode
         {
-            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, "
-                    + "(PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, "
-                    + "PRODUCTS.PRODUCT_QTY, PRODUCTS.SUPPLIER_ID \n" 
-                    + "FROM NBUSER.PRODUCTS\n" 
-                    + "WHERE PRODUCTS.PRODUCT_BARCODE like '%" + barcode + "%'";  //Search for all the similar barcodes
+            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, (PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, PRODUCTS.PRODUCT_QTY, SUPPLIERS.SUPPLIER_NAME \n" +
+                    "FROM NBUSER.PRODUCTS \n" +
+                    "INNER JOIN SUPPLIERS \n" +
+                    "ON PRODUCTS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
+                    "WHERE PRODUCTS.PRODUCT_BARCODE LIKE '%" + barcode + "%'";  //Search for all the similar barcodes
         }
         else if(("".equals(barcode) && "".equals(productName)) || (!"".equals(barcode) && !"".equals(productName))) //If the user has left the input blank or is trying to search for a name AND barcode
         {
             JOptionPane.showMessageDialog(this, "Please fill in ONE of the fields.", "ERROR", WIDTH); //Instruct the user to fill in one of the fields. 
-            return;
+            return;                                         //Exit this method so that the user does not get a SQL exception later on.
         }
         
         ResultSet rs = pos.searchDB(sql);                                   //Search for the specific query
 
-        String[] headings = {"ID", "Name", "Barcode", "Price", "Qty", "Supplier ID"}; //Headings to be printed on output
-        int[] colWidth = {6, 50, 15, 10, 9, 15};                            //Sizes for "columns"
+        String[] headings = {"ID", "Name", "Barcode", "Price", "Qty", "Supplier"}; //Headings to be printed on output
+        int[] colWidth = {6, 50, 15, 10, 9, 20};                            //Sizes for "columns"
         
         displayTable(rs, headings, colWidth);                               //Output rs
     }//GEN-LAST:event_lblSearchMouseReleased
