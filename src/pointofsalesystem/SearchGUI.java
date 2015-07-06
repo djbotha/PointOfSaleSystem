@@ -157,35 +157,44 @@ public class SearchGUI extends javax.swing.JFrame
         
         if(!"".equals(productName) && "".equals(barcode))  //If the user has entered a productName
         {
-            sql = "SELECT * FROM NBUSER.PRODUCTS\n" +
-                    "WHERE PRODUCTS.PRODUCT_NAME like '%" + productName + "%'"; //Search for all the similar product names 
+            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, "
+                    + "(PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, PRODUCTS.PRODUCT_QTY, "
+                    + "PRODUCTS.SUPPLIER_ID \nFROM NBUSER.PRODUCTS\n" 
+                    + "WHERE PRODUCTS.PRODUCT_NAME like '%" + productName + "%'"; //Search for all the similar product names 
         }
         else if (!"".equals(barcode) && "".equals(productName))  //If the user has entered a barcode
         {
-            sql = "SELECT * FROM NBUSER.PRODUCTS\n" +
-                    "WHERE PRODUCTS.PRODUCT_BARCODE like '%" + barcode + "%'";  //Search for all the similar barcodes
+            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, "
+                    + "(PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, "
+                    + "PRODUCTS.PRODUCT_QTY, PRODUCTS.SUPPLIER_ID \n" 
+                    + "FROM NBUSER.PRODUCTS\n" 
+                    + "WHERE PRODUCTS.PRODUCT_BARCODE like '%" + barcode + "%'";  //Search for all the similar barcodes
         }
         else if(("".equals(barcode) && "".equals(productName)) || (!"".equals(barcode) && !"".equals(productName))) //If the user has left the input blank or is trying to search for a name AND barcode
         {
             JOptionPane.showMessageDialog(this, "Please fill in ONE of the fields.", "ERROR", WIDTH); //Instruct the user to fill in one of the fields. 
+            return;
         }
         
-        ResultSet rs = pos.searchDB(sql);                                    //Search for the specific query
+        ResultSet rs = pos.searchDB(sql);                                   //Search for the specific query
 
-        String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
-        int[] colWidth = {6, 50, 15, 10, 10, 9, 11};
+        String[] headings = {"ID", "Name", "Barcode", "Price", "Qty", "Supplier ID"}; //Headings to be printed on output
+        int[] colWidth = {6, 50, 15, 10, 9, 15};                            //Sizes for "columns"
         
-        displayTable(rs, headings, colWidth);
+        displayTable(rs, headings, colWidth);                               //Output rs
     }//GEN-LAST:event_lblSearchMouseReleased
 
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
-        String sql = "select * from \"NBUSER\".PRODUCTS";       //View all the data
+        String sql ="SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, "
+                    + "(PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, "
+                    + "PRODUCTS.PRODUCT_QTY, PRODUCTS.SUPPLIER_ID \n" 
+                    + "FROM NBUSER.PRODUCTS\n";                             //View all the data
         ResultSet rs =pos.searchDB(sql);                                    //Search for query
         
-        String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
-        int[] colWidth = {6, 50, 15, 10, 10, 9, 11};
+        String[] headings = {"ID", "Name", "Barcode", "Price", "Qty", "Supplier ID"}; //Headings to be printed on output
+        int[] colWidth = {6, 50, 15, 10, 9, 15};                            //Sizes for "columns"
         
-        displayTable(rs, headings, colWidth);
+        displayTable(rs, headings, colWidth);                               //Output rs
     }//GEN-LAST:event_lblViewAllMouseReleased
 
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
