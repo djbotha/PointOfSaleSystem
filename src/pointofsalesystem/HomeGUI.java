@@ -192,17 +192,6 @@ public class HomeGUI extends javax.swing.JFrame
         System.exit(0);
     }
 
-//    public void loadWebSite(String url)                     //Display a certain webpage 
-//    {
-//        try 
-//        {
-//            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-//        } catch (IOException ex)                            //If the website failed to display, print an error.
-//        {
-//            System.out.println("Failed to load website. " + ex);
-//        }
-//    }
-
     public static void main(String args[]) 
     {
         /* Set the Nimbus look and feel */
