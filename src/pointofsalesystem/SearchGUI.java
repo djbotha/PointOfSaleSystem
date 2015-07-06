@@ -171,6 +171,7 @@ public class SearchGUI extends javax.swing.JFrame
         }
         
         ResultSet rs = pos.searchDB(sql);                                    //Search for the specific query
+
         String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
         int[] colWidth = {6, 35, 15, 15, 15, 15, 15};
         
@@ -180,6 +181,7 @@ public class SearchGUI extends javax.swing.JFrame
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
         String sql = "select * from \"NBUSER\".PRODUCTS";       //View all the data
         ResultSet rs =pos.searchDB(sql);                                    //Search for query
+        
         String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
         int[] colWidth = {6, 35, 15, 15, 15, 5, 15};
         
