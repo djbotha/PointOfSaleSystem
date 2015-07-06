@@ -162,14 +162,15 @@ public class SearchGUI extends javax.swing.JFrame
         
         if(!"".equals(productName) && "".equals(barcode))  //If the user has entered a productName
         {
-            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, "
-                    + "(PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, PRODUCTS.PRODUCT_QTY, "
-                    + "PRODUCTS.SUPPLIER_ID \nFROM NBUSER.PRODUCTS\n" 
-                    + "WHERE PRODUCTS.PRODUCT_NAME like '%" + productName + "%'"; //Search for all the similar product names 
+            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, ((PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE) AS PRICE, PRODUCTS.PRODUCT_QTY, SUPPLIERS.SUPPLIER_NAME \n" +
+                    "FROM NBUSER.PRODUCTS \n" +
+                    "INNER JOIN SUPPLIERS \n" +
+                    "ON PRODUCTS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
+                    "WHERE PRODUCTS.PRODUCT_NAME LIKE '%" + productName + "%'"; //Search for all the similar product names 
         }
         else if (!"".equals(barcode) && "".equals(productName))  //If the user has entered a barcode
         {
-            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, (PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, PRODUCTS.PRODUCT_QTY, SUPPLIERS.SUPPLIER_NAME \n" +
+            sql = "SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, ((PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE) AS PRICE, PRODUCTS.PRODUCT_QTY, SUPPLIERS.SUPPLIER_NAME \n" +
                     "FROM NBUSER.PRODUCTS \n" +
                     "INNER JOIN SUPPLIERS \n" +
                     "ON PRODUCTS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
