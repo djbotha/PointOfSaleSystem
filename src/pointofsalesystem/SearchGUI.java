@@ -1,6 +1,7 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -189,57 +190,61 @@ public class SearchGUI extends javax.swing.JFrame
         pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project.
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
-    void displayTable(ResultSet rs, String[] headings, int[] colWidth) 
+    void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java
     {
-        taOutput.setText("");
-        for (int i = 0; i < headings.length; i++) 
+        taOutput.setText("");                                   //Clear the text area
+        for (int i = 0; i < headings.length; i++)               //For each of the headings...
         {
-            taOutput.append(addSpaces(headings[i], colWidth[i]));
+            taOutput.append(addSpaces(headings[i], colWidth[i])); //Add spaces to the headings to mimic collumns
         }
-        taOutput.append("\n");
-        for (int i = 0; i < headings.length; i++) 
+        
+        taOutput.append("\n");                                  //Print a new line
+        
+        for (int i = 0; i < headings.length; i++)               //For each of the headings
         {
-            for (int j = 0; j < colWidth[i]; j++) 
+            for (int j = 0; j < colWidth[i]; j++)               //and for the collumn width
             {
-                taOutput.append("=");
+                taOutput.append("=");                           //Print an "=" as a line break
             }
         }
         
-        taOutput.append("\n");
+        taOutput.append("\n");                                  //Print a new line
 
         try 
         {
-            while (rs.next()) 
+            while (rs.next())                                   //Iterate through each line of the ResultSet
             {
-                for (int i = 0; i < headings.length; i++) 
+                for (int i = 0; i < headings.length; i++)       //For each of the collumns
                 {
-                    taOutput.append(addSpaces(rs.getString(i+1), colWidth[i]));
+                    taOutput.append(addSpaces(rs.getString(i+1), colWidth[i])); //Add spaces to the strings to mimic collumns
                 }
-                taOutput.append("\n");
+                taOutput.append("\n");                          //Print a new line
             }
         }
-        catch (Exception e) 
+        catch (Exception e) //If the SQL Query broke at some point
         {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "SQL Exception: " + e, "ERROR", WIDTH); //Print an error message
         }
     }
     
-    private String addSpaces(String str, int colWidth) 
+    private String addSpaces(String str, int colWidth)          //Method to add spaces to strings to mimic collumns        
     {
-        String temp = str;
-        if (str.length() < colWidth)
+        String temp = str;                                      //Assign the String parameter value to a temporary variable
+        
+        if (str.length() < colWidth)                            //If the word is shorter than then collumn
         {
-            for (int i = colWidth; i > str.length(); i--) 
+            for (int i = colWidth; i > str.length(); i--)       //Until the collumn width is reached            
             {
-                temp += " ";
+                temp += " ";                                    //Add a space      
             }
-            return temp;
+            return temp;                                        //Return the final String value
         }
-        else
+        else                                                    //If the word is longer than the collumn
         {
-            return str.substring(0, (colWidth-5)) + "...  ";
+            return str.substring(0, (colWidth-5)) + "...  ";    //Shorten it by 5, add 3 "." and 2 spaces
         }
     }
+    
     public static void main(String args[]) 
     {
         /* Set the Nimbus look and feel */
