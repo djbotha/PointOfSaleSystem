@@ -173,7 +173,7 @@ public class SearchGUI extends javax.swing.JFrame
         ResultSet rs = pos.searchDB(sql);                                    //Search for the specific query
 
         String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
-        int[] colWidth = {6, 35, 15, 15, 15, 15, 15};
+        int[] colWidth = {6, 50, 15, 10, 10, 9, 11};
         
         displayTable(rs, headings, colWidth);
     }//GEN-LAST:event_lblSearchMouseReleased
@@ -183,7 +183,7 @@ public class SearchGUI extends javax.swing.JFrame
         ResultSet rs =pos.searchDB(sql);                                    //Search for query
         
         String[] headings = {"ID", "Name", "Barcode", "Costprice", "Markup", "Qty", "Supplier ID"};
-        int[] colWidth = {6, 35, 15, 15, 15, 5, 15};
+        int[] colWidth = {6, 50, 15, 10, 10, 9, 11};
         
         displayTable(rs, headings, colWidth);
     }//GEN-LAST:event_lblViewAllMouseReleased
