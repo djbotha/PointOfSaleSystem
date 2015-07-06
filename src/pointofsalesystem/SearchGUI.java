@@ -158,12 +158,12 @@ public class SearchGUI extends javax.swing.JFrame
         if(!"".equals(productName) && "".equals(barcode))  //If the user has entered a productName
         {
             sql = "SELECT * FROM NBUSER.PRODUCTS\n" +
-                    "WHERE PRODUCTS.PRODUCT_NAME like '" + productName + "'"; //Search for all the similar product names 
+                    "WHERE PRODUCTS.PRODUCT_NAME like '%" + productName + "%'"; //Search for all the similar product names 
         }
         else if (!"".equals(barcode) && "".equals(productName))  //If the user has entered a barcode
         {
             sql = "SELECT * FROM NBUSER.PRODUCTS\n" +
-                    "WHERE PRODUCTS.PRODUCT_BARCODE like '" + barcode + "'";  //Search for all the similar barcodes
+                    "WHERE PRODUCTS.PRODUCT_BARCODE like '%" + barcode + "%'";  //Search for all the similar barcodes
         }
         else if(("".equals(barcode) && "".equals(productName)) || (!"".equals(barcode) && !"".equals(productName))) //If the user has left the input blank or is trying to search for a name AND barcode
         {
