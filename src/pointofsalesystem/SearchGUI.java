@@ -153,7 +153,7 @@ public class SearchGUI extends javax.swing.JFrame
         String productName = tfProductName.getText();   //Fetch product name from textfield
         String barcode = tfBarcode.getText();           //Fetch barcode from textfield
         
-        String sql = "";                                //INstanstiate "sql" string, to act as the query. 
+        String sql = "";                                //Instanstiate "sql" string, to act as the query. 
         
         if(!"".equals(productName) && "".equals(barcode))  //If the user has entered a productName
         {
