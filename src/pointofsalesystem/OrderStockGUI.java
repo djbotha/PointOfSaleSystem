@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 import javax.mail.Message;
@@ -27,6 +29,7 @@ public class OrderStockGUI extends javax.swing.JFrame
     
     PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods
     int clickercounter = 0;                             //Counter used to determine how many times the OrderStock button has been clicked
+    int supplierID;                                     //Global supplier ID variable
     
     public OrderStockGUI()
     {
@@ -226,7 +229,7 @@ public class OrderStockGUI extends javax.swing.JFrame
             double costPrice = rs.getDouble(4);             //Fetch the costprice from the table
             double markup = rs.getDouble(5);                //Fetch the markup from the table
             int dbQty = rs.getInt(6);                       //Fetch the quantity from the table
-            int supplierID = rs.getInt(7);                  //Fetch the supplierIDfrom the table
+            supplierID = rs.getInt(7);                  //Fetch the supplierIDfrom the table
             
             String getSupplierName =    "SELECT SUPPLIER_NAME FROM NBUSER.SUPPLIERS\n" +
                                         "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
@@ -319,53 +322,70 @@ public class OrderStockGUI extends javax.swing.JFrame
      public void orderStock() 
     {
         //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
+        try
+        {
+            String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
+                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+            ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
+            rs2.next();                                     //Skip to the first line of the file
+            String supplierEmail = rs2.getString(1);         //Fetch the supplier Name from the resultset
         
-        String to = "xyz@gmail.com";                //Recipient's email
+        
+        
+            String to = "xyz@gmail.com";                //Recipient's email
 
-        final String from = "abc@gmail.com";              //Sender's email
-        final String username = "abc";              //Sender email accounts
-        final String password = "*****";            //Sender password
+            final String from = "abc@gmail.com";              //Sender's email
+            final String username = "abc";              //Sender email accounts
+            final String password = "*****";            //Sender password
 
-        String host = "smtp.gmail.com";             //GMAIL server address
+            String host = "smtp.gmail.com";             //GMAIL server address
 
-        Properties props = new Properties();        //Instantiate new Properties object
-        props.put("mail.smtp.auth", "true");        //Server details
-        props.put("mail.smtp.starttls.enable", "true"); //Connect to server
-        props.put("mail.smtp.host", host);          //More details
-        props.put("mail.smtp.port", "587");         //SMTP Port 
+            Properties props = new Properties();        //Instantiate new Properties object
+            props.put("mail.smtp.auth", "true");        //Server details
+            props.put("mail.smtp.starttls.enable", "true"); //Connect to server
+            props.put("mail.smtp.host", host);          //More details
+            props.put("mail.smtp.port", "587");         //SMTP Port 
 
-        Session session = Session.getInstance(props, // Get the Session object.
-                new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+            Session session = Session.getInstance(props, // Get the Session object.
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+            try 
+            {
+                // Create a default MimeMessage object.
+                Message message = new MimeMessage(session);
+
+                // Set From: header field of the header.
+                message.setFrom(new InternetAddress(from));
+
+                // Set To: header field of the header.
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(to));
+
+                // Set Subject: header field
+                message.setSubject("Testing Subject");
+
+                // Now set the actual message
+                message.setText("Hello, this is sample for to check send "
+                        + "email using JavaMailAPI ");
+
+                // Send message
+                Transport.send(message);
+
+                System.out.println("Sent message successfully....");
+
+            } 
+            catch (MessagingException e) 
+            {
+                throw new RuntimeException(e);
             }
-        });
-
-        try {
-            // Create a default MimeMessage object.
-            Message message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
-
-            // Set Subject: header field
-            message.setSubject("Testing Subject");
-
-            // Now set the actual message
-            message.setText("Hello, this is sample for to check send "
-                    + "email using JavaMailAPI ");
-
-            // Send message
-            Transport.send(message);
-
-            System.out.println("Sent message successfully....");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(OrderStockGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
