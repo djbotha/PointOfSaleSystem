@@ -27,12 +27,13 @@ import javax.swing.JOptionPane;
 public class OrderStockGUI extends javax.swing.JFrame 
 {
     
-    PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods
+    PointOfSaleSystem pos = new PointOfSaleSystem("");  //Creates a new PointOfSaleSystem object to use its methods
     int clickercounter = 0;                             //Counter used to determine how many times the OrderStock button has been clicked
     
     int supplierID, orderID, orderQty;                  //Global order variables
     String supplierName, contactName, productName;      //Global name variables 
-    double costPrice;                                   //Global costprice variable
+    double costPrice, totalPrice;                       //Global costprice variable
+    String sqlDate;                                     //Global timestamp variable
     
     public OrderStockGUI()
     {
@@ -232,6 +233,7 @@ public class OrderStockGUI extends javax.swing.JFrame
             rs2.next();                                     //Skip to the first line of the file
             supplierName = rs2.getString(1);                //Fetch the supplier Name from the resultset
             contactName = rs2.getString(2);                 //Fetch the supplier contact name from the resultset
+            
             String getOrderID = "SELECT ORDER_ID FROM NBUSER.ORDERS\n" +
                                 "ORDER BY ORDER_ID DESC\n" +
                                 "FETCH FIRST 1 ROWS ONLY"; //Query to get the last order ID and increment it with one
@@ -295,17 +297,21 @@ public class OrderStockGUI extends javax.swing.JFrame
                 time+= second + ".0";
             }
             
-            String sqlDate = date + " " + time;             //Concatenate the Date and the Time into SQL Date format
+            sqlDate = date + " " + time;             //Concatenate the Date and the Time into SQL Date format
             
-            costPrice =(int)(costPrice*100);                //Convert the costPrice to 2 decimals
-            costPrice = costPrice/100;                      
+            costPrice = (int)(costPrice*100);                //Convert the costPrice to 2 decimals
+            costPrice /= 100;                 
+            
+            totalPrice = (orderQty*costPrice);
+            totalPrice = (int)(totalPrice*100);
+            totalPrice /= 100;
             
             tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
             tfOrderDate.setText(sqlDate);                   //Set the textfield's value to the current date and time
             tfOrderID.setText(""+orderID);                  //Set the textfield's value to the orderID
             tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
             tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
-            tfTotalPrice.setText(""+(orderQty*costPrice));  //Set the textfield's value to the total price of the order
+            tfTotalPrice.setText(""+totalPrice);  //Set the textfield's value to the total price of the order
             
         } 
         catch (SQLException ex)
@@ -319,6 +325,8 @@ public class OrderStockGUI extends javax.swing.JFrame
         //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
         try
         {
+            JOptionPane.showMessageDialog(null, "Please wait...");
+            
             String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
                                         "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
             ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
@@ -362,27 +370,52 @@ public class OrderStockGUI extends javax.swing.JFrame
                         + "\n\nPaul Roos Kwikspar would like to order the following goods from you:\n\n"
                         + "\t" + orderQty +" x " + productName 
                         + "\t"+ "@R" + costPrice + " per unit."
-                        + "\n\tTotal: R" + (costPrice*orderQty)); // Now set the actual message
+                        + "\n\tTotal: R" + totalPrice
+                        + "\n\nKind Regards"
+                        + "\nDaniël Botha"
+                        +"\n\n Sent from my PointofSaleSystem Application."); // Now set the actual message
 
                 Transport.send(message); // Send message
 
-                JOptionPane.showMessageDialog(null, "Order successfully placed....");
-
+                JOptionPane.showMessageDialog(null, "Order successfully placed!");
+                
+                addOrderToDB(orderQty, orderID, totalPrice, productName, supplierName);
             } 
-            catch (MessagingException e) 
+            catch (MessagingException e) //If the mail failed to send
             {
-                throw new RuntimeException(e);
+                throw new RuntimeException(e); //Throw an error
             }
         } 
-        catch (RuntimeException ex)
+        catch (RuntimeException ex) //If the mail failed to send
         {
-            JOptionPane.showMessageDialog(null, "Failed to send email: " + ex);
+            JOptionPane.showMessageDialog(null, "Failed to send email: " + ex); //Print an error message
         } 
-        catch (SQLException ex)
+        catch (SQLException ex) //If the search failed
         {
-            Logger.getLogger(OrderStockGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Failed to retrieve the details: " + ex); //Print an error message
         }
     }
+     
+     public void addOrderToDB(int qty, int orderid, double price, String productName, String supplierName) //Method to take all the order data and add it to the database
+     {
+        String getProductID = "SELECT PRODUCT_ID FROM NBUSER.PRODUCTS\n" +
+                                    "WHERE PRODUCT_NAME LIKE '" +  productName + "'"; //Query to get the product ID
+
+        int productID = pos.getID(getProductID);              //Get the product ID
+        
+        String getSupplierID = "SELECT SUPPLIER_ID FROM NBUSER.SUPPLIERS\n" +
+                                    "WHERE SUPPLIER_NAME LIKE '" +  supplierName + "'"; //Query to get the supplier ID
+
+        supplierID = pos.getID(getSupplierID);              //Get the supplier ID
+        
+        String query =    "INSERT INTO NBUSER.ORDERS(ORDER_ID, PRODUCT_ID, SUPPLIER_ID,"
+                + " ORDER_QTY, ORDER_PRICE, ORDER_DATE, DELIVERED)\n" +
+                        "VALUES (" + orderid + ", " + productID + ", " + supplierID + "," + qty + ", "
+                + price + ", '" + sqlDate + "', false)";      //Query to add the data to the DB
+
+        pos.addDBEntry(query);                              //Add the data to the DB
+        pos.fadeOut(this);                                  //Fade out this window
+     }
 
     /**
      * @param args the command line arguments

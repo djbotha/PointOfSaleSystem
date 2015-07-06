@@ -166,7 +166,8 @@ public class SearchGUI extends javax.swing.JFrame
                     "FROM NBUSER.PRODUCTS \n" +
                     "INNER JOIN SUPPLIERS \n" +
                     "ON PRODUCTS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
-                    "WHERE PRODUCTS.PRODUCT_NAME LIKE '%" + productName + "%'"; //Search for all the similar product names 
+                    "WHERE PRODUCTS.PRODUCT_NAME LIKE '%" + productName + "%'" +
+                    "ORDER BY PRODUCTS.PRODUCT_ID"; //Search for all the similar product names 
         }
         else if (!"".equals(barcode) && "".equals(productName))  //If the user has entered a barcode
         {
@@ -174,7 +175,8 @@ public class SearchGUI extends javax.swing.JFrame
                     "FROM NBUSER.PRODUCTS \n" +
                     "INNER JOIN SUPPLIERS \n" +
                     "ON PRODUCTS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
-                    "WHERE PRODUCTS.PRODUCT_BARCODE LIKE '%" + barcode + "%'";  //Search for all the similar barcodes
+                    "WHERE PRODUCTS.PRODUCT_BARCODE LIKE '%" + barcode + "%'" +
+                    "ORDER BY PRODUCTS.PRODUCT_ID";  //Search for all the similar barcodes
         }
         else if(("".equals(barcode) && "".equals(productName)) || (!"".equals(barcode) && !"".equals(productName))) //If the user has left the input blank or is trying to search for a name AND barcode
         {
@@ -193,11 +195,15 @@ public class SearchGUI extends javax.swing.JFrame
     private void lblViewAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewAllMouseReleased
         String sql ="SELECT PRODUCTS.PRODUCT_ID, PRODUCTS.PRODUCT_NAME, PRODUCTS.PRODUCT_BARCODE, "
                     + "(PRODUCTS.PRODUCT_MARKUP+1)*PRODUCTS.PRODUCT_COSTPRICE AS PRICE, "
-                    + "PRODUCTS.PRODUCT_QTY, PRODUCTS.SUPPLIER_ID \n" 
-                    + "FROM NBUSER.PRODUCTS\n";                             //View all the data
+                    + "PRODUCTS.PRODUCT_QTY, SUPPLIERS.SUPPLIER_NAME \n" 
+                    + "FROM NBUSER.PRODUCTS\n"
+                    + "INNER JOIN SUPPLIERS \n" 
+                    + "ON PRODUCTS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n"
+                    + "ORDER BY PRODUCTS.PRODUCT_ID";                             //View all the data
+        
         ResultSet rs =pos.searchDB(sql);                                    //Search for query
         
-        String[] headings = {"ID", "Name", "Barcode", "Price", "Qty", "Supplier ID"}; //Headings to be printed on output
+        String[] headings = {"ID", "Name", "Barcode", "Price", "Qty", "Supplier"}; //Headings to be printed on output
         int[] colWidth = {6, 50, 15, 10, 9, 15};                            //Sizes for "columns"
         
         displayTable(rs, headings, colWidth);                               //Output rs
