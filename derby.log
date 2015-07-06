@@ -1,8 +1,8 @@
-Mon Jul 06 14:35:55 CAT 2015 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
+Mon Jul 06 20:26:37 CAT 2015 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Jul 06 14:35:55 CAT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-014e-635d-9878-000046bb625d 
-on database directory C:\Users\Daniel\Documents\IT\Gr12\PAT\PointOfSaleSystem\PointOfSaleSystem  with class loader sun.misc.Launcher$AppClassLoader@8955b34 
+Mon Jul 06 20:26:37 CAT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-014e-649e-ac99-000046bb625d 
+on database directory C:\Users\Daniel\Documents\IT\Gr12\PAT\PointOfSaleSystem\PointOfSaleSystem  with class loader sun.misc.Launcher$AppClassLoader@596b753 
 Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_40/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_40-b43
@@ -12,63 +12,3 @@ os.arch=amd64
 os.version=6.2
 derby.system.home=C:\Users\Daniel\Documents\IT\Gr12\PAT\PointOfSaleSystem
 Database Class Loader started - derby.database.classpath=''
-Mon Jul 06 14:41:09 CAT 2015 Thread[DRDAConnThread_4,5,main] (DATABASE = PointOfSaleSystem), (DRDAID = ????????.??-508905321706414942{9}), Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-Mon Jul 06 14:41:09 CAT 2015 : Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-	at org.apache.derby.impl.drda.DRDAConnThread.throwSyntaxrm(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.missingCodePoint(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTTobjects(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTT(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Mon Jul 06 14:41:09 CAT 2015 Thread[DRDAConnThread_4,5,main] (DATABASE = PointOfSaleSystem), (DRDAID = ????????.??-508905321706414942{9}), Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-Mon Jul 06 14:41:09 CAT 2015 : Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-	at org.apache.derby.impl.drda.DRDAConnThread.throwSyntaxrm(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.missingCodePoint(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTTobjects(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTT(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Mon Jul 06 15:31:11 CAT 2015 Thread[DRDAConnThread_5,5,main] (DATABASE = PointOfSaleSystem), (DRDAID = ????????.??-4398045074914532896{16}), Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-Mon Jul 06 15:31:11 CAT 2015 : Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-	at org.apache.derby.impl.drda.DRDAConnThread.throwSyntaxrm(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.missingCodePoint(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTTobjects(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTT(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Mon Jul 06 15:31:11 CAT 2015 Thread[DRDAConnThread_5,5,main] (DATABASE = PointOfSaleSystem), (DRDAID = ????????.??-4398045074914532896{16}), Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-Mon Jul 06 15:31:11 CAT 2015 : Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-	at org.apache.derby.impl.drda.DRDAConnThread.throwSyntaxrm(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.missingCodePoint(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTTobjects(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTT(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Mon Jul 06 15:32:50 CAT 2015 Thread[DRDAConnThread_7,5,main] (DATABASE = PointOfSaleSystem), (DRDAID = ????????.??-4255055786745419733{19}), Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-Mon Jul 06 15:32:50 CAT 2015 : Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-	at org.apache.derby.impl.drda.DRDAConnThread.throwSyntaxrm(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.missingCodePoint(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTTobjects(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTT(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Mon Jul 06 15:32:50 CAT 2015 Thread[DRDAConnThread_7,5,main] (DATABASE = PointOfSaleSystem), (DRDAID = ????????.??-4255055786745419733{19}), Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-Mon Jul 06 15:32:50 CAT 2015 : Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a Distributed Protocol Error:  DRDA_Proto_SYNTAXRM; CODPNT arg  = 2414; Error Code Value = e. Plaintext connection attempt from an SSL enabled client?
-	at org.apache.derby.impl.drda.DRDAConnThread.throwSyntaxrm(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.missingCodePoint(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTTobjects(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parsePRPSQLSTT(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-----------------------------------------------------------------
-Mon Jul 06 16:23:08 CAT 2015: Shutting down Derby engine
-----------------------------------------------------------------
-Mon Jul 06 16:23:09 CAT 2015:
-Shutting down instance a816c00e-014e-635d-9878-000046bb625d on database directory C:\Users\Daniel\Documents\IT\Gr12\PAT\PointOfSaleSystem\PointOfSaleSystem with class loader sun.misc.Launcher$AppClassLoader@8955b34 
-----------------------------------------------------------------
