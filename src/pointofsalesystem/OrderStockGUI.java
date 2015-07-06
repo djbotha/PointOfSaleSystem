@@ -200,13 +200,10 @@ public class OrderStockGUI extends javax.swing.JFrame
         {
             getDetails();
             lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/OrderStockConfirmGUI.png"))); //Change background to a different button
+            clickercounter++;
         }
         else
-        {
-            
-        }
-        
-        
+            orderStock();
     }//GEN-LAST:event_lblPlaceOrderMouseReleased
 
     public void getDetails() //Method to retrieve all the details of the product
@@ -324,19 +321,19 @@ public class OrderStockGUI extends javax.swing.JFrame
         //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
         try
         {
-            String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
-                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
-            ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
-            rs2.next();                                     //Skip to the first line of the file
-            String supplierEmail = rs2.getString(1);         //Fetch the supplier Name from the resultset
+//            String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
+//                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+//            ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
+//            rs2.next();                                     //Skip to the first line of the file
+//            String supplierEmail = rs2.getString(1);         //Fetch the supplier Name from the resultset
+      
+            
         
-        
-        
-            String to = "xyz@gmail.com";                //Recipient's email
+            String to = "botha.daniel1@gmail.com";                //Recipient's email
 
-            final String from = "abc@gmail.com";              //Sender's email
-            final String username = "abc";              //Sender email accounts
-            final String password = "*****";            //Sender password
+            final String from = "pointofsalesystem.github.io@gmail.com";              //Sender's email
+            final String username = "pointofsalesystem.github.io";              //Sender email accounts
+            final String password = "pointofsalesystem";            //Sender password
 
             String host = "smtp.gmail.com";             //GMAIL server address
 
@@ -383,9 +380,9 @@ public class OrderStockGUI extends javax.swing.JFrame
                 throw new RuntimeException(e);
             }
         } 
-        catch (SQLException ex)
+        catch (RuntimeException ex)
         {
-            Logger.getLogger(OrderStockGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }
 
