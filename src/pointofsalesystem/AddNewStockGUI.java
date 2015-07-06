@@ -170,6 +170,7 @@ public class AddNewStockGUI extends javax.swing.JFrame
                     + "" + markup + ", " + quantity + ", " + supplierID + ")"; //Query to add the data to the DB
 
             pos.addDBEntry(query);                              //Add the data to the DB
+            pos.fadeOut(this);                                  //Fade out this window
         }
         else
             JOptionPane.showMessageDialog(null, "The barcode entered is invalid. Barcodes should start with a 0 and contain 13 digits in total.");

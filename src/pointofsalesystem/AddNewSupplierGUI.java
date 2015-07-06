@@ -152,6 +152,7 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
                             + "'" + phone + "')"; //SQL query to add the data to the DB
 
             pos.addDBEntry(query);                          //Add the data to the DB
+            pos.fadeOut(this);
         }
         else
             JOptionPane.showMessageDialog(null, "The email address entered is invalid.");
