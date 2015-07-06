@@ -29,7 +29,10 @@ public class OrderStockGUI extends javax.swing.JFrame
     
     PointOfSaleSystem pos = new PointOfSaleSystem(""); //Creates a new PointOfSaleSystem object to use its methods
     int clickercounter = 0;                             //Counter used to determine how many times the OrderStock button has been clicked
-    int supplierID;                                     //Global supplier ID variable
+    
+    int supplierID, orderID, orderQty;                  //Global order variables
+    String supplierName, contactName, productName;      //Global name variables 
+    double costPrice;                                   //Global costprice variable
     
     public OrderStockGUI()
     {
@@ -190,12 +193,6 @@ public class OrderStockGUI extends javax.swing.JFrame
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
     private void lblPlaceOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPlaceOrderMouseReleased
-        String productName = tfProductName.getText();
-        int quantity = (int) spnQty.getValue();
-        String barcode = tfBarcode.getText();
-        String orderDate = tfOrderDate.getText() + ":00.0";
-        Calendar cal = new GregorianCalendar();
-        
         if (clickercounter == 0)
         {
             getDetails();
@@ -210,8 +207,8 @@ public class OrderStockGUI extends javax.swing.JFrame
     {
         try
         {
-            String productName = tfProductName.getText();   //Fetch the product name from the text field                               
-            int orderQty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
+            productName = tfProductName.getText();   //Fetch the product name from the text field                               
+            orderQty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
 
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
                             "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
@@ -223,22 +220,23 @@ public class OrderStockGUI extends javax.swing.JFrame
             int productID = rs.getInt(1);                   //Fetch the productID from the table
             String dbProductName = rs.getString(2);         //Fetch the productName from the table
             String barcode = rs.getString(3);               //Fetch the barcode from the table
-            double costPrice = rs.getDouble(4);             //Fetch the costprice from the table
+            costPrice = rs.getDouble(4);                    //Fetch the costprice from the table
             double markup = rs.getDouble(5);                //Fetch the markup from the table
             int dbQty = rs.getInt(6);                       //Fetch the quantity from the table
-            supplierID = rs.getInt(7);                  //Fetch the supplierIDfrom the table
+            supplierID = rs.getInt(7);                      //Fetch the supplierIDfrom the table
             
-            String getSupplierName =    "SELECT SUPPLIER_NAME FROM NBUSER.SUPPLIERS\n" +
+            String getSupplierName =    "SELECT SUPPLIER_NAME, CONTACT_NAME FROM NBUSER.SUPPLIERS\n" +
                                         "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+            
             ResultSet rs2 = pos.searchDB(getSupplierName);  //Fetch the supplierName from the database
             rs2.next();                                     //Skip to the first line of the file
-            String supplierName = rs2.getString(1);         //Fetch the supplier Name from the resultset
-
+            supplierName = rs2.getString(1);                //Fetch the supplier Name from the resultset
+            contactName = rs2.getString(2);                 //Fetch the supplier contact name from the resultset
             String getOrderID = "SELECT ORDER_ID FROM NBUSER.ORDERS\n" +
                                 "ORDER BY ORDER_ID DESC\n" +
                                 "FETCH FIRST 1 ROWS ONLY"; //Query to get the last order ID and increment it with one
         
-            int orderID = pos.getID(getOrderID) + 1;        //Get the last order ID and increment it with one
+            orderID = pos.getID(getOrderID) + 1;            //Get the last order ID and increment it with one
             
             Calendar c1 = Calendar.getInstance();           //Get current computer time
             
@@ -321,15 +319,14 @@ public class OrderStockGUI extends javax.swing.JFrame
         //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
         try
         {
-//            String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
-//                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
-//            ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
-//            rs2.next();                                     //Skip to the first line of the file
-//            String supplierEmail = rs2.getString(1);         //Fetch the supplier Name from the resultset
-      
-            
+            String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
+                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+            ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
+
+            rs2.next();                                     //Skip to the first line of the file
+            String supplierEmail = rs2.getString(1);         //Fetch the supplier Name from the resultset
         
-            String to = "botha.daniel1@gmail.com";                //Recipient's email
+            String to = supplierEmail;                //Recipient's email
 
             final String from = "pointofsalesystem.github.io@gmail.com";              //Sender's email
             final String username = "pointofsalesystem.github.io";              //Sender email accounts
@@ -352,27 +349,24 @@ public class OrderStockGUI extends javax.swing.JFrame
 
             try 
             {
-                // Create a default MimeMessage object.
-                Message message = new MimeMessage(session);
+                Message message = new MimeMessage(session); // Create a message object.
 
-                // Set From: header field of the header.
-                message.setFrom(new InternetAddress(from));
+                message.setFrom(new InternetAddress(from)); // Set from
 
-                // Set To: header field of the header.
                 message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse(to));
+                        InternetAddress.parse(to));         // Set to
 
-                // Set Subject: header field
-                message.setSubject("Testing Subject");
+                message.setSubject("ORDER ID "+ orderID +" for Paul Roos Kwikspar"); // Set subject
 
-                // Now set the actual message
-                message.setText("Hello, this is sample for to check send "
-                        + "email using JavaMailAPI ");
+                message.setText("Good afternoon "  + contactName + ","
+                        + "\n\nPaul Roos Kwikspar would like to order the following goods from you:\n\n"
+                        + "\t" + orderQty +" x " + productName 
+                        + "\t"+ "@R" + costPrice + " per unit."
+                        + "\n\tTotal: R" + (costPrice*orderQty)); // Now set the actual message
 
-                // Send message
-                Transport.send(message);
+                Transport.send(message); // Send message
 
-                System.out.println("Sent message successfully....");
+                JOptionPane.showMessageDialog(null, "Order successfully placed....");
 
             } 
             catch (MessagingException e) 
@@ -382,7 +376,11 @@ public class OrderStockGUI extends javax.swing.JFrame
         } 
         catch (RuntimeException ex)
         {
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "Failed to send email: " + ex);
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(OrderStockGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
