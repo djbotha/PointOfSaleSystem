@@ -310,8 +310,8 @@ public class OrderStockGUI extends javax.swing.JFrame
             tfOrderDate.setText(sqlDate);                   //Set the textfield's value to the current date and time
             tfOrderID.setText(""+orderID);                  //Set the textfield's value to the orderID
             tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
-            tfPricePerUnit.setText(""+costPrice);           //Set the textfield's value to the price per unit
-            tfTotalPrice.setText(""+totalPrice);  //Set the textfield's value to the total price of the order
+            tfPricePerUnit.setText("R"+costPrice);           //Set the textfield's value to the price per unit
+            tfTotalPrice.setText("R"+totalPrice);  //Set the textfield's value to the total price of the order
             
         } 
         catch (SQLException ex)

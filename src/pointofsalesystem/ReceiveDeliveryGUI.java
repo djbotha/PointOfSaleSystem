@@ -5,7 +5,11 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +19,12 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
 {
 
     PointOfSaleSystem pos = new PointOfSaleSystem(""); 
+    
+    int clickercounter = 0;                             //Counter used to determine how many times the ReceiveDelivery button has been clicked
+    int orderID;
+    
+    
+    
     
     public ReceiveDeliveryGUI()
     {
@@ -175,7 +185,14 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
 
     private void lblReceiveDeliveryMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblReceiveDeliveryMouseReleased
     {//GEN-HEADEREND:event_lblReceiveDeliveryMouseReleased
-        
+        if (clickercounter == 0)
+        {
+            getDetails();
+            lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ReceiveDeliveryGUIConfirm.png"))); //Change background to a different button
+            clickercounter++;
+        }
+        else
+            receiveDelivery();
     }//GEN-LAST:event_lblReceiveDeliveryMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblBackMouseReleased
@@ -196,9 +213,91 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
 
     private void lblProjectNotesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblProjectNotesMouseReleased
     {//GEN-HEADEREND:event_lblProjectNotesMouseReleased
-        pos.loadWebSite("http://pointofsalesystem.github.io/receivedelivery/");
+        pos.loadWebSite("http://pointofsalesystem.github.io/receivedelivery/"); //Load the project notes for this screen
     }//GEN-LAST:event_lblProjectNotesMouseReleased
 
+    public void getDetails() //Method to retrieve all the details of the order
+    {
+        try
+        {
+            orderID = Integer.parseInt(tfOrderID.getText());   //Fetch the order ID from the text field                               
+
+            String query =  "SELECT * FROM NBUSER.ORDERS\n" +
+                            "WHERE ORDERS.ORDER_ID = " + orderID; //Query to fetch all the data regarding the specific order
+
+            ResultSet rs = pos.searchDB(query);             //Fetch all the data from the table
+
+            rs.next();                                      //Skip to the first line of the ResultSet
+        
+            orderID = rs.getInt(1);                         //Fetch the productID from the table
+            int productID = rs.getInt(2);                   //Fetch the productName from the table
+            int supplierID = rs.getInt(3);                  //Fetch the barcode from the table
+            int orderQty = rs.getInt(4);                    //Fetch the costprice from the table
+            double orderPrice = rs.getDouble(5);            //Fetch the markup from the table
+            String orderDate = rs.getString(6);             //Fetch the quantity from the table
+            
+            String getProductNameBarcode =    "SELECT PRODUCT_NAME, PRODUCT_BARCODE FROM NBUSER.PRODUCTS\n" +
+                                        "WHERE PRODUCTS.PRODUCT_ID = " + productID + ""; //Query to fetch the productName 
+            
+            ResultSet rs2 = pos.searchDB(getProductNameBarcode);   //Fetch the productName from the database
+            rs2.next();                                     //Skip to the first line of the file
+            String productName = rs2.getString(1);          //Fetch the productName from the resultset
+            String barcode = rs2.getString(2);
+            
+            String getSupplierName =    "SELECT SUPPLIER_NAME FROM NBUSER.SUPPLIERS\n" +
+                                        "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
+            
+            ResultSet rs3 = pos.searchDB(getSupplierName);  //Fetch the supplierName from the database
+            rs3.next();                                     //Skip to the first line of the file
+            String supplierName = rs3.getString(1);                //Fetch the supplier Name from the resultset
+            
+            double pricePerUnit = orderPrice/orderQty;
+            pricePerUnit = (int)(pricePerUnit*100);
+            pricePerUnit /= 100;
+            
+            orderPrice = (int)(orderPrice*100);
+            orderPrice /= 100;
+            
+            tfProductID.setText(""+productID);
+            tfProductName.setText(productName);
+            spnQty.setValue(orderQty);
+            tfBarcode.setText(barcode);
+            tfSupplierName.setText(supplierName);
+            tfPricePerUnit.setText("R"+pricePerUnit);
+            tfTotalPrice.setText("R"+orderPrice);
+        } 
+        catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
+        }
+    }
+    
+    public void receiveDelivery()
+    {
+        String query =  "UPDATE NBUSER.ORDERS SET ORDERS.DELIVERED = true" 
+                            + " WHERE ORDERS.ORDER_ID = " + orderID; //Query to decrease the amount of product with the desired amount
+        pos.deleteDBEntry(query);                           //Execute the above query 
+
+        JOptionPane.showMessageDialog(null, "Order " + orderID + " successfully received.");
+        clearFields();
+    }
+    
+    public void clearFields()
+    {
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ReceiveDeliveryGUI.png"))); //Change background to a different button
+        
+        clickercounter = 0;
+        
+        tfOrderID.setText(null);
+        tfProductID.setText(null);
+        tfProductName.setText(null);
+        spnQty.setValue(0);
+        tfBarcode.setText(null);
+        tfSupplierName.setText(null);
+        tfPricePerUnit.setText(null);
+        tfTotalPrice.setText(null);
+    }
+    
     /**
      * @param args the command line arguments
      */
