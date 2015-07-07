@@ -23,6 +23,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         lblOrderStock = new javax.swing.JLabel();
         lblRemoveStock = new javax.swing.JLabel();
         lblIncomeStatement = new javax.swing.JLabel();
+        lblReceiveDelivery = new javax.swing.JLabel();
         lblAddNewSupplier = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
@@ -82,6 +83,16 @@ public class ManagerPortalGUI extends javax.swing.JFrame
             }
         });
         getContentPane().add(lblIncomeStatement, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
+
+        lblReceiveDelivery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblReceiveDelivery.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblReceiveDeliveryMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblReceiveDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 154, 150, 140));
 
         lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
@@ -184,6 +195,11 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_lblIncomeStatementMouseReleased
         new IncomeStatementGUI().setVisible(true);  //Bring up IncomeStatement screen
     }//GEN-LAST:event_lblIncomeStatementMouseReleased
+
+    private void lblReceiveDeliveryMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblReceiveDeliveryMouseReleased
+    {//GEN-HEADEREND:event_lblReceiveDeliveryMouseReleased
+        new ReceiveDeliveryGUI().setVisible(true); //Bring up ReceiveDelivery screen
+    }//GEN-LAST:event_lblReceiveDeliveryMouseReleased
     
     public static void main(String args[]) 
     {
@@ -229,6 +245,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblOrderStock;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
+    private javax.swing.JLabel lblReceiveDelivery;
     private javax.swing.JLabel lblRemoveStock;
     // End of variables declaration//GEN-END:variables
 }
