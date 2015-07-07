@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -21,7 +23,7 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
     PointOfSaleSystem pos = new PointOfSaleSystem(""); 
     
     int clickercounter = 0;                             //Counter used to determine how many times the ReceiveDelivery button has been clicked
-    int orderID;
+    int orderID, orderQty, productID;
     
     
     
@@ -230,9 +232,9 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
             rs.next();                                      //Skip to the first line of the ResultSet
         
             orderID = rs.getInt(1);                         //Fetch the productID from the table
-            int productID = rs.getInt(2);                   //Fetch the productName from the table
+            productID = rs.getInt(2);                   //Fetch the productName from the table
             int supplierID = rs.getInt(3);                  //Fetch the barcode from the table
-            int orderQty = rs.getInt(4);                    //Fetch the costprice from the table
+            orderQty = rs.getInt(4);                    //Fetch the costprice from the table
             double orderPrice = rs.getDouble(5);            //Fetch the markup from the table
             String orderDate = rs.getString(6);             //Fetch the quantity from the table
             
@@ -274,12 +276,50 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
     
     public void receiveDelivery()
     {
-        String query =  "UPDATE NBUSER.ORDERS SET ORDERS.DELIVERED = true" 
-                            + " WHERE ORDERS.ORDER_ID = " + orderID; //Query to decrease the amount of product with the desired amount
-        pos.deleteDBEntry(query);                           //Execute the above query 
+        try
+        {
+            String getDeliveredStatus = "SELECT DELIVERED FROM NBUSER.ORDERS\n"
+                                        + "WHERE ORDERS.ORDER_ID = " + orderID;
+            ResultSet rs = pos.searchDB(getDeliveredStatus);
+            rs.next();
+            
+            boolean delivered = rs.getBoolean(1);
+           
+            if (!delivered)
+            {
+                String setDeliveredTrue =  "UPDATE NBUSER.ORDERS SET ORDERS.DELIVERED = true" 
+                                    + " WHERE ORDERS.ORDER_ID = " + orderID; //Query to decrease the amount of product with the desired amount
+                pos.deleteDBEntry(setDeliveredTrue);                           //Execute the above query 
 
-        JOptionPane.showMessageDialog(null, "Order " + orderID + " successfully received.");
-        clearFields();
+                String increaseQty =  "UPDATE NBUSER.ORDERS SET ORDERS.DELIVERED = true" 
+                                    + " WHERE ORDERS.ORDER_ID = " + orderID; //Query to decrease the amount of product with the desired amount
+                pos.deleteDBEntry(setDeliveredTrue);                           //Execute the above query 
+
+                increaseQty(productID, orderQty);
+
+                clearFields();
+            } 
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Order already delivered!");
+                clearFields();
+            }    
+        } catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to retrieve delivery status: " + ex);
+        }
+    }
+    
+    public void increaseQty(int productid, int orderQuantity)
+    {
+        String getProductQuantity = "SELECT PRODUCTS.PRODUCT_QTY FROM NBUSER.PRODUCTS\n" +
+                                     "WHERE PRODUCTS.PRODUCT_ID = " + productid ;
+        
+        int productqty = pos.getID(getProductQuantity);
+        
+        String increaseQty =  "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = " + (productqty+orderQuantity) 
+                                    + " WHERE PRODUCTS.PRODUCT_ID = " + productid; //Query to decrease the amount of product with the desired amount
+        pos.addDBEntry(increaseQty);                           //Execute the above query 
     }
     
     public void clearFields()
