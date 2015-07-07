@@ -274,7 +274,7 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
         }
     }
     
-    public void receiveDelivery()
+    public void receiveDelivery() //Method to set the delivery status to true
     {
         try
         {
@@ -310,25 +310,27 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
         }
     }
     
-    public void increaseQty(int productid, int orderQuantity)
+    public void increaseQty(int productid, int orderQuantity) //Change the value of the quantity field in the products table
     {
         String getProductQuantity = "SELECT PRODUCTS.PRODUCT_QTY FROM NBUSER.PRODUCTS\n" +
-                                     "WHERE PRODUCTS.PRODUCT_ID = " + productid ;
+                                     "WHERE PRODUCTS.PRODUCT_ID = " + productid ; //Query to get the current product quantity
         
-        int productqty = pos.getID(getProductQuantity);
+        int productqty = pos.getID(getProductQuantity);         //Get the current product quantity
         
         String increaseQty =  "UPDATE NBUSER.PRODUCTS SET PRODUCTS.PRODUCT_QTY = " + (productqty+orderQuantity) 
-                                    + " WHERE PRODUCTS.PRODUCT_ID = " + productid; //Query to decrease the amount of product with the desired amount
-        pos.addDBEntry(increaseQty);                           //Execute the above query 
+                                    + " WHERE PRODUCTS.PRODUCT_ID = " + productid; //Query to increase the amount of product with the desired amount
+        
+        pos.addDBEntry(increaseQty);                           //Increase the amount of product with the desired amount
     }
     
-    public void clearFields()
+    public void clearFields() //Reset the GUI to accept another order
     {
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ReceiveDeliveryGUI.png"))); //Change background to a different button
         
-        clickercounter = 0;
-        
-        tfOrderID.setText(null);
+        clickercounter = 0;                                     //Reset the clicker counter
+            
+        //Clear all the textfields
+        tfOrderID.setText(null);                                
         tfProductID.setText(null);
         tfProductName.setText(null);
         spnQty.setValue(0);
