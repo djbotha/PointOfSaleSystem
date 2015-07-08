@@ -157,7 +157,7 @@ public class PointOfSaleSystem
             JOptionPane.showMessageDialog(null, "INSERT INTO query unsuccessful: " + e); //...print an output message
         }
         
-        JOptionPane.showMessageDialog(null, "Data successfully added to database.");
+//        JOptionPane.showMessageDialog(null, "Data successfully added to database.");
     }
 
     public void deleteDBEntry(String query)

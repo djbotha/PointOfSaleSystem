@@ -240,64 +240,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         
             orderID = pos.getID(getOrderID) + 1;            //Get the last order ID and increment it with one
             
-            Calendar c1 = Calendar.getInstance();           //Get current computer time
-            
-            String date = "";                               //Instantiate a new date string
-            int year = c1.get(Calendar.YEAR);               //Get year from current computer time
-            int month = c1.get(Calendar.MONTH);             //Get month from current computer time
-            int day = c1.get(Calendar.DAY_OF_MONTH);        //Get day from current computer time
-            
-            if (month<10)                                   //If the month is less than 10 add a "0" to confrom to SQL Date format.
-            {
-                date = year + "-0" + month + "-";
-            }
-            else
-            {
-                date = year + "-" + month + "-";
-            }
-            
-            if (day<10)                                     //If the day is less than 10 add a "0" to confrom to SQL Date format.
-            {
-                date+= "0" + day;
-            }
-            else
-            {
-                date+= day;
-            }
-            
-            String time = "";                               //Instantiate a new time object
-            int hour = c1.get(Calendar.HOUR_OF_DAY);        //Get the hour from the current computer time
-            int minute = c1.get(Calendar.MINUTE);           //Get the minute from the current computer time
-            int second = c1.get(Calendar.SECOND);           //Get the second from the current computer time
-            
-            if (hour<10)                                    //If the hour is less than 10 add a "0" to confrom to SQL Date format.
-            {
-                time = "0" + hour + ":";
-            }
-            else
-            {
-                time = hour + ":";
-            }
-            
-            if (minute<10)                                  //If the minute is less than 10 add a "0" to confrom to SQL Date format.
-            {
-                time+= "0" + minute + ":";
-            }
-            else
-            {
-                time+= minute + ":";
-            }
-
-            if (second<10)                                  //If the second is less than 10 add a "0" to confrom to SQL Date format.
-            {
-                time+= "0" + second + ".0";
-            }
-            else
-            {
-                time+= second + ".0";
-            }
-            
-            sqlDate = date + " " + time;             //Concatenate the Date and the Time into SQL Date format
+            sqlDate = calculateDate();
             
             costPrice = (int)(costPrice*100);                //Convert the costPrice to 2 decimals
             costPrice /= 100;                 
@@ -414,9 +357,72 @@ public class OrderStockGUI extends javax.swing.JFrame
                 + price + ", '" + sqlDate + "', false)";      //Query to add the data to the DB
 
         pos.addDBEntry(query);                              //Add the data to the DB
+        JOptionPane.showMessageDialog(null, "Data successfully added to database."); //Message that the Query was successful
         pos.fadeOut(this);                                  //Fade out this window
      }
 
+     String calculateDate()
+     {
+        Calendar c1 = Calendar.getInstance();           //Get current computer time
+
+        String date = "";                               //Instantiate a new date string
+        int year = c1.get(Calendar.YEAR);               //Get year from current computer time
+        int month = c1.get(Calendar.MONTH);             //Get month from current computer time
+        int day = c1.get(Calendar.DAY_OF_MONTH);        //Get day from current computer time
+
+        if (month<10)                                   //If the month is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            date = year + "-0" + month + "-";
+        }
+        else
+        {
+            date = year + "-" + month + "-";
+        }
+
+        if (day<10)                                     //If the day is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            date+= "0" + day;
+        }
+        else
+        {
+            date+= day;
+        }
+
+        String time = "";                               //Instantiate a new time object
+        int hour = c1.get(Calendar.HOUR_OF_DAY);        //Get the hour from the current computer time
+        int minute = c1.get(Calendar.MINUTE);           //Get the minute from the current computer time
+        int second = c1.get(Calendar.SECOND);           //Get the second from the current computer time
+
+        if (hour<10)                                    //If the hour is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            time = "0" + hour + ":";
+        }
+        else
+        {
+            time = hour + ":";
+        }
+
+        if (minute<10)                                  //If the minute is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            time+= "0" + minute + ":";
+        }
+        else
+        {
+            time+= minute + ":";
+        }
+
+        if (second<10)                                  //If the second is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            time+= "0" + second + ".0";
+        }
+        else
+        {
+            time+= second + ".0";
+        }
+        
+        return date + " " + time;                       //Concatenate the Date and the Time into SQL Date format
+    }
+     
     /**
      * @param args the command line arguments
      */

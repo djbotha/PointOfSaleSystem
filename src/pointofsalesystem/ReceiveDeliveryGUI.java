@@ -321,6 +321,7 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
                                     + " WHERE PRODUCTS.PRODUCT_ID = " + productid; //Query to increase the amount of product with the desired amount
         
         pos.addDBEntry(increaseQty);                           //Increase the amount of product with the desired amount
+        JOptionPane.showMessageDialog(null, "Data successfully added to database."); //Message that the Query was successful
     }
     
     public void clearFields() //Reset the GUI to accept another order

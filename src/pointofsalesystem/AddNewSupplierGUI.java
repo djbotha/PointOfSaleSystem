@@ -152,6 +152,7 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
                             + "'" + phone + "')"; //SQL query to add the data to the DB
 
             pos.addDBEntry(query);                          //Add the data to the DB
+            JOptionPane.showMessageDialog(null, "Data successfully added to database."); //Message that the Query was successful
             pos.fadeOut(this);
         }
         else

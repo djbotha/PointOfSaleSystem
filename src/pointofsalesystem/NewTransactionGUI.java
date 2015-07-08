@@ -2,6 +2,8 @@ package pointofsalesystem;
 
 import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.sql.ResultSet;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -9,6 +11,8 @@ public class NewTransactionGUI extends javax.swing.JFrame
 {
     
     PointOfSaleSystem pos = new PointOfSaleSystem("");  //Creates a new POS Object to use it's methods.
+
+    double transactionCost = 0.0;
     
     public NewTransactionGUI()
     {
@@ -17,7 +21,10 @@ public class NewTransactionGUI extends javax.swing.JFrame
         jScrollPane1.getViewport().setOpaque(false);    //Set background of ScrollPane to invisible
         
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
+        
+        displayHeadings();
     }
+    
     
     private final String managerPass = "1234";    
 
@@ -32,15 +39,16 @@ public class NewTransactionGUI extends javax.swing.JFrame
         productsList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery.getResultList();
         productsQuery1 = java.beans.Beans.isDesignTime() ? null : PointOfSaleSystemPUEntityManager.createQuery("SELECT p FROM Products p");
         productsList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery1.getResultList();
+        lblClear = new javax.swing.JLabel();
+        lblComplete = new javax.swing.JLabel();
+        lblManager = new javax.swing.JLabel();
+        lblBarcode = new javax.swing.JLabel();
+        tfSelectedItem = new javax.swing.JTextField();
+        lblAddSelectedProduct = new javax.swing.JLabel();
+        tfSearch = new javax.swing.JTextField();
+        lblAddItemName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taOutput = new javax.swing.JTextArea();
-        lblManager = new javax.swing.JLabel();
-        lblKeypad = new javax.swing.JLabel();
-        lblProductList = new javax.swing.JLabel();
-        tfSelectedItem = new javax.swing.JTextField();
-        lblAdd = new javax.swing.JLabel();
-        tfSearch = new javax.swing.JTextField();
-        lblSearch = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductList = new javax.swing.JTable();
         lblTabs = new javax.swing.JLabel();
@@ -61,18 +69,25 @@ public class NewTransactionGUI extends javax.swing.JFrame
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setOpaque(false);
+        lblClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblClear.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblClearMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 674, 100, 20));
 
-        taOutput.setBackground(new Color(0,0,0,0));
-        taOutput.setColumns(20);
-        taOutput.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        taOutput.setForeground(new java.awt.Color(255, 255, 255));
-        taOutput.setRows(5);
-        taOutput.setBorder(null);
-        jScrollPane1.setViewportView(taOutput);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 400, 630));
+        lblComplete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblComplete.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblCompleteMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 674, 90, 20));
 
         lblManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblManager.addMouseListener(new java.awt.event.MouseAdapter()
@@ -84,25 +99,15 @@ public class NewTransactionGUI extends javax.swing.JFrame
         });
         getContentPane().add(lblManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 160, 30));
 
-        lblKeypad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblKeypad.addMouseListener(new java.awt.event.MouseAdapter()
+        lblBarcode.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBarcode.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
-                lblKeypadMouseReleased(evt);
+                lblBarcodeMouseReleased(evt);
             }
         });
-        getContentPane().add(lblKeypad, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 130, 30));
-
-        lblProductList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblProductList.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
-                lblProductListMouseReleased(evt);
-            }
-        });
-        getContentPane().add(lblProductList, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 94, 150, 30));
+        getContentPane().add(lblBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 130, 30));
 
         tfSelectedItem.setBackground(new Color(0, 0, 0, 0));
         tfSelectedItem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -114,10 +119,17 @@ public class NewTransactionGUI extends javax.swing.JFrame
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProductList, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.productName}"), tfSelectedItem, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
         bindingGroup.addBinding(binding);
 
-        getContentPane().add(tfSelectedItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 290, 40));
+        getContentPane().add(tfSelectedItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 280, 40));
 
-        lblAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(lblAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 174, 70, 30));
+        lblAddSelectedProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAddSelectedProduct.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblAddSelectedProductMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblAddSelectedProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 174, 70, 30));
 
         tfSearch.setBackground(new Color(0, 0, 0, 0));
         tfSearch.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -125,8 +137,31 @@ public class NewTransactionGUI extends javax.swing.JFrame
         tfSearch.setBorder(null);
         getContentPane().add(tfSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 260, 40));
 
-        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 234, 90, 30));
+        lblAddItemName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAddItemName.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                lblAddItemNameMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblAddItemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 234, 90, 30));
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setOpaque(false);
+
+        taOutput.setBackground(new Color(0,0,0,0));
+        taOutput.setColumns(20);
+        taOutput.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        taOutput.setForeground(new java.awt.Color(255, 255, 255));
+        taOutput.setLineWrap(true);
+        taOutput.setRows(5);
+        taOutput.setBorder(null);
+        taOutput.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        taOutput.setEnabled(false);
+        jScrollPane1.setViewportView(taOutput);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 400, 630));
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productsList1, tblProductList);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productName}"));
@@ -139,7 +174,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
         jTableBinding.bind();
         jScrollPane2.setViewportView(tblProductList);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 400, 420));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 400, 360));
 
         lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_ProductList.png"))); // NOI18N
         getContentPane().add(lblTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, 640));
@@ -190,24 +225,42 @@ public class NewTransactionGUI extends javax.swing.JFrame
         System.exit(0);                 //Quit the program
     }//GEN-LAST:event_lblQuitMouseReleased
 
-    private void lblKeypadMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblKeypadMouseReleased
-    {//GEN-HEADEREND:event_lblKeypadMouseReleased
-        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Keypad.png")));
-        tfSelectedItem.setText("");
-        tfSelectedItem.setEnabled(false);
-        tblProductList.setOpaque(false);
-    }//GEN-LAST:event_lblKeypadMouseReleased
-
-    private void lblProductListMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblProductListMouseReleased
-    {//GEN-HEADEREND:event_lblProductListMouseReleased
-        lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_ProductList.png")));
-    }//GEN-LAST:event_lblProductListMouseReleased
+    private void lblBarcodeMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblBarcodeMouseReleased
+    {//GEN-HEADEREND:event_lblBarcodeMouseReleased
+        getProductName();                   //Method to manually add a product via a barcode
+    }//GEN-LAST:event_lblBarcodeMouseReleased
 
     private void lblManagerMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblManagerMouseReleased
     {//GEN-HEADEREND:event_lblManagerMouseReleased
         validateManagerPassword();                          //Check if the Manager Password is correct or not
-        
     }//GEN-LAST:event_lblManagerMouseReleased
+
+    private void lblAddItemNameMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblAddItemNameMouseReleased
+    {//GEN-HEADEREND:event_lblAddItemNameMouseReleased
+        
+    }//GEN-LAST:event_lblAddItemNameMouseReleased
+
+    private void lblAddSelectedProductMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblAddSelectedProductMouseReleased
+    {//GEN-HEADEREND:event_lblAddSelectedProductMouseReleased
+        addProductName(tfSelectedItem.getText());
+    }//GEN-LAST:event_lblAddSelectedProductMouseReleased
+
+    private void lblClearMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblClearMouseReleased
+    {//GEN-HEADEREND:event_lblClearMouseReleased
+        if(JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WANT TO CLEAR THE TRANSACTION?") == 0)
+        {
+            transactionCost = 0.0;
+            displayHeadings();
+        }
+    }//GEN-LAST:event_lblClearMouseReleased
+
+    private void lblCompleteMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblCompleteMouseReleased
+    {//GEN-HEADEREND:event_lblCompleteMouseReleased
+        if (JOptionPane.showConfirmDialog(this, "Proceed to checkout?") == 0)
+        {
+            checkout();
+        }
+    }//GEN-LAST:event_lblCompleteMouseReleased
     
     public void validateManagerPassword()                   //Validate the password when the manager tries to log in to the manager portal
     {
@@ -223,23 +276,227 @@ public class NewTransactionGUI extends javax.swing.JFrame
                 password = JOptionPane.showInputDialog("Please enter your manager password. " + passwordTries + " tries remaining."); //Prompt for new password to be entered.
                 if (password.equals(managerPass)) 
                 {
-                   lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Manager.png")));
-                    tfSelectedItem.setText("");
-                    tfSelectedItem.setEnabled(false);
+                    removeProduct();                        //Remove a product from the transaction
                     return;                                 //Exit out of this method
                 }
             } 
-            else                                          //If the password is valid
+            else                                            //If the password is valid
             {
-                lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_Manager.png")));
-                tfSelectedItem.setText("");                 
-                tfSelectedItem.setEnabled(false);
+                removeProduct();                            //Remove a product from the transaction
                 return;                                     //Exit out of this method
             }
         }
 
         JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT.", "ERROR", WIDTH); //Show error message. 
     }
+    
+    
+    public void removeProduct() //Method to remove product from a transaction
+    {
+        String removeItemBarcode = JOptionPane.showInputDialog("Please enter an item barcode to remove from the transaction:");
+    }
+    
+    public void getProductName() //Method to add a product via a barcode to the transaction
+    {
+        String barcode = JOptionPane.showInputDialog("Please enter an item barcode:");
+    }
+    
+    public void addProductName(String productName)
+    {
+            String getProductDetails = "SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE, (PRODUCT_COSTPRICE * (PRODUCT_MARKUP+1)) AS PRICE\n" +
+                                        "FROM NBUSER.PRODUCTS\n" +
+                                        "WHERE PRODUCT_NAME LIKE '%" + productName + "%'" +
+                                        "FETCH FIRST 1 ROW ONLY";
+            
+            ResultSet rs = pos.searchDB(getProductDetails);
+            
+            String[] headings = {"ID", "Name", "Barcode", "Price"}; //Headings to be printed on output
+            int[] colWidth = {6, 24, 15, 10};                       //Sizes for "columns"
+            
+            displayTable(rs, headings, colWidth);
+    }
+    
+    void checkout()
+    {
+        for (int i = 0; i < 57; i++)                            //For each of the headings
+        {
+                taOutput.append("=");                           //Print an "=" as a line break
+        }
+        
+        transactionCost = (int)(transactionCost*100);
+        transactionCost /= 100;
+        
+        double vat = transactionCost*0.14;
+        vat = (int)(vat*100);
+        vat /= 100;
+        
+        double transactionCostPlusVAT = transactionCost + vat;
+        
+        JOptionPane.showMessageDialog(this, "Amount: R" + transactionCost + "\n14% VAT: R" + vat + "\nTotal: R" + transactionCostPlusVAT);
+        
+        taOutput.append("\nAmount: R" + transactionCost + "\n14% VAT: R" + vat + "\nTotal: R" + transactionCostPlusVAT);
+        
+        double cash = Double.parseDouble(JOptionPane.showInputDialog("Please enter amount of cash received:"));
+    
+        while(cash<transactionCostPlusVAT)
+        {
+            JOptionPane.showMessageDialog(this, "The amount of cash payed is too little for the transaction.");
+            
+            cash = Double.parseDouble(JOptionPane.showInputDialog("Please enter amount of cash received:"));
+        }
+        
+        double change = cash-transactionCostPlusVAT;
+        change = (int)(change*100);
+        change /= 100;
+        
+        taOutput.append("\n\nCash: R" + cash);
+        taOutput.append("\t\tChange: R" + change);
+        
+        JOptionPane.showMessageDialog(this, "Amount of change: R" + change + ".\nClick OK to go back to main menu.");
+        
+        saveTransaction(calculateDate(), transactionCost, transactionCostPlusVAT);
+    }
+    
+    void saveTransaction(String date, double cost, double costPlusVAT)
+    {
+        String getTransactionID = "SELECT TRANSACTION_ID FROM NBUSER.TRANSACTIONS\n" +
+                                    "ORDER BY TRANSACTION_ID DESC\n" +
+                                    "FETCH FIRST 1 ROWS ONLY";              //Query to get the last transaction ID and increment it with one
+        
+        int transactionID = pos.getID(getTransactionID) + 1;            //Get the last transaction ID and increment it with one
+        
+        String addTransaction = "INSERT INTO NBUSER.TRANSACTIONS(TRANSACTION_ID, TRANSACTION_DATE, TRANSACTION_TOTALPRICE_NOVAT, TRANSACTION_TOTALPRICE_PLUSVAT)\n" +
+                                "VALUES("+ transactionID +", '"+ date +"', "+ cost +", "+ costPlusVAT +")";
+        pos.addDBEntry(addTransaction);
+        
+        
+    }
+    
+    String calculateDate()
+    {
+        Calendar c1 = Calendar.getInstance();           //Get current computer time
+
+        String date = "";                               //Instantiate a new date string
+        int year = c1.get(Calendar.YEAR);               //Get year from current computer time
+        int month = c1.get(Calendar.MONTH);             //Get month from current computer time
+        int day = c1.get(Calendar.DAY_OF_MONTH);        //Get day from current computer time
+
+        if (month<10)                                   //If the month is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            date = year + "-0" + month + "-";
+        }
+        else
+        {
+            date = year + "-" + month + "-";
+        }
+
+        if (day<10)                                     //If the day is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            date+= "0" + day;
+        }
+        else
+        {
+            date+= day;
+        }
+
+        String time = "";                               //Instantiate a new time object
+        int hour = c1.get(Calendar.HOUR_OF_DAY);        //Get the hour from the current computer time
+        int minute = c1.get(Calendar.MINUTE);           //Get the minute from the current computer time
+        int second = c1.get(Calendar.SECOND);           //Get the second from the current computer time
+
+        if (hour<10)                                    //If the hour is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            time = "0" + hour + ":";
+        }
+        else
+        {
+            time = hour + ":";
+        }
+
+        if (minute<10)                                  //If the minute is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            time+= "0" + minute + ":";
+        }
+        else
+        {
+            time+= minute + ":";
+        }
+
+        if (second<10)                                  //If the second is less than 10 add a "0" to confrom to SQL Date format.
+        {
+            time+= "0" + second + ".0";
+        }
+        else
+        {
+            time+= second + ".0";
+        }
+        
+        return date + " " + time;                       //Concatenate the Date and the Time into SQL Date format
+    }
+    
+    void displayHeadings()
+    {
+        String[] headings = {"ID", "Name", "Barcode", "Price"}; //Headings to be printed on output
+        int[] colWidth = {6, 24, 15, 10};                       //Sizes for "columns"
+        
+        taOutput.setText("");
+        
+        for (int i = 0; i < headings.length; i++)               //For each of the headings...
+        {
+            taOutput.append(addSpaces(headings[i], colWidth[i])); //Add spaces to the headings to mimic collumns
+        }
+        
+        taOutput.append("\n");                                  //Print a new line
+        
+        for (int i = 0; i < 57; i++)               //For each of the headings
+        {
+                taOutput.append("=");                           //Print an "=" as a line break
+        }
+    }
+    
+    void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java
+    {
+        try 
+        {
+            rs.next();
+            for (int i = 0; i < headings.length-1; i++)       //For each of the collumns
+            {
+                taOutput.append(addSpaces(rs.getString(i+1), colWidth[i])); //Add spaces to the strings to mimic collumns
+            }
+            
+            double price = rs.getDouble(4);
+            price = (int) (price*100);
+            price /= 100;
+            
+            transactionCost += price;
+            
+            taOutput.append(addSpaces("R"+price, 10));
+            taOutput.append("\n");                          //Print a new line
+        }
+        catch (Exception e) //If the SQL Query broke at some point
+        {
+            JOptionPane.showMessageDialog(this, "SQL Exception: " + e, "ERROR", WIDTH); //Print an error message
+        }
+    }
+    
+    private String addSpaces(String str, int colWidth)          //Method to add spaces to strings to mimic collumns        
+    {
+        String temp = str;                                      //Assign the String parameter value to a temporary variable
+        
+        if (str.length() < colWidth)                            //If the word is shorter than then collumn
+        {
+            for (int i = colWidth; i > str.length(); i--)       //Until the collumn width is reached            
+            {
+                temp += " ";                                    //Add a space      
+            }
+            return temp;                                        //Return the final String value
+        }
+        else                                                    //If the word is longer than the collumn
+        {
+            return str.substring(0, (colWidth-5)) + "...  ";    //Shorten it by 5, add 3 "." and 2 spaces
+        }
+    }
+    
     public static void main(String args[])
     {
         /* Set the Nimbus look and feel */
@@ -285,14 +542,15 @@ public class NewTransactionGUI extends javax.swing.JFrame
     private javax.persistence.EntityManager PointOfSaleSystemPUEntityManager;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblAdd;
+    private javax.swing.JLabel lblAddItemName;
+    private javax.swing.JLabel lblAddSelectedProduct;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
-    private javax.swing.JLabel lblKeypad;
+    private javax.swing.JLabel lblBarcode;
+    private javax.swing.JLabel lblClear;
+    private javax.swing.JLabel lblComplete;
     private javax.swing.JLabel lblManager;
-    private javax.swing.JLabel lblProductList;
     private javax.swing.JLabel lblQuit;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblTabs;
     private java.util.List<pointofsalesystem.Products> productsList;
     private java.util.List<pointofsalesystem.Products> productsList1;

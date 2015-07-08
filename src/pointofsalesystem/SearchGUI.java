@@ -215,12 +215,6 @@ public class SearchGUI extends javax.swing.JFrame
 
     void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java
     {
-        taOutput.setText("");                                   //Clear the text area
-        for (int i = 0; i < headings.length; i++)               //For each of the headings...
-        {
-            taOutput.append(addSpaces(headings[i], colWidth[i])); //Add spaces to the headings to mimic collumns
-        }
-        
         taOutput.append("\n");                                  //Print a new line
         
         for (int i = 0; i < headings.length; i++)               //For each of the headings
