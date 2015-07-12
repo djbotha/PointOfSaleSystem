@@ -3,7 +3,10 @@ package pointofsalesystem;
 import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -237,7 +240,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
     private void lblAddItemNameMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblAddItemNameMouseReleased
     {//GEN-HEADEREND:event_lblAddItemNameMouseReleased
-        
+        addProductName(tfSearch.getText());
     }//GEN-LAST:event_lblAddItemNameMouseReleased
 
     private void lblAddSelectedProductMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblAddSelectedProductMouseReleased
@@ -247,18 +250,18 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
     private void lblClearMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblClearMouseReleased
     {//GEN-HEADEREND:event_lblClearMouseReleased
-        if(JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WANT TO CLEAR THE TRANSACTION?") == 0)
+        if(JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WANT TO CLEAR THE TRANSACTION?") == 0) //If the user clicks the okay button
         {
-            transactionCost = 0.0;
-            displayHeadings();
+            transactionCost = 0.0;  //Clear the transaction variable
+            displayHeadings();      //Clear output
         }
     }//GEN-LAST:event_lblClearMouseReleased
 
     private void lblCompleteMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblCompleteMouseReleased
     {//GEN-HEADEREND:event_lblCompleteMouseReleased
-        if (JOptionPane.showConfirmDialog(this, "Proceed to checkout?") == 0)
+        if (JOptionPane.showConfirmDialog(this, "Proceed to checkout?") == 0) //If the user clicks the okay button
         {
-            checkout();
+            checkout(); //Proceed to checkout
         }
     }//GEN-LAST:event_lblCompleteMouseReleased
     
@@ -291,17 +294,41 @@ public class NewTransactionGUI extends javax.swing.JFrame
     }
     
     
+    
+    /* <-- WORK IN PROGRESS --> */
     public void removeProduct() //Method to remove product from a transaction
     {
         String removeItemBarcode = JOptionPane.showInputDialog("Please enter an item barcode to remove from the transaction:");
     }
+    /* <-- WORK IN PROGRESS --> */
+    
+    
     
     public void getProductName() //Method to add a product via a barcode to the transaction
     {
-        String barcode = JOptionPane.showInputDialog("Please enter an item barcode:");
+        try
+        {
+            String barcode = JOptionPane.showInputDialog("Please enter an item barcode:"); //Get barcode from user input
+            
+            String getProductName = "SELECT PRODUCT_NAME \n" +
+                                    "FROM NBUSER.PRODUCTS\n" +
+                                    "WHERE PRODUCT_BARCODE like '%"+ barcode +"%'"; //Query to retrieve product name via barcode
+            
+            ResultSet rs = pos.searchDB(getProductName);    //Retrieve product name
+            
+            rs.next();  //Skip to first line
+            
+            String productName = rs.getString(1);   //Select product name
+            
+            addProductName(productName);            //Add product to transaction
+        }
+        catch (SQLException ex) //If the search failed....
+        {
+            JOptionPane.showMessageDialog(null, "Failed to retrieve product name: " + ex); //... print an error message
+        }
     }
     
-    public void addProductName(String productName)
+    public void addProductName(String productName) //Method to add a product to the transaction via product name
     {
             String getProductDetails = "SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE, (PRODUCT_COSTPRICE * (PRODUCT_MARKUP+1)) AS PRICE\n" +
                                         "FROM NBUSER.PRODUCTS\n" +
@@ -315,49 +342,51 @@ public class NewTransactionGUI extends javax.swing.JFrame
             
             displayTable(rs, headings, colWidth);
     }
-    
-    void checkout()
+  
+    void checkout() //Method to add costs and calculate change
     {
         for (int i = 0; i < 57; i++)                            //For each of the headings
         {
                 taOutput.append("=");                           //Print an "=" as a line break
         }
         
-        transactionCost = (int)(transactionCost*100);
+        transactionCost = (int)(transactionCost*100);           //Round transaction cost to 2 decimal points
         transactionCost /= 100;
         
-        double vat = transactionCost*0.14;
+        double vat = transactionCost*0.14;                      //Calculate the VAT of the transaction
         vat = (int)(vat*100);
         vat /= 100;
         
-        double transactionCostPlusVAT = transactionCost + vat;
+        double transactionCostPlusVAT = transactionCost + vat;  //Round transaction cost to 2 decimal points
+        transactionCostPlusVAT = (int) (transactionCostPlusVAT*100);
+        transactionCostPlusVAT /= 100;
         
-        JOptionPane.showMessageDialog(this, "Amount: R" + transactionCost + "\n14% VAT: R" + vat + "\nTotal: R" + transactionCostPlusVAT);
+        JOptionPane.showMessageDialog(this, "Amount: R" + transactionCost + "\n14% VAT: R" + vat + "\nTotal: R" + transactionCostPlusVAT); //Output message to display total
         
-        taOutput.append("\nAmount: R" + transactionCost + "\n14% VAT: R" + vat + "\nTotal: R" + transactionCostPlusVAT);
+        taOutput.append("\nAmount: R" + transactionCost + "\n14% VAT: R" + vat + "\nTotal: R" + transactionCostPlusVAT); //Output total to output screen
         
-        double cash = Double.parseDouble(JOptionPane.showInputDialog("Please enter amount of cash received:"));
+        double cash = Double.parseDouble(JOptionPane.showInputDialog("Please enter amount of cash received:"));     //Get amount of cash payed
     
-        while(cash<transactionCostPlusVAT)
+        while(cash<transactionCostPlusVAT)  //While the cash is too little for the transaction
         {
-            JOptionPane.showMessageDialog(this, "The amount of cash payed is too little for the transaction.");
+            JOptionPane.showMessageDialog(this, "The amount of cash payed is too little for the transaction."); //Print an error message
             
-            cash = Double.parseDouble(JOptionPane.showInputDialog("Please enter amount of cash received:"));
+            cash = Double.parseDouble(JOptionPane.showInputDialog("Please enter amount of cash received:"));    //Prompt for cash again
         }
         
-        double change = cash-transactionCostPlusVAT;
+        double change = cash-transactionCostPlusVAT;            //Round change to 2 decimal points
         change = (int)(change*100);
         change /= 100;
         
-        taOutput.append("\n\nCash: R" + cash);
-        taOutput.append("\t\tChange: R" + change);
+        taOutput.append("\n\nCash: R" + cash);                  //Output cash
+        taOutput.append("\t\tChange: R" + change);              //Output change
         
-        JOptionPane.showMessageDialog(this, "Amount of change: R" + change + ".\nClick OK to go back to main menu.");
+        JOptionPane.showMessageDialog(this, "Amount of change: R" + change + ".\nClick OK to go back to main menu."); //Amount of change to be given
         
-        saveTransaction(calculateDate(), transactionCost, transactionCostPlusVAT);
+        saveTransaction(calculateDate(), transactionCost, transactionCostPlusVAT); //Add transaction to database
     }
     
-    void saveTransaction(String date, double cost, double costPlusVAT)
+    void saveTransaction(String date, double cost, double costPlusVAT) //Method to add transaction to DB
     {
         String getTransactionID = "SELECT TRANSACTION_ID FROM NBUSER.TRANSACTIONS\n" +
                                     "ORDER BY TRANSACTION_ID DESC\n" +
@@ -372,13 +401,13 @@ public class NewTransactionGUI extends javax.swing.JFrame
         
     }
     
-    String calculateDate()
+    String calculateDate() //Method to calculate the date
     {
         Calendar c1 = Calendar.getInstance();           //Get current computer time
 
         String date = "";                               //Instantiate a new date string
         int year = c1.get(Calendar.YEAR);               //Get year from current computer time
-        int month = c1.get(Calendar.MONTH);             //Get month from current computer time
+        int month = c1.get(Calendar.MONTH) + 1;         //Get month from current computer time
         int day = c1.get(Calendar.DAY_OF_MONTH);        //Get day from current computer time
 
         if (month<10)                                   //If the month is less than 10 add a "0" to confrom to SQL Date format.
@@ -430,11 +459,11 @@ public class NewTransactionGUI extends javax.swing.JFrame
         {
             time+= second + ".0";
         }
-        
+        System.out.println(date+" " + time);
         return date + " " + time;                       //Concatenate the Date and the Time into SQL Date format
     }
     
-    void displayHeadings()
+    void displayHeadings() //Output the appropriate headings to the screen
     {
         String[] headings = {"ID", "Name", "Barcode", "Price"}; //Headings to be printed on output
         int[] colWidth = {6, 24, 15, 10};                       //Sizes for "columns"

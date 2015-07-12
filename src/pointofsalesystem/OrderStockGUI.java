@@ -367,7 +367,7 @@ public class OrderStockGUI extends javax.swing.JFrame
 
         String date = "";                               //Instantiate a new date string
         int year = c1.get(Calendar.YEAR);               //Get year from current computer time
-        int month = c1.get(Calendar.MONTH);             //Get month from current computer time
+        int month = c1.get(Calendar.MONTH) + 1;         //Get month from current computer time
         int day = c1.get(Calendar.DAY_OF_MONTH);        //Get day from current computer time
 
         if (month<10)                                   //If the month is less than 10 add a "0" to confrom to SQL Date format.
