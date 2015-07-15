@@ -34,6 +34,7 @@ public class OrderStockGUI extends javax.swing.JFrame
     String supplierName, contactName, productName;      //Global name variables 
     double costPrice, totalPrice;                       //Global costprice variable
     String sqlDate;                                     //Global timestamp variable
+    String subject;                                     //Global email subject variable
     
     public OrderStockGUI()
     {
@@ -306,7 +307,7 @@ public class OrderStockGUI extends javax.swing.JFrame
 
                 message.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(to));         // Set to
-
+                subject = "ORDER ID "+ orderID +" for Paul Roos Kwikspar";  //Set subject variable
                 message.setSubject("ORDER ID "+ orderID +" for Paul Roos Kwikspar"); // Set subject
 
                 message.setText("Good afternoon "  + contactName + ","
@@ -316,11 +317,11 @@ public class OrderStockGUI extends javax.swing.JFrame
                         + "\n\tTotal: R" + totalPrice
                         + "\n\nKind Regards"
                         + "\nDaniël Botha"
-                        +"\n\n Sent from my PointofSaleSystem Application."); // Now set the actual message
+                        +"\n\nSent from my PointofSaleSystem Application."); // Now set the actual message
 
                 Transport.send(message); // Send message
 
-                JOptionPane.showMessageDialog(null, "Order successfully placed!");
+                JOptionPane.showMessageDialog(null, "Order successfully placed! Email for order \"" + subject +"\" \nsent to supplier \"" + supplierName + "\"."); //Message to state that stock was ordered.
                 
                 addOrderToDB(orderQty, orderID, totalPrice, productName, supplierName);
             } 
@@ -357,7 +358,7 @@ public class OrderStockGUI extends javax.swing.JFrame
                 + price + ", '" + sqlDate + "', false)";      //Query to add the data to the DB
 
         pos.addDBEntry(query);                              //Add the data to the DB
-        JOptionPane.showMessageDialog(null, "Data successfully added to database."); //Message that the Query was successful
+//        JOptionPane.showMessageDialog(null, "Data successfully added to database."); //Message that the Query was successful
         pos.fadeOut(this);                                  //Fade out this window
      }
 
