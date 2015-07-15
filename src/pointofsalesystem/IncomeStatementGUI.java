@@ -1,9 +1,16 @@
 package pointofsalesystem;
 
 import java.awt.Color;
+import static java.awt.image.ImageObserver.WIDTH;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -11,11 +18,23 @@ public class IncomeStatementGUI extends javax.swing.JFrame
 {
 
     PointOfSaleSystem pos = new PointOfSaleSystem("");
+    PrintWriter writer;
     
     public IncomeStatementGUI() 
     {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
+        
+        Calendar cal = Calendar.getInstance();
+        String date = ""+cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);
+        try
+        {
+            writer = new PrintWriter("IncomeStatement" + date + ".txt");
+        }
+        catch (FileNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to export to a file: " + ex); //Print an error message
+        }
     }
 
     
@@ -31,7 +50,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         tfIncome = new javax.swing.JTextField();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
-        lblExport = new javax.swing.JLabel();
+        lblExportToFile = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
@@ -103,15 +122,15 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 30, 30));
 
-        lblExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblExport.addMouseListener(new java.awt.event.MouseAdapter()
+        lblExportToFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblExportToFile.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
-                lblExportMouseReleased(evt);
+                lblExportToFileMouseReleased(evt);
             }
         });
-        getContentPane().add(lblExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 364, 200, 50));
+        getContentPane().add(lblExportToFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 364, 200, 50));
 
         lblEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEmail.addMouseListener(new java.awt.event.MouseAdapter()
@@ -153,10 +172,10 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         
     }//GEN-LAST:event_lblEmailMouseReleased
 
-    private void lblExportMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblExportMouseReleased
-    {//GEN-HEADEREND:event_lblExportMouseReleased
-        
-    }//GEN-LAST:event_lblExportMouseReleased
+    private void lblExportToFileMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblExportToFileMouseReleased
+    {//GEN-HEADEREND:event_lblExportToFileMouseReleased
+        exportToText();
+    }//GEN-LAST:event_lblExportToFileMouseReleased
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblBackMouseReleased
     {//GEN-HEADEREND:event_lblBackMouseReleased
@@ -227,6 +246,113 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         tfExpense.setText("R" + expenses);
         tfProfit.setText("R" + profit);
     }
+    
+    void exportToText()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String startDate = formatter.format(dpStartDate.getDate()) + " 00:00:00.0";
+        String endDate = formatter.format(dpEndDate.getDate()) + " 00:00:00.0";
+
+        String getIncomes = "SELECT TRANSACTION_ID, TRANSACTION_DATE, TRANSACTION_TOTALPRICE_NOVAT, TRANSACTION_TOTALPRICE_PLUSVAT\n" +
+                            "FROM NBUSER.TRANSACTIONS\n" +
+                            "WHERE TRANSACTION_DATE > '"+ startDate +"' AND TRANSACTION_DATE < '"+ endDate +"'\n" +
+                            "ORDER BY TRANSACTION_DATE";
+
+        double income = calculateValues(getIncomes);
+        
+        ResultSet incomeRS = pos.searchDB(getIncomes);                          //Search for query
+
+        String[] incomeHeadings = {"ID", "TRANSACTION DATE", "PRICE excl VAT", "PRICE incl VAT"}; //Headings to be printed on output
+        int[] incomeColWidth = {6, 30, 20, 20};                                       //Sizes for "columns"
+        
+        writer.println("TRANSACTIONS (Income)\n");
+        
+        displayTable(incomeRS, incomeHeadings, incomeColWidth);                             //Output rs
+        writer.println("Total income: R" + income + "\n");
+        
+        String getExpenses = "SELECT ORDERS.ORDER_ID, ORDERS.ORDER_DATE, ORDERS.ORDER_PRICE, ORDERS.ORDER_QTY, PRODUCTS.PRODUCT_NAME, SUPPLIERS.SUPPLIER_NAME\n" +
+                                "FROM NBUSER.ORDERS\n" +
+                                "INNER JOIN PRODUCTS\n" +
+                                "ON ORDERS.PRODUCT_ID = PRODUCTS.PRODUCT_ID\n" +
+                                "INNER JOIN SUPPLIERS\n" +
+                                "ON ORDERS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
+                                "WHERE ORDER_DATE > '"+ startDate +"' AND ORDER_DATE < '"+ endDate +"'\n" +
+                                "ORDER BY ORDER_DATE";
+
+        double expenses = calculateValues(getExpenses);
+
+        ResultSet expenseRS = pos.searchDB(getExpenses);                          //Search for query
+
+        String[] expenseHeadings = {"ID", "ORDER DATE", "PRICE", "QTY", "Product Name", "Supplier Name"}; //Headings to be printed on output
+        int[] expenseColWidth = {6, 30, 20, 10, 20, 20};                                       //Sizes for "columns"
+
+        writer.println("ORDERS (Expenses)\n");
+        
+        displayTable(expenseRS, expenseHeadings, expenseColWidth);                             //Output rs
+        
+        writer.println("Total expense: R" + expenses);
+        
+        writer.close();
+    }
+    
+    void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java
+    {
+        writer.print("");
+
+        for (int i = 0; i < headings.length; i++)               //Print a new line
+        {
+            writer.print(addSpaces(headings[i], colWidth[i])); //Add spaces to the headings to mimic collumns
+        }
+
+        writer.println("");                                     //Print a new line
+
+        for (int i = 0; i < headings.length; i++)               //For each of the headings
+        {
+            for (int j = 0; j < colWidth[i]; j++)
+            {
+                writer.print("=");                           //Print an "=" as a line break
+            }
+        }
+
+        writer.println("");                                     //Print a new line
+
+        try 
+        {
+            while (rs.next())                                   //For each of the collumns
+            {
+                for (int i = 0; i < headings.length; i++)       //Add spaces to the strings to mimic collumns
+                {
+                    writer.print(addSpaces(rs.getString(i+1), colWidth[i])); //Add spaces to the strings to mimic collumns
+                }
+                writer.println("");                             //Print a new line
+            }
+        }
+
+        catch (Exception e) //If the SQL Query broke at some point
+        {
+            JOptionPane.showMessageDialog(this, "SQL Exception: " + e, "ERROR", WIDTH); //Print an error message
+        }
+    }
+    
+    private String addSpaces(String str, int colWidth)          //Method to add spaces to strings to mimic collumns        
+    {
+        String temp = str;                                      //Assign the String parameter value to a temporary variable
+        
+        if (str.length() < colWidth)                            //If the word is shorter than then collumn
+        {
+            for (int i = colWidth; i > str.length(); i--)       //Until the collumn width is reached            
+            {
+                temp += " ";                                    //Add a space      
+            }
+            return temp;                                        //Return the final String value
+        }
+        else                                                    //If the word is longer than the collumn
+        {
+            return str.substring(0, (colWidth-5)) + "...  ";    //Shorten it by 5, add 3 "." and 2 spaces
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -267,7 +393,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblExport;
+    private javax.swing.JLabel lblExportToFile;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JTextField tfExpense;
