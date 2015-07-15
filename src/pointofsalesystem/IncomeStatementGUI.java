@@ -24,17 +24,6 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/resources/POS_Icon_blue.png")).getImage()); //Set taskbar icon to logo.
-        
-        Calendar cal = Calendar.getInstance();
-        String date = ""+cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);
-        try
-        {
-            writer = new PrintWriter("IncomeStatement" + date + ".txt");
-        }
-        catch (FileNotFoundException ex)
-        {
-            JOptionPane.showMessageDialog(null, "Failed to export to a file: " + ex); //Print an error message
-        }
     }
 
     
@@ -193,83 +182,92 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         calculateProfit();
     }//GEN-LAST:event_dpEndDateActionPerformed
     
-    double calculateValues(String query)
+    double calculateValues(String query) //Method to retrieve values from one field in a resultset
     {
         try
         {
-            ResultSet rs = pos.searchDB(query);
+            ResultSet rs = pos.searchDB(query); //Search for the specified field
             
-            double price = 0.0;
-            while(rs.next())
+            double price = 0.0;                 //Create an empty variable
+            while(rs.next())                    //Loop through each record
             {
-                price += rs.getDouble(1);
+                price += rs.getDouble(1);       //Add it's price to the total
             }
             
-            price = (int) (price*100);
+            price = (int) (price*100);          //Round to 2 decimals
             price /= 100;
             
-            return price;
+            return price;                       //Return the value
         }
         catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);
-            return 0.0;
+            JOptionPane.showMessageDialog(null, "Failed to fetch data from tables: " + ex);//Print an error message
+            return 0.0; //Return 0.0
         }
     }
     
-    void calculateProfit()
+    void calculateProfit() //Method to calculate values for each textfield
     {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
-        String startDate = formatter.format(dpStartDate.getDate()) + " 00:00:00.0";
-        String endDate = formatter.format(dpEndDate.getDate()) + " 00:00:00.0";
+        String startDate = formatter.format(dpStartDate.getDate()) + " 00:00:00.0"; //Concatenate the start date and time into a string
+        String endDate = formatter.format(dpEndDate.getDate()) + " 23:59:59.9";     //Concatenate the end date and time into a string
         
         String getIncomes = "SELECT TRANSACTION_TOTALPRICE_NOVAT \n" +
                                 "FROM NBUSER.TRANSACTIONS\n" +
                                 "WHERE TRANSACTION_DATE > '"+ startDate +"' AND TRANSACTION_DATE < '"+ endDate +"'\n" +
-                                "ORDER BY TRANSACTION_DATE";
+                                "ORDER BY TRANSACTION_DATE";                        //Query to retrieve all transaction details
         
-        double income = calculateValues(getIncomes);
+        double income = calculateValues(getIncomes);                                //Calculate the total income
         
         String getExpenses = "SELECT ORDER_PRICE \n" +
                                 "FROM NBUSER.ORDERS\n" +
                                 "WHERE ORDER_DATE > '"+ startDate +"' AND ORDER_DATE < '"+ endDate +"'\n" +
-                                "ORDER BY ORDER_DATE";
+                                "ORDER BY ORDER_DATE";                              //Query to retrieve all orders' prices
         
-        double expenses = calculateValues(getExpenses);
+        double expenses = calculateValues(getExpenses);                             //Calculate the total income
         
-        double profit = income-expenses;
-//        profit = (int) (profit*100);
-//        profit /= 100;
+        double profit = income-expenses;                                            //Calculate the net profit
         
-        tfIncome.setText("R" + income);
-        tfExpense.setText("R" + expenses);
-        tfProfit.setText("R" + profit);
+        tfIncome.setText("R" + income);         //Set the income in it's textfield
+        tfExpense.setText("R" + expenses);      //Set the expense in it's textfield
+        tfProfit.setText("R" + profit);         //Set the profit in it's textfield
     }
     
-    void exportToText()
+    void exportToText() //method to save all the transactions and orders in a text file
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance(); //Create a new calendar object to get the computer time
+        String date = ""+cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);  //Get the current date for the file name
+        try
+        {
+            writer = new PrintWriter("IncomeStatement" + date + ".txt"); //Instantiate a new FileWriter object to create a text file
+        }
+        catch (FileNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to export to a file: " + ex); //Print an error message
+        }
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //Format the date and time from the JXDatePickers to convert it to SQL Datetime format
 
-        String startDate = formatter.format(dpStartDate.getDate()) + " 00:00:00.0";
-        String endDate = formatter.format(dpEndDate.getDate()) + " 00:00:00.0";
+        String startDate = formatter.format(dpStartDate.getDate()) + " 00:00:00.0"; //Concatenate the start date and time into a string
+        String endDate = formatter.format(dpEndDate.getDate()) + " 23:59:59.9";     //Concatenate the end date and time into a string
 
         String getIncomes = "SELECT TRANSACTION_ID, TRANSACTION_DATE, TRANSACTION_TOTALPRICE_NOVAT, TRANSACTION_TOTALPRICE_PLUSVAT\n" +
                             "FROM NBUSER.TRANSACTIONS\n" +
                             "WHERE TRANSACTION_DATE > '"+ startDate +"' AND TRANSACTION_DATE < '"+ endDate +"'\n" +
-                            "ORDER BY TRANSACTION_DATE";
+                            "ORDER BY TRANSACTION_DATE"; //Query to get all the income details for a specific time period
 
-        double income = calculateValues(getIncomes);
+        double income = calculateValues(getIncomes);    //Calculate the total income for a specific time period
         
-        ResultSet incomeRS = pos.searchDB(getIncomes);                          //Search for query
+        ResultSet incomeRS = pos.searchDB(getIncomes);                          //Get all the income details for a specific time period
 
         String[] incomeHeadings = {"ID", "TRANSACTION DATE", "PRICE excl VAT", "PRICE incl VAT"}; //Headings to be printed on output
         int[] incomeColWidth = {6, 30, 20, 20};                                       //Sizes for "columns"
         
-        writer.println("TRANSACTIONS (Income)\n");
+        writer.println("TRANSACTIONS (Income)\n");                              //Print a header
         
-        displayTable(incomeRS, incomeHeadings, incomeColWidth);                             //Output rs
-        writer.println("Total income: R" + income + "\n");
+        displayTable(incomeRS, incomeHeadings, incomeColWidth);                 //Output rs
+        writer.println("Total income: R" + income + "\n");                      //Output total income
         
         String getExpenses = "SELECT ORDERS.ORDER_ID, ORDERS.ORDER_DATE, ORDERS.ORDER_PRICE, ORDERS.ORDER_QTY, PRODUCTS.PRODUCT_NAME, SUPPLIERS.SUPPLIER_NAME\n" +
                                 "FROM NBUSER.ORDERS\n" +
@@ -278,25 +276,25 @@ public class IncomeStatementGUI extends javax.swing.JFrame
                                 "INNER JOIN SUPPLIERS\n" +
                                 "ON ORDERS.SUPPLIER_ID = SUPPLIERS.SUPPLIER_ID\n" +
                                 "WHERE ORDER_DATE > '"+ startDate +"' AND ORDER_DATE < '"+ endDate +"'\n" +
-                                "ORDER BY ORDER_DATE";
+                                "ORDER BY ORDER_DATE";                          //Query to get all the order details for a specific time period
 
-        double expenses = calculateValues(getExpenses);
+        double expenses = calculateValues(getExpenses);                         //Calculate the total expenses for a specific period of time
 
-        ResultSet expenseRS = pos.searchDB(getExpenses);                          //Search for query
+        ResultSet expenseRS = pos.searchDB(getExpenses);                        //Search for query
 
         String[] expenseHeadings = {"ID", "ORDER DATE", "PRICE", "QTY", "Product Name", "Supplier Name"}; //Headings to be printed on output
-        int[] expenseColWidth = {6, 30, 20, 10, 20, 20};                                       //Sizes for "columns"
+        int[] expenseColWidth = {6, 30, 20, 10, 20, 20};                        //Sizes for "columns"
 
-        writer.println("ORDERS (Expenses)\n");
+        writer.println("ORDERS (Expenses)\n");                                  //Print a heading
         
-        displayTable(expenseRS, expenseHeadings, expenseColWidth);                             //Output rs
+        displayTable(expenseRS, expenseHeadings, expenseColWidth);              //Output rs
         
-        writer.println("Total expense: R" + expenses);
+        writer.println("Total expense: R" + expenses);                          //Output the total expenses
         
-        writer.close();
+        writer.close();                                                         //Close and save the file
     }
     
-    void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java
+    void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java - Method to add the ResulSet to the file
     {
         writer.print("");
 
@@ -311,7 +309,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         {
             for (int j = 0; j < colWidth[i]; j++)
             {
-                writer.print("=");                           //Print an "=" as a line break
+                writer.print("=");                              //Print an "=" as a line break
             }
         }
 
