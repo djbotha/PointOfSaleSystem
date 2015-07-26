@@ -29,9 +29,9 @@ import javax.swing.JOptionPane;
  *  PROJECT NOTES
  *      http://pointofsalesystem.github.io/                 - Developed by Daniël J Botha using Jekyll for Windows.
  */
+
 public class PointOfSaleSystem
 {
-
     static
     {
         try
@@ -43,6 +43,7 @@ public class PointOfSaleSystem
            JOptionPane.showMessageDialog(null, "Derby driver not found.");
         }
     }
+    
     private Connection conn;
 
     public PointOfSaleSystem()  //Default constructor for instantiating a POS object 
@@ -62,6 +63,11 @@ public class PointOfSaleSystem
         }
     }
 
+    public static void main(String[] args)
+    {
+        new LockScreenGUI().setVisible(true);
+    }
+    
     public void fadeIn(JFrame frame)    //Fade in the current window
     {
         for (double i = 0.0; i <= 1.0; i += 0.1)
