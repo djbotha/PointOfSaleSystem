@@ -55,7 +55,6 @@ public class PointOfSaleSystem
         try //Connect application to Database
         {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/PointOfSaleSystem", "nbuser", "nbuser");
-//            JOptionPane.showMessageDialog(null, "Connection to PointOfSaleSystem Database Established"); 
         } 
         catch (SQLException ex) //If the connection fails...
         {
@@ -165,8 +164,6 @@ public class PointOfSaleSystem
         {
             JOptionPane.showMessageDialog(null, "INSERT INTO query unsuccessful: " + e); //...print an output message
         }
-        
-//        JOptionPane.showMessageDialog(null, "Data successfully added to database.");
     }
 
     public void deleteDBEntry(String query)
@@ -180,7 +177,5 @@ public class PointOfSaleSystem
         {
             JOptionPane.showMessageDialog(null, "DELETE query unsuccessful: " + e); //...print an output message
         }
-        
-//        JOptionPane.showMessageDialog(null, "Data successfully removed from database.");
     }
 }
