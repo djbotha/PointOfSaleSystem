@@ -25,6 +25,9 @@ import javax.swing.JOptionPane;
  *      <-- PROJECT NOTES SITE -->
  *      http://jekyllrb.com/                                - Jekyll
  *      http://jekyll-windows.juthilo.com/                  - Jekyll Windows Documentation
+ * 
+ *  PROJECT NOTES
+ *      http://pointofsalesystem.github.io/                 - Developed by Daniël J Botha using Jekyll for Windows.
  */
 public class PointOfSaleSystem
 {

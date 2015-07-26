@@ -33,8 +33,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         PointOfSaleSystemPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PointOfSaleSystemPU").createEntityManager();
@@ -54,6 +53,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
         taOutput = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductList = new javax.swing.JTable();
+        lblHelp = new javax.swing.JLabel();
         lblTabs = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
@@ -63,50 +63,40 @@ public class NewTransactionGUI extends javax.swing.JFrame
         setTitle("POS New Transaction");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblClear.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblClearMouseReleased(evt);
             }
         });
         getContentPane().add(lblClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 674, 100, 20));
 
         lblComplete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblComplete.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblComplete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblCompleteMouseReleased(evt);
             }
         });
         getContentPane().add(lblComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 674, 90, 20));
 
         lblManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblManager.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblManager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblManagerMouseReleased(evt);
             }
         });
         getContentPane().add(lblManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 160, 30));
 
         lblBarcode.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBarcode.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBarcode.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBarcodeMouseReleased(evt);
             }
         });
@@ -125,10 +115,8 @@ public class NewTransactionGUI extends javax.swing.JFrame
         getContentPane().add(tfSelectedItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 280, 40));
 
         lblAddSelectedProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddSelectedProduct.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblAddSelectedProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblAddSelectedProductMouseReleased(evt);
             }
         });
@@ -141,10 +129,8 @@ public class NewTransactionGUI extends javax.swing.JFrame
         getContentPane().add(tfSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 260, 40));
 
         lblAddItemName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddItemName.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblAddItemName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblAddItemNameMouseReleased(evt);
             }
         });
@@ -179,24 +165,31 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 400, 360));
 
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, 30));
+
         lblTabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/NewTransactionGUI_ProductList.png"))); // NOI18N
         getContentPane().add(lblTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, 640));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 14, 50, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
@@ -230,7 +223,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
 
     private void lblBarcodeMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblBarcodeMouseReleased
     {//GEN-HEADEREND:event_lblBarcodeMouseReleased
-        getProductName();                   //Method to manually add a product via a barcode
+        addProductBarcode();                   //Method to manually add a product via a barcode
     }//GEN-LAST:event_lblBarcodeMouseReleased
 
     private void lblManagerMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblManagerMouseReleased
@@ -264,6 +257,10 @@ public class NewTransactionGUI extends javax.swing.JFrame
             checkout(); //Proceed to checkout
         }
     }//GEN-LAST:event_lblCompleteMouseReleased
+
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/newtransaction/");
+    }//GEN-LAST:event_lblHelpMouseReleased
     
     public void validateManagerPassword()                   //Validate the password when the manager tries to log in to the manager portal
     {
@@ -298,13 +295,42 @@ public class NewTransactionGUI extends javax.swing.JFrame
     /* <-- WORK IN PROGRESS --> */
     public void removeProduct() //Method to remove product from a transaction
     {
-        String removeItemBarcode = JOptionPane.showInputDialog("Please enter an item barcode to remove from the transaction:");
+        try 
+        {
+            String removeItemBarcode = JOptionPane.showInputDialog("Please enter an item barcode to remove from the transaction:");
+            
+            String getProductDetails = "SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_BARCODE, (PRODUCT_COSTPRICE * (PRODUCT_MARKUP+1)) AS PRICE\n" +
+                                            "FROM NBUSER.PRODUCTS\n" +
+                                            "WHERE PRODUCT_BARCODE LIKE '%" + removeItemBarcode + "%'" +
+                                            "FETCH FIRST 1 ROW ONLY";
+            ResultSet rs = pos.searchDB(getProductDetails);
+            
+            rs.next();
+            
+            String[] productDetails = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)};
+            
+            String id = rs.getString(1);
+            String name = "-"+addSpaces(productDetails[1], 22);
+            String barcode = rs.getString(3);
+            double cost = rs.getDouble(4);
+            
+            cost = (int)(cost*100);
+            cost /= 100;
+            
+            taOutput.append(String.format("%-5s %-22s %-14s %-8s", id, name, barcode, "R"+cost+"\n"));
+            
+            transactionCost -= cost;
+        } 
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null, "Failed to remove product from transaction: " + ex); //... print an error message
+        }
     }
     /* <-- WORK IN PROGRESS --> */
     
     
     
-    public void getProductName() //Method to add a product via a barcode to the transaction
+    public void addProductBarcode() //Method to add a product via a barcode to the transaction
     {
         try
         {
@@ -347,7 +373,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
     {
         for (int i = 0; i < 57; i++)                            //For each of the headings
         {
-                taOutput.append("=");                           //Print an "=" as a line break
+                taOutput.append("-");                           //Print an "-" as a line break
         }
         
         transactionCost = (int)(transactionCost*100);           //Round transaction cost to 2 decimal points
@@ -379,7 +405,14 @@ public class NewTransactionGUI extends javax.swing.JFrame
         change /= 100;
         
         taOutput.append("\n\nCash: R" + cash);                  //Output cash
-        taOutput.append("\t\tChange: R" + change);              //Output change
+        taOutput.append("\t\t\t\tChange: R" + change + "\n");   //Output change
+        
+        for (int i = 0; i < 57; i++)                            //For each of the headings
+        {
+                taOutput.append("-");                           //Print an "-" as a line break
+        }
+        
+        taOutput.append("\n");
         
         JOptionPane.showMessageDialog(this, "Amount of change: R" + change + ".\nClick OK to go back to main menu."); //Amount of change to be given
         
@@ -397,8 +430,6 @@ public class NewTransactionGUI extends javax.swing.JFrame
         String addTransaction = "INSERT INTO NBUSER.TRANSACTIONS(TRANSACTION_ID, TRANSACTION_DATE, TRANSACTION_TOTALPRICE_NOVAT, TRANSACTION_TOTALPRICE_PLUSVAT)\n" +
                                 "VALUES("+ transactionID +", '"+ date +"', "+ cost +", "+ costPlusVAT +")";
         pos.addDBEntry(addTransaction);
-        
-        
     }
     
     String calculateDate() //Method to calculate the date
@@ -578,6 +609,7 @@ public class NewTransactionGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBarcode;
     private javax.swing.JLabel lblClear;
     private javax.swing.JLabel lblComplete;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblManager;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblTabs;

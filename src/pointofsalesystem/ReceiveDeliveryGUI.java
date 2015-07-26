@@ -37,8 +37,7 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         tfTotalPrice = new javax.swing.JTextField();
         tfPricePerUnit = new javax.swing.JTextField();
@@ -48,7 +47,7 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
         tfProductID = new javax.swing.JTextField();
         tfOrderID = new javax.swing.JTextField();
         lblPOSLogo = new javax.swing.JLabel();
-        lblProjectNotes = new javax.swing.JLabel();
+        lblHelp = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblReceiveDelivery = new javax.swing.JLabel();
@@ -59,10 +58,8 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
         setTitle("POS Receive Delivery");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -123,50 +120,43 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
         getContentPane().add(tfOrderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 220, 40));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 50));
 
-        lblProjectNotes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblProjectNotes.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
-                lblProjectNotesMouseReleased(evt);
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
             }
         });
-        getContentPane().add(lblProjectNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 14, 250, 30));
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 14, 40, 30));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
         lblReceiveDelivery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblReceiveDelivery.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblReceiveDelivery.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblReceiveDeliveryMouseReleased(evt);
             }
         });
@@ -213,10 +203,9 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
         pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project. 
     }//GEN-LAST:event_lblPOSLogoMouseReleased
 
-    private void lblProjectNotesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblProjectNotesMouseReleased
-    {//GEN-HEADEREND:event_lblProjectNotesMouseReleased
-        pos.loadWebSite("http://pointofsalesystem.github.io/receivedelivery/"); //Load the project notes for this screen
-    }//GEN-LAST:event_lblProjectNotesMouseReleased
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/receivedelivery/");
+    }//GEN-LAST:event_lblHelpMouseReleased
 
     public void getDetails() //Method to retrieve all the details of the order
     {
@@ -388,8 +377,8 @@ public class ReceiveDeliveryGUI extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblPOSLogo;
-    private javax.swing.JLabel lblProjectNotes;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblReceiveDelivery;
     private javax.swing.JSpinner spnQty;

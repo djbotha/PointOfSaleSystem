@@ -17,8 +17,7 @@ public class AddNewStockGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         tfMarkup = new javax.swing.JTextField();
         tfPricePerUnit = new javax.swing.JTextField();
@@ -26,6 +25,7 @@ public class AddNewStockGUI extends javax.swing.JFrame
         tfBarcode = new javax.swing.JTextField();
         tfProductName = new javax.swing.JTextField();
         spnQty = new javax.swing.JSpinner();
+        lblHelp = new javax.swing.JLabel();
         lblAddToDB = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
@@ -36,10 +36,8 @@ public class AddNewStockGUI extends javax.swing.JFrame
         setTitle("POS Add New Stock");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -73,46 +71,49 @@ public class AddNewStockGUI extends javax.swing.JFrame
         tfProductName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tfProductName.setForeground(new java.awt.Color(255, 255, 255));
         tfProductName.setBorder(null);
-        getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 116, 340, 20));
+        getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 330, 20));
 
         spnQty.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
         getContentPane().add(spnQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 110, 100, 30));
 
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
+
         lblAddToDB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddToDB.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblAddToDB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblAddToDBMouseReleased(evt);
             }
         });
         getContentPane().add(lblAddToDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 304, 150, 30));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
-        getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 20));
+        getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
@@ -178,6 +179,10 @@ public class AddNewStockGUI extends javax.swing.JFrame
 
     }//GEN-LAST:event_lblAddToDBMouseReleased
 
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/addstock/");
+    }//GEN-LAST:event_lblHelpMouseReleased
+
     public boolean validateBarcode(String barcode)
     {
         /*
@@ -229,6 +234,7 @@ public class AddNewStockGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblAddToDB;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JSpinner spnQty;

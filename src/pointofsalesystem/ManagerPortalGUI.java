@@ -16,8 +16,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         lblAddNewStock = new javax.swing.JLabel();
         lblOrderStock = new javax.swing.JLabel();
@@ -27,6 +26,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         lblAddNewSupplier = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
+        lblHelp = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblCompanyLogo = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
@@ -35,110 +35,99 @@ public class ManagerPortalGUI extends javax.swing.JFrame
         setTitle("POS Manager Portal");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAddNewStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblAddNewStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblAddNewStockMouseReleased(evt);
             }
         });
         getContentPane().add(lblAddNewStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 150));
 
         lblOrderStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblOrderStock.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblOrderStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblOrderStockMouseReleased(evt);
             }
         });
         getContentPane().add(lblOrderStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 150, 150));
 
         lblRemoveStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblRemoveStock.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblRemoveStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblRemoveStockMouseReleased(evt);
             }
         });
         getContentPane().add(lblRemoveStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 534, 150, 150));
 
         lblIncomeStatement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblIncomeStatement.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblIncomeStatement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblIncomeStatementMouseReleased(evt);
             }
         });
         getContentPane().add(lblIncomeStatement, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 344, 150, 140));
 
         lblReceiveDelivery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblReceiveDelivery.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblReceiveDelivery.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblReceiveDeliveryMouseReleased(evt);
             }
         });
         getContentPane().add(lblReceiveDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 154, 150, 140));
 
         lblAddNewSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblAddNewSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblAddNewSupplierMouseReleased(evt);
             }
         });
         getContentPane().add(lblAddNewSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 150, 150));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 40, 50));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 14, 60, 30));
 
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, 30));
+
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 30, 30));
 
         lblCompanyLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblCompanyLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblCompanyLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblCompanyLogoMouseReleased(evt);
             }
         });
@@ -200,6 +189,10 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_lblReceiveDeliveryMouseReleased
         new ReceiveDeliveryGUI().setVisible(true); //Bring up ReceiveDelivery screen
     }//GEN-LAST:event_lblReceiveDeliveryMouseReleased
+
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/managerportal/");
+    }//GEN-LAST:event_lblHelpMouseReleased
     
     public static void main(String args[]) 
     {
@@ -241,6 +234,7 @@ public class ManagerPortalGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblCompanyLogo;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblIncomeStatement;
     private javax.swing.JLabel lblOrderStock;
     private javax.swing.JLabel lblPOSLogo;

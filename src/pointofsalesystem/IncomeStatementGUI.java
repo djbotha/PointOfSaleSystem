@@ -4,21 +4,28 @@ import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class IncomeStatementGUI extends javax.swing.JFrame 
 {
 
-    PointOfSaleSystem pos = new PointOfSaleSystem("");
-    PrintWriter writer;
+    PointOfSaleSystem pos = new PointOfSaleSystem("");  //Create a new POS object
+    PrintWriter writer;                                 //Create a new filewriter object
+    String fileName, todayDate;
     
     public IncomeStatementGUI() 
     {
@@ -29,8 +36,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         dpEndDate = new org.jdesktop.swingx.JXDatePicker();
         dpStartDate = new org.jdesktop.swingx.JXDatePicker();
@@ -39,6 +45,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         tfIncome = new javax.swing.JTextField();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
+        lblHelp = new javax.swing.JLabel();
         lblExportToFile = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
@@ -48,19 +55,15 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         setTitle("POS Income Statement");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dpEndDate.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        dpEndDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dpEndDateActionPerformed(evt);
             }
         });
@@ -92,50 +95,51 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         getContentPane().add(tfIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 130, 40));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 30, 30));
 
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
+
         lblExportToFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblExportToFile.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblExportToFile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblExportToFileMouseReleased(evt);
             }
         });
         getContentPane().add(lblExportToFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 364, 200, 50));
 
         lblEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblEmail.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblEmailMouseReleased(evt);
             }
         });
         getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 364, 190, 50));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
@@ -181,6 +185,10 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_dpEndDateActionPerformed
         calculateProfit();
     }//GEN-LAST:event_dpEndDateActionPerformed
+
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/printstatements/");
+    }//GEN-LAST:event_lblHelpMouseReleased
     
     double calculateValues(String query) //Method to retrieve values from one field in a resultset
     {
@@ -228,6 +236,8 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         double expenses = calculateValues(getExpenses);                             //Calculate the total income
         
         double profit = income-expenses;                                            //Calculate the net profit
+        profit = (int)(profit*100);
+        profit /= 100;
         
         tfIncome.setText("R" + income);         //Set the income in it's textfield
         tfExpense.setText("R" + expenses);      //Set the expense in it's textfield
@@ -237,10 +247,12 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     void exportToText() //method to save all the transactions and orders in a text file
     {
         Calendar cal = Calendar.getInstance(); //Create a new calendar object to get the computer time
-        String date = ""+cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);  //Get the current date for the file name
+        todayDate = ""+(cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH));
+        fileName = "IncomeStatement"+ todayDate + ".txt";  //Get the current date for the file name
+
         try
         {
-            writer = new PrintWriter("IncomeStatement" + date + ".txt"); //Instantiate a new FileWriter object to create a text file
+            writer = new PrintWriter("statements/" + fileName); //Instantiate a new FileWriter object to create a text file
         }
         catch (FileNotFoundException ex)
         {
@@ -285,13 +297,81 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         String[] expenseHeadings = {"ID", "ORDER DATE", "PRICE", "QTY", "Product Name", "Supplier Name"}; //Headings to be printed on output
         int[] expenseColWidth = {6, 30, 20, 10, 20, 20};                        //Sizes for "columns"
 
+        writer.println();
         writer.println("ORDERS (Expenses)\n");                                  //Print a heading
-        
+
         displayTable(expenseRS, expenseHeadings, expenseColWidth);              //Output rs
         
         writer.println("Total expense: R" + expenses);                          //Output the total expenses
         
         writer.close();                                                         //Close and save the file
+        
+        String path = Paths.get(".").toAbsolutePath().normalize().toString();   //Get the current working directory
+        
+        JOptionPane.showMessageDialog(null, "File \"" + fileName + "\" successfully saved in directory \"" + path + "\\statements\\\" "); //Print a message that the file has been successfully saved.
+    }
+    
+    public void orderStock() //Method to send the text file as an email
+     {
+        //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
+        try
+        {
+            JOptionPane.showMessageDialog(null, "Processing... Click OK to continue.");
+            
+        
+            String to = "botha.daniel1@gmail.com";                //Recipient's email - the manager of the store.
+
+            final String from = "pointofsalesystem.github.io@gmail.com";              //Sender's email
+            final String username = "pointofsalesystem.github.io";              //Sender email accounts
+            final String password = "pointofsalesystem";            //Sender password
+            
+            final String managerName = "Koos Visagie";
+            
+            String host = "smtp.gmail.com";             //GMAIL server address
+
+            Properties props = new Properties();        //Instantiate new Properties object
+            props.put("mail.smtp.auth", "true");        //Server details
+            props.put("mail.smtp.starttls.enable", "true"); //Connect to server
+            props.put("mail.smtp.host", host);          //More details
+            props.put("mail.smtp.port", "587");         //SMTP Port 
+
+            Session session = Session.getInstance(props, // Get the Session object.
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+            try 
+            {
+                Message message = new MimeMessage(session); // Create a message object.
+
+                message.setFrom(new InternetAddress(from)); // Set from
+
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(to));         // Set to
+                message.setSubject(fileName); // Set subject
+
+                message.setText("Good afternoon "  + managerName + ","
+                        + "\n\nAttached please find the Income Statement as generated on "+ todayDate+".\n\n"
+                        + "\n\nKind Regards"
+                        + "\nDaniël Botha"
+                        +"\n\nSent from my PointofSaleSystem Application."); // Now set the actual message
+
+                Transport.send(message); // Send message
+                
+                JOptionPane.showMessageDialog(null, "Email successfully sent!"); //Print an error message
+
+            } 
+            catch (MessagingException e) //If the mail failed to send
+            {
+                throw new RuntimeException(e); //Throw an error
+            }
+        } 
+        catch (RuntimeException ex) //If the mail failed to send
+        {
+            JOptionPane.showMessageDialog(null, "Failed to send email: " + ex); //Print an error message
+        } 
     }
     
     void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java - Method to add the ResulSet to the file
@@ -392,6 +472,7 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblExportToFile;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JTextField tfExpense;

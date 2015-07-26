@@ -26,8 +26,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         spnQty = new javax.swing.JSpinner();
         tfMarkup = new javax.swing.JTextField();
@@ -38,6 +37,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
         tfBarcode = new javax.swing.JTextField();
         tfProductName = new javax.swing.JTextField();
         lblDeleteStock = new javax.swing.JLabel();
+        lblHelp4 = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
@@ -47,10 +47,8 @@ public class DeleteStockGUI extends javax.swing.JFrame
         setTitle("POS Delete Stock");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -115,40 +113,43 @@ public class DeleteStockGUI extends javax.swing.JFrame
         getContentPane().add(tfProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 290, 40));
 
         lblDeleteStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblDeleteStock.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblDeleteStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblDeleteStockMouseReleased(evt);
             }
         });
         getContentPane().add(lblDeleteStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 364, 200, 30));
 
+        lblHelp4.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp4.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp4.setText("?");
+        lblHelp4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelp4MouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
+
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 14, 30, 30));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
@@ -197,6 +198,10 @@ public class DeleteStockGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_lblDeleteStockMouseReleased
 
+    private void lblHelp4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelp4MouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/removestock/");
+    }//GEN-LAST:event_lblHelp4MouseReleased
+
     public void getDetails() //Method to retrieve all the details of the product
     {
         try
@@ -228,7 +233,7 @@ public class DeleteStockGUI extends javax.swing.JFrame
             costPrice =(int)(costPrice*100);                //Convert the costPrice to a value with 2 decimal points
             costPrice = costPrice/100;                      
             
-            markup = (int)(markup*10000);                   //Convert the markup to a percentage with 2 decimal points
+            markup = (int)(markup*100);                   //Convert the markup to a percentage with 2 decimal points
             markup = markup/100;
             
             tfBarcode.setText(barcode);                     //Set the textfield's value to the barcode
@@ -316,6 +321,10 @@ public class DeleteStockGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblDeleteStock;
+    private javax.swing.JLabel lblHelp;
+    private javax.swing.JLabel lblHelp1;
+    private javax.swing.JLabel lblHelp2;
+    private javax.swing.JLabel lblHelp4;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JSpinner spnQty;

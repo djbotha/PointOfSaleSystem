@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 import javax.mail.Message;
@@ -45,8 +42,7 @@ public class OrderStockGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         tfTotalPrice = new javax.swing.JTextField();
         tfPricePerUnit = new javax.swing.JTextField();
@@ -57,6 +53,7 @@ public class OrderStockGUI extends javax.swing.JFrame
         tfProductName = new javax.swing.JTextField();
         spnQty = new javax.swing.JSpinner();
         lblPlaceOrder = new javax.swing.JLabel();
+        lblHelp = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
@@ -66,10 +63,8 @@ public class OrderStockGUI extends javax.swing.JFrame
         setTitle("POS Order Stock");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -131,40 +126,43 @@ public class OrderStockGUI extends javax.swing.JFrame
         getContentPane().add(spnQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 80, 30));
 
         lblPlaceOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPlaceOrder.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPlaceOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPlaceOrderMouseReleased(evt);
             }
         });
         getContentPane().add(lblPlaceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 364, 190, 20));
 
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
+
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 50));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
         getContentPane().add(lblQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
@@ -204,6 +202,10 @@ public class OrderStockGUI extends javax.swing.JFrame
         else
             orderStock();
     }//GEN-LAST:event_lblPlaceOrderMouseReleased
+
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/orderstock/");
+    }//GEN-LAST:event_lblHelpMouseReleased
 
     public void getDetails() //Method to retrieve all the details of the product
     {
@@ -264,13 +266,11 @@ public class OrderStockGUI extends javax.swing.JFrame
         }
     }
     
-     public void orderStock() 
-    {
+     public void orderStock()
+     {
         //http://www.tutorialspoint.com/javamail_api/javamail_api_gmail_smtp_server.htm - Sending a GMAIL email through TLS 
         try
         {
-            JOptionPane.showMessageDialog(null, "Please wait...");
-            
             String getSupplierEmail =    "SELECT SUPPLIER_EMAIL FROM NBUSER.SUPPLIERS\n" +
                                         "WHERE SUPPLIERS.SUPPLIER_ID  = " + supplierID + ""; //Query to fetch the supplier Name 
             ResultSet rs2 = pos.searchDB(getSupplierEmail);  //Fetch the supplierName from the database
@@ -319,8 +319,10 @@ public class OrderStockGUI extends javax.swing.JFrame
                         + "\nDaniël Botha"
                         +"\n\nSent from my PointofSaleSystem Application."); // Now set the actual message
 
+                JOptionPane.showMessageDialog(null, "Processing...");
+                
                 Transport.send(message); // Send message
-
+                
                 JOptionPane.showMessageDialog(null, "Order successfully placed! Email for order \"" + subject +"\" \nsent to supplier \"" + supplierName + "\"."); //Message to state that stock was ordered.
                 
                 addOrderToDB(orderQty, orderID, totalPrice, productName, supplierName);
@@ -461,6 +463,7 @@ public class OrderStockGUI extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblPlaceOrder;
     private javax.swing.JLabel lblQuit;

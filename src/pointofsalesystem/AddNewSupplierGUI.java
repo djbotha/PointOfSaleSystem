@@ -17,13 +17,13 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         tfPhone = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
         tfContactName = new javax.swing.JTextField();
         tfSupplierName = new javax.swing.JTextField();
+        lblHelp = new javax.swing.JLabel();
         lblSave = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
@@ -34,10 +34,8 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
         setTitle("POS Add New Supplier");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -67,41 +65,44 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
         tfSupplierName.setBorder(null);
         getContentPane().add(tfSupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 460, 40));
 
+        lblHelp.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp.setText("?");
+        lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelpMouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
+
         lblSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSave.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblSaveMouseReleased(evt);
             }
         });
         getContentPane().add(lblSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 304, 150, 30));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 4, 40, 50));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
@@ -158,6 +159,10 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
         else
             JOptionPane.showMessageDialog(null, "The email address entered is invalid.");
     }//GEN-LAST:event_lblSaveMouseReleased
+
+    private void lblHelpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelpMouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/addsupplier/");
+    }//GEN-LAST:event_lblHelpMouseReleased
 
     public boolean validateEmail(String email)
     {
@@ -218,6 +223,7 @@ public class AddNewSupplierGUI extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblSave;

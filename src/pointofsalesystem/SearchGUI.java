@@ -23,8 +23,7 @@ public class SearchGUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         tfBarcode = new javax.swing.JTextField();
         tfProductName = new javax.swing.JTextField();
@@ -32,6 +31,7 @@ public class SearchGUI extends javax.swing.JFrame
         taOutput = new javax.swing.JTextArea();
         lblSearch = new javax.swing.JLabel();
         lblViewAll = new javax.swing.JLabel();
+        lblHelp3 = new javax.swing.JLabel();
         lblPOSLogo = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         lblQuit = new javax.swing.JLabel();
@@ -41,10 +41,8 @@ public class SearchGUI extends javax.swing.JFrame
         setTitle("POS Search");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -79,50 +77,51 @@ public class SearchGUI extends javax.swing.JFrame
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 236, 920, 490));
 
         lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSearch.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblSearchMouseReleased(evt);
             }
         });
         getContentPane().add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 104, 110, 110));
 
         lblViewAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblViewAll.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblViewAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblViewAllMouseReleased(evt);
             }
         });
         getContentPane().add(lblViewAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 104, 110, 110));
 
+        lblHelp3.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblHelp3.setForeground(new java.awt.Color(25, 168, 250));
+        lblHelp3.setText("?");
+        lblHelp3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHelp3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblHelp3MouseReleased(evt);
+            }
+        });
+        getContentPane().add(lblHelp3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, 30));
+
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblPOSLogoMouseReleased(evt);
             }
         });
         getContentPane().add(lblPOSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 40, 50));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 14, 60, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lblQuitMouseReleased(evt);
             }
         });
@@ -212,6 +211,10 @@ public class SearchGUI extends javax.swing.JFrame
     private void lblPOSLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPOSLogoMouseReleased
         pos.loadWebSite("https://github.com/iggnoreza/pointofsalesystem"); //Load the github repository for this project.
     }//GEN-LAST:event_lblPOSLogoMouseReleased
+
+    private void lblHelp3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHelp3MouseReleased
+        pos.loadWebSite("http://pointofsalesystem.github.io/search/");
+    }//GEN-LAST:event_lblHelp3MouseReleased
 
     void displayTable(ResultSet rs, String[] headings, int[] colWidth) //Code adapted from Nico C Rossouw's in PRG_IT_2015_march_test.java
     {
@@ -306,6 +309,10 @@ public class SearchGUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblHelp;
+    private javax.swing.JLabel lblHelp1;
+    private javax.swing.JLabel lblHelp2;
+    private javax.swing.JLabel lblHelp3;
     private javax.swing.JLabel lblPOSLogo;
     private javax.swing.JLabel lblQuit;
     private javax.swing.JLabel lblSearch;
