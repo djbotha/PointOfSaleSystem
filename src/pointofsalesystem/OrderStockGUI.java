@@ -211,8 +211,8 @@ public class OrderStockGUI extends javax.swing.JFrame
     {
         try
         {
-            productName = tfProductName.getText();   //Fetch the product name from the text field                               
-            orderQty = (int) spnQty.getValue();              //Fetch the quantity to be deleted from the spinner
+            productName = tfProductName.getText();          //Fetch the product name from the text field                               
+            orderQty = (int) spnQty.getValue();             //Fetch the quantity to be deleted from the spinner
 
             String query =  "SELECT * FROM NBUSER.PRODUCTS\n" +
                             "WHERE PRODUCTS.PRODUCT_NAME LIKE '" + productName + "'"; //Query to fetch all the data regarding the specific product
@@ -241,11 +241,11 @@ public class OrderStockGUI extends javax.swing.JFrame
                                 "ORDER BY ORDER_ID DESC\n" +
                                 "FETCH FIRST 1 ROWS ONLY"; //Query to get the last order ID and increment it with one
         
-            orderID = pos.getID(getOrderID) + 1;            //Get the last order ID and increment it with one
+            orderID = pos.getID(getOrderID) + 1;           //Get the last order ID and increment it with one
             
             sqlDate = calculateDate();
             
-            costPrice = (int)(costPrice*100);                //Convert the costPrice to 2 decimals
+            costPrice = (int)(costPrice*100);              //Convert the costPrice to 2 decimals
             costPrice /= 100;                 
             
             totalPrice = (orderQty*costPrice);
@@ -256,8 +256,8 @@ public class OrderStockGUI extends javax.swing.JFrame
             tfOrderDate.setText(sqlDate);                   //Set the textfield's value to the current date and time
             tfOrderID.setText(""+orderID);                  //Set the textfield's value to the orderID
             tfSupplierName.setText(supplierName);           //Set the textfield's value to the supplierName
-            tfPricePerUnit.setText("R"+costPrice);           //Set the textfield's value to the price per unit
-            tfTotalPrice.setText("R"+totalPrice);  //Set the textfield's value to the total price of the order
+            tfPricePerUnit.setText("R"+costPrice);          //Set the textfield's value to the price per unit
+            tfTotalPrice.setText("R"+totalPrice);           //Set the textfield's value to the total price of the order
             
         } 
         catch (SQLException ex)
