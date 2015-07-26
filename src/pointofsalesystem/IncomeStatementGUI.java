@@ -36,7 +36,8 @@ public class IncomeStatementGUI extends javax.swing.JFrame
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         dpEndDate = new org.jdesktop.swingx.JXDatePicker();
         dpStartDate = new org.jdesktop.swingx.JXDatePicker();
@@ -55,19 +56,23 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         setTitle("POS Income Statement");
         setUndecorated(true);
         setOpacity(0.0F);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dpEndDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dpEndDate.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dpEndDateActionPerformed(evt);
             }
         });
-        getContentPane().add(dpEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 150, 40));
+        getContentPane().add(dpEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 150, 40));
         getContentPane().add(dpStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 150, 40));
 
         tfProfit.setBackground(new Color(0, 0, 0, 0));
@@ -95,16 +100,20 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         getContentPane().add(tfIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 130, 40));
 
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblBackMouseReleased(evt);
             }
         });
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 60, 30));
 
         lblQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblQuit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblQuit.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblQuitMouseReleased(evt);
             }
         });
@@ -114,32 +123,40 @@ public class IncomeStatementGUI extends javax.swing.JFrame
         lblHelp.setForeground(new java.awt.Color(25, 168, 250));
         lblHelp.setText("?");
         lblHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblHelp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblHelp.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblHelpMouseReleased(evt);
             }
         });
         getContentPane().add(lblHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 30));
 
         lblExportToFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblExportToFile.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblExportToFile.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblExportToFileMouseReleased(evt);
             }
         });
         getContentPane().add(lblExportToFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 364, 200, 50));
 
         lblEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblEmail.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblEmailMouseReleased(evt);
             }
         });
         getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 364, 190, 50));
 
         lblPOSLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        lblPOSLogo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lblPOSLogoMouseReleased(evt);
             }
         });

@@ -290,9 +290,6 @@ public class NewTransactionGUI extends javax.swing.JFrame
         JOptionPane.showMessageDialog(this, "MANAGER PASSWORD INCORRECT.", "ERROR", WIDTH); //Show error message. 
     }
     
-    
-    
-    /* <-- WORK IN PROGRESS --> */
     public void removeProduct() //Method to remove product from a transaction
     {
         try 
@@ -326,9 +323,6 @@ public class NewTransactionGUI extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Failed to remove product from transaction: " + ex); //... print an error message
         }
     }
-    /* <-- WORK IN PROGRESS --> */
-    
-    
     
     public void addProductBarcode() //Method to add a product via a barcode to the transaction
     {
